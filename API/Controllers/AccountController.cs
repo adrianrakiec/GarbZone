@@ -3,7 +3,6 @@ using System.Text;
 using API.Data;
 using API.DTOs;
 using API.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,7 +18,6 @@ namespace API.Controllers
             if(await UserExist(registerDto.Username)) return BadRequest("Nazwa użytkownika jest zajęta!");
             
             using var hmac = new HMACSHA512();
-
             var user = new User
             {
                 UserName = registerDto.Username,
@@ -29,6 +27,24 @@ namespace API.Controllers
 
             context.Users.Add(user);
             await context.SaveChangesAsync();
+
+            return user;
+        }
+
+        [HttpPost("login")] 
+        public async Task<ActionResult<User>> Login(LoginDto loginDto)
+        {
+            var user = await context.Users.FirstOrDefaultAsync(x => x.UserName == loginDto.Username);
+
+            if(user == null) return Unauthorized("Nazwa użytkownika jest nieprawidłowa!");
+
+            using var hmac = new HMACSHA512(user.PasswordSalt);
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
+
+            for(int i = 0; i < computedHash.Length; i++) 
+            {
+                if(computedHash[i] != user.PasswordHash[i]) return Unauthorized("Hasło jest nieprawidłowe!");
+            }
 
             return user;
         }
