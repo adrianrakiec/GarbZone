@@ -9,9 +9,9 @@ export const login = async data => {
 		body: JSON.stringify(data),
 	});
 
-	// if (!response.ok) {
-	// 	throw new Error('Nie udało się zalogować!');
-	// }
+	if (!response.ok) {
+		throw new Error('Błędne dane logowania!');
+	}
 
 	return response.json();
 };
