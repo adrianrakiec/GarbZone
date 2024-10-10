@@ -20,6 +20,8 @@ export const AuthProvider = ({ children }) => {
 		try {
 			const data = await loginService(credentials);
 			setUser(data);
+
+			return data;
 		} catch (error) {
 			console.error('Błąd logowania:', error.message);
 			throw error;

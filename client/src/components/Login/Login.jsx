@@ -8,7 +8,8 @@ export const Login = () => {
 
 	const onSubmit = async data => {
 		try {
-			await login(data);
+			const user = await login(data);
+			console.log(user);
 		} catch (e) {
 			console.log(e.message);
 		}
