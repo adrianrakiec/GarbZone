@@ -2,6 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { Nav } from './components/Nav/Nav';
 import { Login } from './components/Login/Login';
 
+import { AuthContext } from './context/AuthContext';
+import { useContext } from 'react';
+
 const URL = 'https://localhost:5001/api/users';
 
 export const App = () => {
@@ -10,10 +13,20 @@ export const App = () => {
 		queryKey: ['users'],
 	});
 
+	const { user, logout } = useContext(AuthContext);
+
 	return (
 		<>
 			<Nav />
-			<Login />
+			{user ? (
+				<>
+					<p>Witaj, {user.username}</p>
+					<button onClick={logout}>Wygloguj się</button>
+				</>
+			) : (
+				<Login />
+			)}
+
 			<h1>Users:</h1>
 			<ul>
 				{users?.map(user => (

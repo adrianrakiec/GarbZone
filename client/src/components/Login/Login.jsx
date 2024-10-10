@@ -1,13 +1,14 @@
 import { useForm } from 'react-hook-form';
-import { login } from '../../services/AuthService';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
 export const Login = () => {
 	const { register, handleSubmit, formState } = useForm();
+	const { login } = useContext(AuthContext);
 
 	const onSubmit = async data => {
 		try {
-			const response = await login(data);
-			console.log(response);
+			await login(data);
 		} catch (e) {
 			console.log(e.message);
 		}
