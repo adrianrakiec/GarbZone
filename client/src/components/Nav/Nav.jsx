@@ -1,28 +1,25 @@
 import logo from '../../assets/logo.png';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import styles from './Nav.module.css';
 
 export const Nav = () => {
 	return (
-		<nav>
-			<ul>
+		<nav className={styles.nav}>
+			<ul className={styles.navItems}>
 				<li>
 					<a href='#'>
 						<img src={logo} alt='GarbZone logo' />
 					</a>
 				</li>
 				<li>
-					<div className='search-bar'>
-						<select name='options' id='options'>
-							<option value='offers'>Przedmioty</option>
-							<option value='users'>Użytkownicy</option>
-						</select>
-						<input type='search' placeholder='Wyszukaj...' />
+					<div className='menu'>
+						<button>Zaloguj/Zarejestruj</button>
 					</div>
 				</li>
 				<li>
-					<div className='menu'>
-						<button>Zaloguj</button>
-						<button>Zarejestruj</button>
-					</div>
+					<button className={styles.menuBtn}>
+						<GiHamburgerMenu />
+					</button>
 				</li>
 			</ul>
 		</nav>
