@@ -1,6 +1,7 @@
 import logo from '../../assets/logo.png';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import styles from './Nav.module.css';
+import { MainBtn } from '../MainBtn/MainBtn';
 
 export const Nav = () => {
 	return (
@@ -12,9 +13,7 @@ export const Nav = () => {
 					</a>
 				</li>
 				<li>
-					<div className='menu'>
-						<button>Zaloguj/Zarejestruj</button>
-					</div>
+					<MainBtn>Zaloguj/Zarejestruj</MainBtn>
 				</li>
 				<li>
 					<button className={styles.menuBtn}>
