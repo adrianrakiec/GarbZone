@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from 'react';
 import {
 	login as loginService,
+	register as registerService,
 	logout as logoutService,
 } from '../services/AuthService';
 
@@ -20,7 +21,16 @@ export const AuthProvider = ({ children }) => {
 		try {
 			const data = await loginService(credentials);
 			setUser(data);
+			return data;
+		} catch (error) {
+			console.error('Błąd logowania:', error.message);
+			throw error;
+		}
+	};
 
+	const register = async userData => {
+		try {
+			const data = await registerService(userData);
 			return data;
 		} catch (error) {
 			console.error('Błąd logowania:', error.message);
@@ -34,7 +44,7 @@ export const AuthProvider = ({ children }) => {
 	};
 
 	return (
-		<AuthContext.Provider value={{ user, login, logout }}>
+		<AuthContext.Provider value={{ user, login, register, logout }}>
 			{children}
 		</AuthContext.Provider>
 	);

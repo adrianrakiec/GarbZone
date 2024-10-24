@@ -3,13 +3,13 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { MainBtn } from '../MainBtn/MainBtn';
 
-export const Login = () => {
+export const Register = () => {
 	const { register, handleSubmit, formState } = useForm();
-	const { login } = useContext(AuthContext);
+	const { register: registerUser } = useContext(AuthContext);
 
 	const onSubmit = async data => {
 		try {
-			await login(data);
+			await registerUser(data);
 		} catch (e) {
 			console.log(e.message);
 		}
@@ -17,7 +17,7 @@ export const Login = () => {
 
 	return (
 		<div>
-			<h3>Login</h3>
+			<h3>Rejestracja</h3>
 			<form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
 				<div>
 					<label htmlFor='username'>Login:</label>
@@ -51,7 +51,7 @@ export const Login = () => {
 						<span>{formState.errors.password.message}</span>
 					)}
 				</div>
-				<MainBtn>Zaloguj się</MainBtn>
+				<MainBtn>Zarejestruj się</MainBtn>
 			</form>
 		</div>
 	);

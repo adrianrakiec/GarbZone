@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Nav } from './components/Nav/Nav';
 import { Login } from './components/Login/Login';
+import { Register } from './components/Register/Register';
 
 import { AuthContext } from './context/AuthContext';
 import { useContext } from 'react';
@@ -24,7 +25,10 @@ export const App = () => {
 					<button onClick={logout}>Wygloguj się</button>
 				</>
 			) : (
-				<Login />
+				<>
+					<Login />
+					<Register />
+				</>
 			)}
 
 			<h1>Users:</h1>
