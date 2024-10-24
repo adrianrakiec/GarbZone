@@ -2,6 +2,8 @@ import { useForm } from 'react-hook-form';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { MainBtn } from '../MainBtn/MainBtn';
+import { ArrowBtn } from '../ArrowBtn/ArrowBtn';
+import styles from './Register.module.css';
 
 export const Register = () => {
 	const { register, handleSubmit, formState } = useForm();
@@ -16,10 +18,15 @@ export const Register = () => {
 	};
 
 	return (
-		<div>
-			<h3>Rejestracja</h3>
-			<form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
-				<div>
+		<div className={styles.wrapper}>
+			<ArrowBtn arrowDirection='left' />
+			<h2>Rejestracja</h2>
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				autoComplete='off'
+				className={styles.registerForm}
+			>
+				<div className={styles.formGroup}>
 					<label htmlFor='username'>Login:</label>
 					<input
 						id='username'
@@ -35,7 +42,7 @@ export const Register = () => {
 						<span>{formState.errors.username.message}</span>
 					)}
 				</div>
-				<div>
+				<div className={styles.formGroup}>
 					<label htmlFor='password'>Hasło:</label>
 					<input
 						id='password'

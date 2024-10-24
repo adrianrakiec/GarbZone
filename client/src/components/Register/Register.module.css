@@ -1,0 +1,29 @@
+.formGroup,
+.wrapper,
+.registerForm {
+	display: flex;
+	flex-direction: column;
+}
+
+.wrapper {
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	width: 100%;
+}
+
+.wrapper > a {
+	top: 15%;
+	left: 15%;
+}
+
+.registerForm {
+	width: 30%;
+	gap: 1em;
+	padding: 1em;
+}
+
+.formGroup input {
+    padding: 0.5em;
+}
