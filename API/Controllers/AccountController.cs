@@ -16,7 +16,7 @@ namespace API.Controllers
         [HttpPost("register")] 
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
-            if(await UserExist(registerDto.Username)) return BadRequest("Nazwa użytkownika jest zajęta!");
+            if(await UserExist(registerDto.Username)) return Unauthorized(new { message = "Nazwa użytkownika jest już zajęta!"});
             
             using var hmac = new HMACSHA512();
             var user = new User

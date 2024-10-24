@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
 			const data = await registerService(userData);
 			return data;
 		} catch (error) {
-			console.error('Błąd logowania:', error.message);
+			console.error('Błąd rejestracji:', error.message);
 			throw error;
 		}
 	};
