@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { MainBtn } from '../MainBtn/MainBtn';
 import { Wrapper } from '../Wrapper/Wrapper';
@@ -7,6 +7,14 @@ import { ArrowBtn } from '../ArrowBtn/ArrowBtn';
 import styles from './Login.module.css';
 
 export const Login = () => {
+	useEffect(() => {
+		document.body.style.overflow = 'hidden';
+
+		return () => {
+			document.body.style.overflow = 'auto';
+		};
+	}, []);
+
 	const { register, handleSubmit, formState } = useForm();
 	const { login } = useContext(AuthContext);
 

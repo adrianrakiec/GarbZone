@@ -1,11 +1,19 @@
 import { useForm } from 'react-hook-form';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { MainBtn } from '../MainBtn/MainBtn';
 import { ArrowBtn } from '../ArrowBtn/ArrowBtn';
 import styles from './Register.module.css';
 
 export const Register = () => {
+	useEffect(() => {
+		document.body.style.overflow = 'hidden';
+
+		return () => {
+			document.body.style.overflow = 'auto';
+		};
+	}, []);
+
 	const { register, handleSubmit, formState } = useForm();
 	const { register: registerUser } = useContext(AuthContext);
 
