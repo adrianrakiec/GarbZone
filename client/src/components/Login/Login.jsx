@@ -1,22 +1,16 @@
 import { useForm } from 'react-hook-form';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { MainBtn } from '../MainBtn/MainBtn';
 import { Wrapper } from '../Wrapper/Wrapper';
 import { ArrowBtn } from '../ArrowBtn/ArrowBtn';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
 
 export const Login = () => {
-	useEffect(() => {
-		document.body.style.overflow = 'hidden';
-
-		return () => {
-			document.body.style.overflow = 'auto';
-		};
-	}, []);
-
 	const { register, handleSubmit, formState } = useForm();
 	const { login } = useContext(AuthContext);
+	const navigate = useNavigate();
 
 	const onSubmit = async data => {
 		try {
@@ -29,8 +23,11 @@ export const Login = () => {
 	return (
 		<Wrapper>
 			<div className={styles.wrapper}>
-				<ArrowBtn arrowDirection='left' />
+				<ArrowBtn arrowDirection='left' onClick={() => navigate('/')} />
 				<h2>Zaloguj się</h2>
+				<p>
+					Nie posiadasz konta? <Link to='/rejestracja'>Zarejestruj się!</Link>
+				</p>
 				<form
 					onSubmit={handleSubmit(onSubmit)}
 					autoComplete='off'

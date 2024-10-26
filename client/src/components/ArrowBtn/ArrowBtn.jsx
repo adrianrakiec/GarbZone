@@ -2,10 +2,10 @@ import { FaArrowLeft } from 'react-icons/fa6';
 import { FaArrowRight } from 'react-icons/fa6';
 import styles from './ArrowBtn.module.css';
 
-export const ArrowBtn = ({ arrowDirection }) => {
+export const ArrowBtn = ({ arrowDirection, onClick }) => {
 	return (
-		<a href='#' className={styles.arrowBtn}>
+		<button className={styles.arrowBtn} onClick={onClick}>
 			{arrowDirection === 'left' ? <FaArrowLeft /> : <FaArrowRight />}
-		</a>
+		</button>
 	);
 };

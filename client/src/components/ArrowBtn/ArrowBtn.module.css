@@ -1,5 +1,7 @@
 .arrowBtn {
     position: absolute;
+    background: none;
+    border: none;
     width: 3.2rem;
     height: 3.2rem;
     text-align: center;
@@ -8,4 +10,5 @@
     background-color: var(--main-color);
     color: white;
     border-radius: 50%;
+    cursor: pointer;
 }

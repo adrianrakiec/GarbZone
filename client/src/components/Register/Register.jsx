@@ -1,21 +1,15 @@
 import { useForm } from 'react-hook-form';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { MainBtn } from '../MainBtn/MainBtn';
 import { ArrowBtn } from '../ArrowBtn/ArrowBtn';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Register.module.css';
 
 export const Register = () => {
-	useEffect(() => {
-		document.body.style.overflow = 'hidden';
-
-		return () => {
-			document.body.style.overflow = 'auto';
-		};
-	}, []);
-
 	const { register, handleSubmit, formState } = useForm();
 	const { register: registerUser } = useContext(AuthContext);
+	const navigate = useNavigate();
 
 	const onSubmit = async data => {
 		try {
@@ -27,8 +21,11 @@ export const Register = () => {
 
 	return (
 		<div className={styles.wrapper}>
-			<ArrowBtn arrowDirection='left' />
+			<ArrowBtn arrowDirection='left' onClick={() => navigate('/')} />
 			<h2>Rejestracja</h2>
+			<p>
+				Masz już konto? <Link to='/logowanie'>Zaloguj się!</Link>
+			</p>
 			<form
 				onSubmit={handleSubmit(onSubmit)}
 				autoComplete='off'
