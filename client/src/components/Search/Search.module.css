@@ -1,0 +1,36 @@
+.form {
+	display: flex;
+	width: 100%;
+	padding: 1em 3em;
+}
+
+.select {
+	background-color: var(--main-color);
+	color: var(--second-color);
+	padding: 0.3em 0.5em;
+	border-radius: 0.5em;
+}
+
+.searchGroup {
+	position: relative;
+	flex: 1;
+}
+
+.input {
+	border-radius: 0.2em;
+	padding: 0.3em 0.5em;
+	padding-left: 3em;
+	width: 100%;
+}
+
+.btn {
+	position: absolute;
+	top: 10%;
+	left: 0;
+	background: none;
+	border: none;
+	border-right: 1px dashed var(--text-color);
+	z-index: 10;
+	padding: 0.2em 0.5em;
+	cursor: pointer;
+}
