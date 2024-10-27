@@ -14,6 +14,7 @@ export const Register = () => {
 	const onSubmit = async data => {
 		try {
 			await registerUser(data);
+			navigate('/logowanie');
 		} catch (e) {
 			console.log(e.message);
 		}

@@ -15,6 +15,7 @@ export const Login = () => {
 	const onSubmit = async data => {
 		try {
 			await login(data);
+			navigate('/');
 		} catch (e) {
 			console.log(e.message);
 		}
