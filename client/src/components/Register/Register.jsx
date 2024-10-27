@@ -4,6 +4,8 @@ import { AuthContext } from '../../context/AuthContext';
 import { MainBtn } from '../MainBtn/MainBtn';
 import { ArrowBtn } from '../ArrowBtn/ArrowBtn';
 import { Link, useNavigate } from 'react-router-dom';
+import { Bounce, toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import styles from './Register.module.css';
 
 export const Register = () => {
@@ -16,12 +18,23 @@ export const Register = () => {
 			await registerUser(data);
 			navigate('/logowanie');
 		} catch (e) {
-			console.log(e.message);
+			toast.error(`${e.message}`, {
+				position: 'top-right',
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: 'colored',
+				transition: Bounce,
+			});
 		}
 	};
 
 	return (
 		<div className={styles.wrapper}>
+			<ToastContainer />
 			<ArrowBtn arrowDirection='left' onClick={() => navigate('/')} />
 			<h2>Rejestracja</h2>
 			<p>
