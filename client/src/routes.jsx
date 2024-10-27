@@ -7,13 +7,13 @@ import { Layout } from './components/Layout/Layout';
 export const routes = createBrowserRouter([
 	{
 		element: <Layout />,
-		path: '/',	
+		path: '/',
 		children: [
 			{
 				path: '/',
-				element: <MainPage />
-			}
-		]
+				element: <MainPage />,
+			},
+		],
 	},
 	{
 		element: <Login />,
@@ -22,5 +22,9 @@ export const routes = createBrowserRouter([
 	{
 		element: <Register />,
 		path: '/rejestracja',
+	},
+	{
+		element: <h1>Strona nie istnieje!</h1>,
+		path: '*',
 	},
 ]);
