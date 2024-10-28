@@ -1,6 +1,7 @@
 using System;
 using API.Data;
 using API.Interfaces;
+using API.Repository;
 using API.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped<ITokenService, TokenService>();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
+        services.AddScoped<IUserRepository, UserRepository>();
 
         return services;
     }
