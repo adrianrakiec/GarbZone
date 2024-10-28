@@ -15,5 +15,5 @@ public class User
     [Range(1, 5)]
     public double? Rating { get; set; }
     public string? About { get; set; }
-    public List<Photo>? ProfilePhoto { get; set; }
+    public List<Photo> ProfilePhotos { get; set; } = [];
 }

@@ -7,7 +7,8 @@
 		"About": "Nostrud commodo Lorem enim esse incididunt magna officia amet occaecat proident ut. Sit ullamco commodo Lorem ut ex. Velit qui nisi esse commodo labore ullamco mollit. Nostrud est irure cupidatat labore adipisicing occaecat. Reprehenderit sunt exercitation ea ullamco mollit. In mollit eiusmod ut occaecat enim nulla labore. Est consequat est veniam ut enim veniam velit voluptate culpa.\r\n",
 		"ProfilePhotos": [
 			{
-				"Url": "https://randomuser.me/api/portraits/men/7.jpg"
+				"Url": "https://randomuser.me/api/portraits/men/7.jpg",
+				"IsMain": true
 			}
 		]
 	},
@@ -19,7 +20,8 @@
 		"About": "In ut nulla excepteur non. Cillum esse tempor quis nulla culpa fugiat sunt. Consequat tempor do duis commodo cillum esse ea non aliquip dolor magna sint ex nostrud.\r\n",
 		"ProfilePhotos": [
 			{
-				"Url": "https://randomuser.me/api/portraits/men/50.jpg"
+				"Url": "https://randomuser.me/api/portraits/men/50.jpg",
+				"IsMain": true
 			}
 		]
 	},
@@ -31,7 +33,8 @@
 		"About": "Commodo veniam eiusmod incididunt ullamco aute aute enim anim esse non sunt. Magna nisi aute culpa et elit. Nostrud mollit exercitation Lorem in labore cupidatat consequat Lorem sunt. Pariatur adipisicing anim id aliquip consequat duis in.\r\n",
 		"ProfilePhotos": [
 			{
-				"Url": "https://randomuser.me/api/portraits/women/26.jpg"
+				"Url": "https://randomuser.me/api/portraits/women/26.jpg",
+				"IsMain": true
 			}
 		]
 	},
@@ -43,7 +46,8 @@
 		"About": "Voluptate esse velit ad pariatur incididunt ut excepteur. Cillum non aute aliqua ea culpa duis sit deserunt tempor anim aliquip. Occaecat ex proident ea ut nulla aliquip. Exercitation commodo ullamco ipsum sit voluptate cupidatat et dolore reprehenderit deserunt eu enim cupidatat. Nulla ea nulla anim deserunt est dolor ad.\r\n",
 		"ProfilePhotos": [
 			{
-				"Url": "https://randomuser.me/api/portraits/women/85.jpg"
+				"Url": "https://randomuser.me/api/portraits/women/85.jpg",
+				"IsMain": true
 			}
 		]
 	}
