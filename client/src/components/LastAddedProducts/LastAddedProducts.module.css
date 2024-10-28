@@ -1,0 +1,16 @@
+.products {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 4em;
+}
+
+.btns {
+   text-align: right;
+   padding-right: 4em;
+   margin-bottom: 1em;
+   font-size: 0.9rem;
+}
+
+.btns button:last-child {
+    margin-left: 0.5em;
+}

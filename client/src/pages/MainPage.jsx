@@ -1,6 +1,7 @@
+import { BestOffers } from '../components/BestOffers/BestOffers';
 import { Hero } from '../components/Hero/Hero';
 import { HorizontalRule } from '../components/HorizontalRule/HorizontalRule';
-import { Products } from '../components/Products/Products';
+import { LastAddedProducts } from '../components/LastAddedProducts/LastAddedProducts';
 import { SectionHeading } from '../components/SectionHeading/SectionHeading';
 import { Wrapper } from '../components/Wrapper/Wrapper';
 
@@ -11,7 +12,10 @@ export const MainPage = () => {
 			<Wrapper>
 				<HorizontalRule />
 				<SectionHeading preTitle='Nowości' title='Ostatnio dodane' />
-				<Products />
+				<LastAddedProducts />
+				<HorizontalRule />
+				<SectionHeading preTitle='Polecane' title='Najlepsze oferty' />
+				<BestOffers />
 				<HorizontalRule />
 			</Wrapper>
 		</>

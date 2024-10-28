@@ -7,8 +7,8 @@ export const Product = () => {
 			<img
 				src='https://cdn.pixabay.com/photo/2024/07/28/15/19/ai-generated-8927774_1280.jpg'
 				alt=''
-				width={200}
-				height={200}
+				width={250}
+				height={250}
 			/>
 			<button
 				className={styles.like}
