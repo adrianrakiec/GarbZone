@@ -1,0 +1,19 @@
+.profile {
+	padding: 1em;
+}
+
+.profileInfo {
+	display: flex;
+	padding: 4em 4em 0;
+	border-top: 1px solid #808080;
+}
+
+.userInfo {
+	margin-left: 2em;
+	padding: 1em;
+}
+
+.description {
+	margin-top: 2em;
+    padding: 0 3em;
+}
