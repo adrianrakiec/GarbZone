@@ -2,7 +2,7 @@ import { Product } from '../Product/Product';
 import { ArrowBtn } from '../ArrowBtn/ArrowBtn';
 import styles from './LastAddedProducts.module.css';
 
-export const LastAddedProducts = () => {
+export const LastAddedProducts = ({ lastAdded }) => {
 	return (
 		<section className={styles.lastAdded}>
 			<div className={styles.btns}>
@@ -10,10 +10,14 @@ export const LastAddedProducts = () => {
 				<ArrowBtn />
 			</div>
 			<div className={styles.products}>
-				<Product />
-				<Product />
-				<Product />
-				<Product />
+				{lastAdded && (
+					<>
+						<Product product={lastAdded[0]} />
+						<Product product={lastAdded[1]} />
+						<Product product={lastAdded[2]} />
+						<Product product={lastAdded[3]} />
+					</>
+				)}
 			</div>
 		</section>
 	);
