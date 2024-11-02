@@ -20,6 +20,7 @@ public static class ApplicationServiceExtensions
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IOfferRepository, OfferRepository>();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         return services;

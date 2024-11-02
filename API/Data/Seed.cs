@@ -27,4 +27,20 @@ public class Seed
 
         await context.SaveChangesAsync();
     }
+
+    public static async Task SeedOffers(DataContext context)
+    {
+        if(await context.Offers.AnyAsync()) return;
+
+        var offersData = await File.ReadAllTextAsync("Data/OfferSeedData.json");
+        var offers = JsonSerializer.Deserialize<List<Offer>>(offersData);
+        if(offers == null) return;
+
+        foreach (var offer in offers)
+        {
+            context.Offers.Add(offer);
+        }
+
+        await context.SaveChangesAsync();
+    }
 }
