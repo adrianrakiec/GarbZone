@@ -9,7 +9,7 @@ public class Offer
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
     public required string Status { get; set; }
-    public List<string> ImageUrls { get; set; } = [];
-    public User User { get; set; } = null!;
+    public List<Photo> Images { get; set; } = [];
     public int UserId { get; set; }
+    public User User { get; set; } = null!;
 }

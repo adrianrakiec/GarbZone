@@ -1,4 +1,4 @@
-using API.Entities;
+using API.DTOs;
 using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,11 +9,21 @@ namespace API.Controllers
     public class OffersController(IOfferRepository offerRepository) : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Offer>>> GetOffers()
+        public async Task<ActionResult<IEnumerable<OfferDto>>> GetOffers()
         {
             var offers = await offerRepository.GetOffers();
 
             return Ok(offers);
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<OfferDto>> GetOffer(int id)
+        {
+            var offer = await offerRepository.GetOfferById(id);
+
+            if(offer == null) return NotFound();
+
+            return offer;
         }
     }
 }

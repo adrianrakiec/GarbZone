@@ -32,16 +32,12 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
 
     public async Task<User?> GetUserByUsername(string username)
     {
-        return await context.Users
-        .Include(x => x.ProfilePhotos)
-        .SingleOrDefaultAsync(x => x.UserName == username);
+        return await context.Users.SingleOrDefaultAsync(x => x.UserName == username);
     }
 
     public async Task<IEnumerable<User>> GetUsers()
     {
-        return await context.Users
-        .Include(x => x.ProfilePhotos)
-        .ToListAsync();
+        return await context.Users.ToListAsync();
     }
 
     public async Task<bool> SaveAll()

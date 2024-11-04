@@ -22,6 +22,7 @@ namespace API.Controllers
             var user = new User
             {
                 UserName = registerDto.Username,
+                Email = registerDto.Email,
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
                 PasswordSalt = hmac.Key
             };

@@ -1,9 +1,9 @@
-using System;
-using API.Entities;
+using API.DTOs;
 
 namespace API.Interfaces;
 
 public interface IOfferRepository
 {
-    Task<IEnumerable<Offer>> GetOffers();
+    Task<IEnumerable<OfferDto>> GetOffers();
+    Task<OfferDto?> GetOfferById(int id);
 }

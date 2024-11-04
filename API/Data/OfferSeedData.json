@@ -7,8 +7,12 @@
 		"CreatedAt": "2023-10-15T09:00:00",
 		"UpdatedAt": "2023-10-15T09:00:00",
 		"Status": "Active",
-		"ImageUrls": [
-			"https://sportroom.pl/pol_pl_Kurtka-zimowa-meska-The-North-Face-ZANECK-granatowa-NF0A4M8H8K2-19231_1.jpg"
+		"Images": [
+			{
+				"Url": "https://sportroom.pl/pol_pl_Kurtka-zimowa-meska-The-North-Face-ZANECK-granatowa-NF0A4M8H8K2-19231_1.jpg",
+				"IsMain": true,
+				"OfferId": 1
+			}
 		],
 		"UserId": 1
 	},
@@ -20,8 +24,12 @@
 		"CreatedAt": "2023-10-18T13:30:00",
 		"UpdatedAt": "2023-10-18T13:30:00",
 		"Status": "Active",
-		"ImageUrls": [
-			"https://kupsweter.pl/wp-content/uploads/2022/10/weniany_sweter_damski_p61r49d64dxlc199.jpg"
+		"Images": [
+			{
+				"Url": "https://kupsweter.pl/wp-content/uploads/2022/10/weniany_sweter_damski_p61r49d64dxlc199.jpg",
+				"IsMain": true,
+				"OfferId": 2
+			}
 		],
 		"UserId": 2
 	},
@@ -33,8 +41,12 @@
 		"CreatedAt": "2023-10-20T08:45:00",
 		"UpdatedAt": "2023-10-20T08:45:00",
 		"Status": "Active",
-		"ImageUrls": [
-			"https://static.miinto.net/1e0727e99729558a805a2bd8cb2a980c.jpg?width=693&height=842"
+		"Images": [
+			{
+				"Url": "https://static.miinto.net/1e0727e99729558a805a2bd8cb2a980c.jpg?width=693&height=842",
+				"IsMain": true,
+				"OfferId": 3
+			}
 		],
 		"UserId": 3
 	},
@@ -46,8 +58,12 @@
 		"CreatedAt": "2023-10-22T17:00:00",
 		"UpdatedAt": "2023-10-22T17:00:00",
 		"Status": "Active",
-		"ImageUrls": [
-			"https://octagonshop.pl/galerie/t/t-shirt-damski-sport-octagon_15615.jpg"
+		"Images": [
+			{
+				"Url": "https://octagonshop.pl/galerie/t/t-shirt-damski-sport-octagon_15615.jpg",
+				"IsMain": true,
+				"OfferId": 4
+			}
 		],
 		"UserId": 4
 	},
@@ -59,8 +75,12 @@
 		"CreatedAt": "2023-10-25T12:30:00",
 		"UpdatedAt": "2023-10-25T12:30:00",
 		"Status": "Active",
-		"ImageUrls": [
-			"https://radiozet-static.hitraff.pl/uploads/productfeeds/images/e8/9b/ombre-clothing-bluza-meska-z-kapturem-rozpinana-nantes-b1368-czarna-xxl.jpg"
+		"Images": [
+			{
+				"Url": "https://radiozet-static.hitraff.pl/uploads/productfeeds/images/e8/9b/ombre-clothing-bluza-meska-z-kapturem-rozpinana-nantes-b1368-czarna-xxl.jpg",
+				"IsMain": true,
+				"OfferId": 5
+			}
 		],
 		"UserId": 1
 	},
@@ -72,8 +92,12 @@
 		"CreatedAt": "2023-10-26T14:00:00",
 		"UpdatedAt": "2023-10-26T14:00:00",
 		"Status": "Active",
-		"ImageUrls": [
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHa6Iwu3rbFTASDpOTsagqqGJl2yyXl64tvg&s"
+		"Images": [
+			{
+				"Url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHa6Iwu3rbFTASDpOTsagqqGJl2yyXl64tvg&s",
+				"IsMain": true,
+				"OfferId": 6
+			}
 		],
 		"UserId": 2
 	},
@@ -85,8 +109,12 @@
 		"CreatedAt": "2023-10-27T09:30:00",
 		"UpdatedAt": "2023-10-27T09:30:00",
 		"Status": "Active",
-		"ImageUrls": [
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH7oSf8bDqtf8AeDdBFDY0ZxzW0J0QS7j63w&s"
+		"Images": [
+			{
+				"Url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH7oSf8bDqtf8AeDdBFDY0ZxzW0J0QS7j63w&s",
+				"IsMain": true,
+				"OfferId": 7
+			}
 		],
 		"UserId": 3
 	},
@@ -98,33 +126,13 @@
 		"CreatedAt": "2023-10-28T18:20:00",
 		"UpdatedAt": "2023-10-28T18:20:00",
 		"Status": "Active",
-		"ImageUrls": [
-			"https://a.allegroimg.com/original/115fc8/ecef2da245058691d6e586b8583c/SUKIENKA-ELEGANCKA-LETNIA-DAMSKA-ZWIEWNA-MINI-W-KWIATY-M-Plec-kobieta"
+		"Images": [
+			{
+				"Url": "https://a.allegroimg.com/original/115fc8/ecef2da245058691d6e586b8583c/SUKIENKA-ELEGANCKA-LETNIA-DAMSKA-ZWIEWNA-MINI-W-KWIATY-M-Plec-kobieta",
+				"IsMain": true,
+				"OfferId": 8
+			}
 		],
 		"UserId": 4
-	},
-	{
-		"Id": 9,
-		"Title": "Płaszcz jesienny damski",
-		"Description": "Elegancki płaszcz damski na jesień, kolor camelowy, stan idealny.",
-		"Price": 150.0,
-		"CreatedAt": "2023-10-29T15:45:00",
-		"UpdatedAt": "2023-10-29T15:45:00",
-		"Status": "Active",
-		"ImageUrls": [
-			"https://mamaville.pl/101347-thickbox_default/plaszcz-damski-premium-wiosenno-jesienny-oliwka.jpg"
-		],
-		"UserId": 2
-	},
-	{
-		"Id": 10,
-		"Title": "Czapka zimowa",
-		"Description": "Ciepła czapka zimowa, używana. Kolor niebeieski.",
-		"Price": 20.0,
-		"CreatedAt": "2023-10-30T08:00:00",
-		"UpdatedAt": "2023-10-30T08:00:00",
-		"Status": "Active",
-		"ImageUrls": ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5Tki61_cPXnWYfw7aj3t0jlbmQOpGabg3CA&s"],
-		"UserId": 1
 	}
 ]
