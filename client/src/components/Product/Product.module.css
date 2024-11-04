@@ -4,10 +4,6 @@
 	margin-bottom: 1.5em;
 }
 
-.product p > span {
-	color: gold;
-}
-
 .price {
 	color: var(--main-color);
 	font-size: 1.2rem;

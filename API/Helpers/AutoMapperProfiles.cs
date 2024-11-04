@@ -10,6 +10,8 @@ public class AutoMapperProfiles : Profile
     {
         CreateMap<User, MemberDto>();
         CreateMap<Photo, PhotoDto>();
-        CreateMap<Offer, OfferDto>();
+        CreateMap<Offer, OfferDto>()
+            .ForMember(d => d.Seller, o => o.MapFrom(s => s.User.UserName))
+            .ForMember(d => d.SellerRaiting, o => o.MapFrom(s => s.User.Rating));
     }
 }

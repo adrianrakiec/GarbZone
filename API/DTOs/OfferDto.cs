@@ -9,5 +9,7 @@ public class OfferDto
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
     public string? Status { get; set; }
+    public string? Seller { get; set; }
+    public double? SellerRaiting { get; set; }
     public List<PhotoDto>? Images { get; set; }
 }
