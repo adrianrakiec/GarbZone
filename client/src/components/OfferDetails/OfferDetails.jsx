@@ -3,6 +3,7 @@ import { Wrapper } from '../Wrapper/Wrapper';
 import { useFetchData } from '../../services/ApiClientService';
 import { NotFoundPage } from '../../pages/NotFoundPage';
 import styles from './OfferDetails.module.css';
+import { Gallery } from '../Gallery/Gallery';
 
 export const OfferDetails = () => {
 	const { id } = useParams();
@@ -13,10 +14,12 @@ export const OfferDetails = () => {
 	return (
 		<section className={styles.offerDetails}>
 			<Wrapper>
-				<div className={styles.offerDetailsInfo}>
-					<h2>{offer.title}</h2>
-                    <p>{offer.description}</p>
-					<img src={offer.images[0].url} alt={offer.title} />
+				<div className={styles.container}>
+					<div className={styles.offerInfo}>
+						<h2>{offer.title}</h2>
+						<p>{offer.description}</p>
+					</div>
+					<Gallery offerImages={offer.images}/>
 				</div>
 			</Wrapper>
 		</section>
