@@ -1,14 +1,13 @@
-import { Product } from '../Product/Product';
+import { Offer } from '../Offer/Offer';
 import { MainBtn } from '../MainBtn/MainBtn';
 import styles from './BestOffers.module.css';
 
-export const BestOffers = ({bestOffers}) => {
-
+export const BestOffers = ({ bestOffers }) => {
 	return (
 		<section className={styles.bestOffers}>
-			<div className={styles.products}>
+			<div className={styles.offers}>
 				{bestOffers?.map(offer => (
-					<Product key={offer.id} product={offer} />
+					<Offer key={offer.id} offer={offer} />
 				))}
 			</div>
 			<div className={styles.moreBtn}>

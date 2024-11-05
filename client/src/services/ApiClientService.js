@@ -8,13 +8,23 @@ export const apiClient = async (
 	method = 'GET',
 	headers = { 'Content-Type': 'application/json' }
 ) => {
-	const response = await fetch(`${API_URL}${url}`, {
-		method: method,
-		headers: headers,
-		body: body ? JSON.stringify(body) : null,
-	});
+	try {
+		const response = await fetch(`${API_URL}${url}`, {
+			method: method,
+			headers: headers,
+			body: body ? JSON.stringify(body) : null,
+		});
 
-	return response.json();
+		if (!response.ok) {
+			const errorData = await response.json();
+			throw new Error(errorData.message);
+		}
+
+		return await response.json();
+	} catch (error) {
+		console.error('Błąd:', error.message);
+		throw error;
+	}
 };
 
 export const useFetchData = (url, queryKey) => {

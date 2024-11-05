@@ -5,6 +5,7 @@ import { Register } from './components/Register/Register';
 import { Layout } from './components/Layout/Layout';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { Profile } from './components/Profile/Profile';
+import { OfferDetails } from './components/OfferDetails/OfferDetails';
 
 export const routes = createBrowserRouter([
 	{
@@ -16,12 +17,16 @@ export const routes = createBrowserRouter([
 				element: <MainPage />,
 			},
 			{
-				element: <Profile />,
-				path: '/profil',
+				path: '/oferta/:id',
+				element: <OfferDetails />,
 			},
 			{
-				element: <NotFoundPage />,
+				path: '/profil',
+				element: <Profile />,
+			},
+			{
 				path: '*',
+				element: <NotFoundPage />,
 			},
 		],
 	},

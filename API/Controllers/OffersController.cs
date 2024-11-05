@@ -21,7 +21,7 @@ namespace API.Controllers
         {
             var offer = await offerRepository.GetOfferById(id);
 
-            if(offer == null) return NotFound();
+            if(offer == null) return NotFound(new { message = "Nie znaleziono elementu." });
 
             return offer;
         }
