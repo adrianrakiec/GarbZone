@@ -1,6 +1,5 @@
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
-import styles from './Gallery.module.css';
 
 export const Gallery = ({ offerImages }) => {
 	const images = offerImages.map(img => ({
@@ -9,7 +8,7 @@ export const Gallery = ({ offerImages }) => {
 	}));
 
 	return (
-		<div className={styles.galleryContainer}>
+		<div>
 			<ImageGallery
 				items={images}
 				showThumbnails={true}

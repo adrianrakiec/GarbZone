@@ -4,6 +4,7 @@ import { useFetchData } from '../../services/ApiClientService';
 import { NotFoundPage } from '../../pages/NotFoundPage';
 import styles from './OfferDetails.module.css';
 import { Gallery } from '../Gallery/Gallery';
+import { ProfileCard } from '../ProfileCard/ProfileCard';
 
 export const OfferDetails = () => {
 	const { id } = useParams();
@@ -16,10 +17,21 @@ export const OfferDetails = () => {
 			<Wrapper>
 				<div className={styles.container}>
 					<div className={styles.offerInfo}>
-						<h2>{offer.title}</h2>
-						<p>{offer.description}</p>
+						<div className={styles.offer}>
+							<ProfileCard
+								sellerUsername={offer.seller}
+								sellerRaiting={offer.sellerRaiting}
+								sellerImg={offer.sellerImg}
+							/>
+						</div>
+						<div>
+							<h2>{offer.title}</h2>
+							<p>{offer.description}</p>
+						</div>
 					</div>
-					<Gallery offerImages={offer.images}/>
+					<div className={styles.offerGallery}>
+						<Gallery offerImages={offer.images} />
+					</div>
 				</div>
 			</Wrapper>
 		</section>

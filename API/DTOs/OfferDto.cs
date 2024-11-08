@@ -11,5 +11,6 @@ public class OfferDto
     public string? Status { get; set; }
     public string? Seller { get; set; }
     public double? SellerRaiting { get; set; }
+    public string? SellerImg { get; set; }
     public List<PhotoDto>? Images { get; set; }
 }
