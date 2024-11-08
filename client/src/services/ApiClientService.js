@@ -2,12 +2,7 @@ import { useQuery, useMutation } from '@tanstack/react-query';
 
 const API_URL = import.meta.env.VITE_API_KEY;
 
-export const apiClient = async (
-	url,
-	body = null,
-	method = 'GET',
-	headers = { 'Content-Type': 'application/json' }
-) => {
+export const apiClient = async (url, headers, body = null, method = 'GET') => {
 	try {
 		const response = await fetch(`${API_URL}${url}`, {
 			method: method,
@@ -27,15 +22,24 @@ export const apiClient = async (
 	}
 };
 
-export const useFetchData = (url, queryKey) => {
+export const useFetchData = (
+	url,
+	queryKey,
+	headers = { 'Content-Type': 'application/json' }
+) => {
 	return useQuery({
 		queryKey,
-		queryFn: () => apiClient(url),
+		queryFn: () => apiClient(url, headers),
 	});
 };
 
-export const useMutateData = (url, method = 'POST') => {
+export const useMutateData = (
+	url,
+	body,
+	headers = { 'Content-Type': 'application/json' },
+	method = 'POST'
+) => {
 	return useMutation({
-		mutationFn: (headers, body) => apiClient(url, body, method, headers),
+		mutationFn: () => apiClient(url, headers, body, method),
 	});
 };
