@@ -6,6 +6,7 @@ import { Layout } from './components/Layout/Layout';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { Profile } from './components/Profile/Profile';
 import { OfferDetails } from './components/OfferDetails/OfferDetails';
+import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
 
 export const routes = createBrowserRouter([
 	{
@@ -22,7 +23,11 @@ export const routes = createBrowserRouter([
 			},
 			{
 				path: '/profil',
-				element: <Profile />,
+				element: (
+					<ProtectedRoute>
+						<Profile />
+					</ProtectedRoute>
+				),
 			},
 			{
 				path: '*',

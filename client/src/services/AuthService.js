@@ -6,13 +6,13 @@ export const login = async credentials => {
 		headers: {
 			'Content-Type': 'application/json',
 		},
+		credentials: 'include',
 		body: JSON.stringify(credentials),
 	});
 
 	const data = await response.json();
 
 	if (response.ok) {
-		localStorage.setItem('user', JSON.stringify(data));
 		return data;
 	} else {
 		throw new Error(data.message);
@@ -25,6 +25,7 @@ export const register = async userData => {
 		headers: {
 			'Content-Type': 'application/json',
 		},
+		credentials: 'include',
 		body: JSON.stringify(userData),
 	});
 
@@ -37,6 +38,12 @@ export const register = async userData => {
 	}
 };
 
-export const logout = () => {
-	localStorage.removeItem('user');
+export const logout = async () => {
+	await fetch(`${API_URL}account/logout`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		credentials: 'include',
+	});
 };

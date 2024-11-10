@@ -6,21 +6,37 @@ import {
 } from '../services/AuthService';
 
 export const AuthContext = createContext();
+const API_URL = import.meta.env.VITE_API_KEY;
 
 export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		const savedUser = localStorage.getItem('user');
-		if (savedUser) {
-			setUser(JSON.parse(savedUser));
-		}
+		getCurrentUser();
 	}, []);
+
+	const getCurrentUser = async () => {
+		try {
+			const response = await fetch(`${API_URL}account/me`, {
+				credentials: 'include',
+			});
+			if (response.ok) {
+				const data = await response.json();
+				setUser(data.username);
+			}
+		} catch (e) {
+			console.log(e);
+			setUser(null);
+		} finally {
+			setIsLoading(false);
+		}
+	};
 
 	const login = async credentials => {
 		try {
 			const data = await loginService(credentials);
-			setUser(data);
+			setUser(data.username);
 			return data;
 		} catch (error) {
 			console.error('Błąd logowania:', error.message);
@@ -44,7 +60,7 @@ export const AuthProvider = ({ children }) => {
 	};
 
 	return (
-		<AuthContext.Provider value={{ user, login, register, logout }}>
+		<AuthContext.Provider value={{ user, login, register, logout, isLoading }}>
 			{children}
 		</AuthContext.Provider>
 	);
