@@ -8,6 +8,7 @@ import { Profile } from './components/Profile/Profile';
 import { OfferDetails } from './components/OfferDetails/OfferDetails';
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
 import { UserProfilePage } from './pages/UserProfilePage';
+import { SearchResultPage } from './pages/SearchResultPage';
 
 export const routes = createBrowserRouter([
 	{
@@ -33,6 +34,10 @@ export const routes = createBrowserRouter([
 			{
 				path: '/profil/:username',
 				element: <UserProfilePage />,
+			},
+			{
+				path: '/wyszukiwanie',
+				element: <SearchResultPage />
 			},
 			{
 				path: '*',

@@ -12,9 +12,6 @@ public class OfferRepository(DataContext context, IMapper mapper) : IOfferReposi
 {
     public async Task<OfferDto?> GetOfferById(int id)
     {
-        // return await context.Offers
-        //     .Include(x => x.Images)
-        //     .FirstOrDefaultAsync(x => x.Id == id);
         return await context.Offers
             .Where(x => x.Id == id)
             .ProjectTo<OfferDto>(mapper.ConfigurationProvider)
@@ -23,10 +20,15 @@ public class OfferRepository(DataContext context, IMapper mapper) : IOfferReposi
 
     public async Task<IEnumerable<OfferDto>> GetOffers()
     {
-        // return await context.Offers
-        // .Include(x => x.Images)
-        // .ToListAsync();
         return await context.Offers
+            .ProjectTo<OfferDto>(mapper.ConfigurationProvider)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<OfferDto>> GetOffersByTerm(string term)
+    {
+        return await context.Offers
+            .Where(o => o.Title.ToLower().Contains(term.ToLower()))
             .ProjectTo<OfferDto>(mapper.ConfigurationProvider)
             .ToListAsync();
     }

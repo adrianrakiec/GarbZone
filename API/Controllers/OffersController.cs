@@ -25,5 +25,15 @@ namespace API.Controllers
 
             return offer;
         }
+
+        [HttpGet("search/{term}")]
+        public async Task<ActionResult<IEnumerable<OfferDto>>> GetOffersByTerm(string term)
+        {
+            var offers = await offerRepository.GetOffersByTerm(term);
+
+            if(offers == null) return NotFound(new { message = "Brak pasujących wyników"});
+
+            return Ok(offers);
+        }
     }
 }

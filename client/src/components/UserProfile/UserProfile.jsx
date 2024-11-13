@@ -9,6 +9,10 @@ import styles from './UserProfile.module.css';
 export const UserProfile = ({ user }) => {
 	const messageUrl = `/wiadomosci/${user?.username}`;
 
+	if (!user) {
+		return <p>Ładowanie danych...</p>;
+	}
+
 	return (
 		<div className={styles.userProfile}>
 			<ScrollRestoration />
@@ -34,7 +38,7 @@ export const UserProfile = ({ user }) => {
 					<p>{user?.about}</p>
 					<div className={styles.offersSection}>
 						<h3>Inne oferty sprzedającego</h3>
-						{user?.offers ? (
+						{user.offers && user.offers.length > 0 ? (
 							<div className={styles.offers}>
 								{user?.offers.map((offer, i) => (
 									<Offer key={i} offer={offer} />

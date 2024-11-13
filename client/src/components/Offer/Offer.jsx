@@ -4,13 +4,15 @@ import styles from './Offer.module.css';
 import { Link } from 'react-router-dom';
 
 export const Offer = ({ offer }) => {
+	if (!offer) return;
+
 	const { url: mainPhoto } = offer.images.find(img => img.isMain);
 	const sellerRaiting = Math.floor(offer.sellerRaiting);
 	const linkToOfferDetails = `/oferta/${offer.id}`;
 	const linkToProfile = `/profil/${offer.seller}`;
 
 	return (
-		<div className={styles.offer}>			
+		<div className={styles.offer}>
 			<Link to={linkToOfferDetails}>
 				<img src={mainPhoto} alt='' width={250} height={250} />
 			</Link>

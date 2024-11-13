@@ -12,4 +12,5 @@ public interface IUserRepository
     Task<User?> GetUserByUsername(string username);
     Task<IEnumerable<MemberDto>> GetMembers();
     Task<MemberDto?> GetMember(string username);
+    Task<IEnumerable<MemberDto>> GetUsersByTerm(string term);
 }

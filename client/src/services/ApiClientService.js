@@ -25,11 +25,13 @@ export const apiClient = async (url, headers, body = null, method = 'GET') => {
 export const useFetchData = (
 	url,
 	queryKey,
+	enabled = true,
 	headers = { 'Content-Type': 'application/json' }
 ) => {
 	return useQuery({
 		queryKey,
 		queryFn: () => apiClient(url, headers),
+		enabled: enabled,
 	});
 };
 

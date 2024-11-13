@@ -49,4 +49,12 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
     {
         context.Entry(user).State = EntityState.Modified;
     }
+
+    public async Task<IEnumerable<MemberDto>> GetUsersByTerm(string term)
+    {
+        return await context.Users
+            .Where(u => u.UserName.ToLower().Contains(term.ToLower()))
+            .ProjectTo<MemberDto>(mapper.ConfigurationProvider)
+            .ToListAsync();
+    }
 }

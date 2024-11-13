@@ -1,0 +1,25 @@
+.searchProfile {
+	padding: 0 4em;
+	width: 100%;
+}
+
+.searchProfile a {
+	text-decoration: none;
+	color: var(--text-color);
+}
+
+.searchProfileInfo {
+	display: flex;
+	align-items: center;
+	border: 1px solid var(--main-color);
+	border-radius: 1em;
+	overflow: hidden;
+}
+
+.userInfo {
+	margin-left: 1em;
+}
+
+.userInfo h3 {
+	font-size: 0.9rem;
+}

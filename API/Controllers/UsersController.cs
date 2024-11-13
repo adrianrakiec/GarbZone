@@ -27,5 +27,15 @@ namespace API.Controllers
 
             return user;
         }
+
+        [HttpGet("search/{term}")]
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsersByTerm(string term)
+        {
+            var users = await userRepository.GetUsersByTerm(term);
+
+            if(users == null) return NotFound(new { message = "Brak pasujących wyników"});
+
+            return Ok(users);
+        }
     }
 }

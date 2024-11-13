@@ -1,43 +1,40 @@
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { CiSearch } from 'react-icons/ci';
 import styles from './Search.module.css';
 
 export const Search = () => {
-	const [selectedOption, setSelectedOption] = useState('items');
-	const [searchTerm, setSearchTerm] = useState('');
+	const { register, handleSubmit } = useForm();
+	const navigate = useNavigate();
 
-	const handleOptionChange = event => {
-		setSelectedOption(event.target.value);
-		setSearchTerm('');
-	};
+	const onSubmit = data => {
+		const { selectedOption, searchTerm } = data;
 
-	const handleSearchChange = event => {
-		setSearchTerm(event.target.value);
-	};
+		if (!searchTerm) return;
 
-	const handleSubmit = event => {
-		event.preventDefault();
-		console.log(`Wyszukiwanie w ${selectedOption}: ${searchTerm}`);
+		navigate(
+			`/wyszukiwanie?opcja=${
+				selectedOption === 'items' ? 'przedmioty' : 'uzytkownicy'
+			}&fraza=${encodeURIComponent(searchTerm)}`
+		);
 	};
 
 	return (
-		<form onSubmit={handleSubmit} className={styles.form}>
+		<form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
 			<select
-				value={selectedOption}
-				onChange={handleOptionChange}
+				{...register('selectedOption')}
+				defaultValue='items'
 				className={styles.select}
 			>
 				<option value='items'>Przedmioty</option>
 				<option value='users'>Użytkownicy</option>
 			</select>
+
 			<div className={styles.searchGroup}>
 				<input
 					type='search'
-					value={searchTerm}
-					onChange={handleSearchChange}
-					placeholder={`Szukaj ${
-						selectedOption === 'items' ? 'w przedmiotach' : 'użytkowników'
-					}`}
+					{...register('searchTerm')}
+					placeholder='Szukaj'
 					className={styles.input}
 				/>
 				<button type='submit' className={styles.btn}>
