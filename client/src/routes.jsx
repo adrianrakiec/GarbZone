@@ -7,6 +7,7 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import { Profile } from './components/Profile/Profile';
 import { OfferDetails } from './components/OfferDetails/OfferDetails';
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
+import { UserProfilePage } from './pages/UserProfilePage';
 
 export const routes = createBrowserRouter([
 	{
@@ -28,6 +29,10 @@ export const routes = createBrowserRouter([
 						<Profile />
 					</ProtectedRoute>
 				),
+			},
+			{
+				path: '/profil/:username',
+				element: <UserProfilePage />,
 			},
 			{
 				path: '*',

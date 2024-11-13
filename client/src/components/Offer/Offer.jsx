@@ -7,9 +7,10 @@ export const Offer = ({ offer }) => {
 	const { url: mainPhoto } = offer.images.find(img => img.isMain);
 	const sellerRaiting = Math.floor(offer.sellerRaiting);
 	const linkToOfferDetails = `/oferta/${offer.id}`;
+	const linkToProfile = `/profil/${offer.seller}`;
 
 	return (
-		<div className={styles.offer}>
+		<div className={styles.offer}>			
 			<Link to={linkToOfferDetails}>
 				<img src={mainPhoto} alt='' width={250} height={250} />
 			</Link>
@@ -22,7 +23,8 @@ export const Offer = ({ offer }) => {
 			<h3>{offer.title}</h3>
 			<p className={styles.price}>{offer.price} zł</p>
 			<p>
-				{offer.seller} (<Stars count={sellerRaiting} />)
+				<Link to={linkToProfile}>{offer.seller}</Link> (
+				<Stars count={sellerRaiting} />)
 			</p>
 		</div>
 	);

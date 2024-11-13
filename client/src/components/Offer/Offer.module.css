@@ -4,6 +4,11 @@
 	margin-bottom: 1.5em;
 }
 
+.offer a {
+	text-decoration: none;
+	color: var(--text-color);
+}
+
 .price {
 	color: var(--main-color);
 	font-size: 1.2rem;

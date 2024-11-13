@@ -21,6 +21,27 @@
 	flex: 1;
 }
 
-.offerInfo h2 {
-	margin-bottom: 1.5em;
+.price {
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	font-size: 1.3rem;
+	color: var(--main-color);
+}
+
+.options {
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+	margin-top: 2em;
+}
+
+.options button {
+	width: 30%;
+}
+
+.btn {
+	padding: 1em;
+	background: none;
+	border-radius: 1em;
+	font-weight: bold;
 }

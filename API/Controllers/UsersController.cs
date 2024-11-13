@@ -23,7 +23,7 @@ namespace API.Controllers
         {
             var user = await userRepository.GetMember(username);
 
-            if(user == null) return NotFound();
+            if(user == null) return NotFound(new { message = "Użytkownik nie został znaleziony"});
 
             return user;
         }

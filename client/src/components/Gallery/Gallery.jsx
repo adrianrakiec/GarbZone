@@ -13,7 +13,7 @@ export const Gallery = ({ offerImages }) => {
 				items={images}
 				showThumbnails={true}
 				showBullets={true}
-				showFullscreenButton={false}
+				showFullscreenButton={true}
 				showPlayButton={false}
 				autoPlay={false}
 				lazyLoad={true}

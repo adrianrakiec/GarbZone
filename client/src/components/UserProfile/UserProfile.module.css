@@ -1,0 +1,49 @@
+.userProfileInfo {
+	padding: 0 4em;
+}
+
+.mainInfo img {
+	width: 15%;
+	margin-right: 1em;
+}
+
+.mainInfo {
+	display: flex;
+	font-size: 1.4rem;
+	margin-bottom: 1em;
+}
+
+.mainInfo p {
+	margin-top: 0.5em;
+	font-size: 1.1rem;
+}
+
+.mainInfo :nth-child(2) {
+	flex: 1;
+}
+
+.sendMessageLink a {
+	text-decoration: none;
+	padding: 1em;
+	font-size: 1rem;
+	color: var(--second-color);
+	background-color: var(--main-color);
+	border-radius: 1em;
+}
+
+.offersSection {
+	margin-top: 2em;
+}
+
+.offersEmpty {
+	margin-top: 2em;
+    font-size: 0.8rem;
+}
+
+.offers {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: auto;
+	justify-items: center;
+    margin-top: 1em;
+}
