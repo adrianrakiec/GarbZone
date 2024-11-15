@@ -1,11 +1,10 @@
-import { useForm } from 'react-hook-form';
 import { useContext } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import { toastService } from '../../services/ToastService';
 import { MainBtn } from '../MainBtn/MainBtn';
 import { ArrowBtn } from '../ArrowBtn/ArrowBtn';
-import { Link, useNavigate } from 'react-router-dom';
-import { Bounce, toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import styles from './Register.module.css';
 
 export const Register = () => {
@@ -16,25 +15,15 @@ export const Register = () => {
 	const onSubmit = async data => {
 		try {
 			await registerUser(data);
+			toastService.success('Rejestracja przbiegła pomyślnie');
 			navigate('/logowanie');
 		} catch (e) {
-			toast.error(`${e.message}`, {
-				position: 'top-right',
-				autoClose: 3000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: 'colored',
-				transition: Bounce,
-			});
+			toastService.error(e.message);
 		}
 	};
 
 	return (
 		<div className={styles.wrapper}>
-			<ToastContainer />
 			<ArrowBtn arrowDirection='left' onClick={() => navigate('/')} />
 			<h2>Rejestracja</h2>
 			<p>
@@ -62,6 +51,22 @@ export const Register = () => {
 					)}
 				</div>
 				<div className={styles.formGroup}>
+					<label htmlFor='email'>Email:</label>
+					<input
+						id='email'
+						type='email'
+						{...register('email', {
+							required: {
+								value: true,
+								message: 'Email jest wymagany!',
+							},
+						})}
+					/>
+					{formState.errors.email && (
+						<span>{formState.errors.email.message}</span>
+					)}
+				</div>
+				<div className={styles.formGroup}>
 					<label htmlFor='password'>Hasło:</label>
 					<input
 						id='password'
@@ -75,6 +80,22 @@ export const Register = () => {
 					/>
 					{formState.errors.password && (
 						<span>{formState.errors.password.message}</span>
+					)}
+				</div>
+				<div className={styles.formGroup}>
+					<label htmlFor='confirmPassword'>Powtórz hasło:</label>
+					<input
+						id='confirmPassword'
+						type='password'
+						{...register('confirmPassword', {
+							required: {
+								value: true,
+								message: 'Powtórzenie hasła jest wymagane!',
+							},
+						})}
+					/>
+					{formState.errors.confirmPassword && (
+						<span>{formState.errors.confirmPassword.message}</span>
 					)}
 				</div>
 				<MainBtn>Zarejestruj się</MainBtn>

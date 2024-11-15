@@ -15,53 +15,58 @@ namespace API.Controllers
     [ApiController]
     public class AccountController(DataContext context, ITokenService tokenService) : ControllerBase
     {
-        [HttpPost("register")] 
-        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(RegisterDto registerDto)
         {
-            if(await UserExist(registerDto.Username)) return Unauthorized(new { message = "Nazwa użytkownika jest już zajęta!"});
-            
+            if (await UserExist(registerDto.Username)) 
+                return Unauthorized(new { message = "Nazwa użytkownika jest już zajęta!" });
+
+            if (await EmailExist(registerDto.Email)) 
+                return Unauthorized(new { message = "Istnieje już użytkownik o podanym email!" });
+
+            if (registerDto.Password != registerDto.ConfirmPassword) 
+                return Unauthorized(new { message = "Hasła muszą być takie same!" });
+
             using var hmac = new HMACSHA512();
             var user = new User
             {
                 UserName = registerDto.Username,
                 Email = registerDto.Email,
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-                PasswordSalt = hmac.Key
+                PasswordSalt = hmac.Key,
+                CreatedAt = DateTime.UtcNow
             };
 
             context.Users.Add(user);
             await context.SaveChangesAsync();
 
-            return new UserDto
-            {
-                Username = user.UserName,
-                Token = tokenService.CreateToken(user)
-            };
-        }
+            return Ok();
+        }       
 
-        [HttpPost("login")] 
-        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(LoginDto loginDto)
         {
             var user = await context.Users.FirstOrDefaultAsync(x => x.UserName == loginDto.Username);
 
-            if(user == null) return Unauthorized(new { message = "Nazwa użytkownika jest nieprawidłowa!"});
+            if (user == null) 
+                return Unauthorized(new { message = "Nazwa użytkownika jest nieprawidłowa!" });
+
+            user.LastActive = DateTime.UtcNow;
+            await context.SaveChangesAsync();
 
             using var hmac = new HMACSHA512(user.PasswordSalt);
             var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
 
-            for(int i = 0; i < computedHash.Length; i++) 
+            for (int i = 0; i < computedHash.Length; i++) 
             {
-                if(computedHash[i] != user.PasswordHash[i]) return Unauthorized(new { message = "Hasło jest nieprawidłowe!"});
+                if (computedHash[i] != user.PasswordHash[i]) 
+                    return Unauthorized(new { message = "Hasło jest nieprawidłowe!" });
             }
 
             var token = tokenService.CreateToken(user);
             AddTokenToCookie(token);
 
-            return new UserDto
-            {
-                Username = user.UserName,
-                Token = tokenService.CreateToken(user)
-            };
+            return Ok();
         }
 
         [Authorize]
@@ -70,7 +75,7 @@ namespace API.Controllers
         {
             var username = User.FindFirst(ClaimTypes.Name)?.Value;
 
-            return Ok(new { Username = username});
+            return Ok(new { Username = username });
 }
 
         [HttpPost("logout")]
@@ -83,13 +88,19 @@ namespace API.Controllers
                     Secure = true,
                     SameSite = SameSiteMode.None
                 });
+
             return Ok();
         }
 
         private async Task<bool> UserExist(string username)
         {
             return await context.Users.AnyAsync(x => x.UserName == username);
-        }   
+        }
+
+        private async Task<bool> EmailExist(string email)
+        {
+            return await context.Users.AnyAsync(x => x.Email == email);
+        }     
 
         private void AddTokenToCookie(string token) 
         {

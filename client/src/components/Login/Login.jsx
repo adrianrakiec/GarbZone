@@ -1,12 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { toastService } from '../../services/ToastService';
 import { MainBtn } from '../MainBtn/MainBtn';
 import { Wrapper } from '../Wrapper/Wrapper';
 import { ArrowBtn } from '../ArrowBtn/ArrowBtn';
 import { Link, useNavigate } from 'react-router-dom';
-import { Bounce, toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import styles from './Login.module.css';
 
 export const Login = () => {
@@ -16,27 +15,18 @@ export const Login = () => {
 
 	const onSubmit = async data => {
 		try {
-			await login(data);
-			navigate('/');
+			const result = await login(data);
+			if (result.success) {
+				navigate('/');
+			}
 		} catch (e) {
-			toast.error(`${e.message}`, {
-				position: 'top-right',
-				autoClose: 3000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: 'colored',
-				transition: Bounce
-			});
+			toastService.error(e.message);
 		}
 	};
 
 	return (
 		<Wrapper>
 			<div className={styles.wrapper}>
-				<ToastContainer />
 				<ArrowBtn arrowDirection='left' onClick={() => navigate('/')} />
 				<h2>Zaloguj się</h2>
 				<p>

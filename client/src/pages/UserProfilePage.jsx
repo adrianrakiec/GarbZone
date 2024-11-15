@@ -14,7 +14,7 @@ export const UserProfilePage = () => {
 		isError,
 	} = useFetchData(`users/${username}`, ['user']);
 
-	if (isPending) <div>Ładowanie...</div>;
+	if (isPending) return <div>Ładowanie...</div>;
 	if (isError) return <NotFoundPage />;
 
 	return (

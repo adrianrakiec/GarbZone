@@ -1,40 +1,46 @@
 const API_URL = import.meta.env.VITE_API_KEY;
 
 export const login = async credentials => {
-	const response = await fetch(`${API_URL}account/login`, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		credentials: 'include',
-		body: JSON.stringify(credentials),
-	});
+	try {
+		const response = await fetch(`${API_URL}account/login`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			credentials: 'include',
+			body: JSON.stringify(credentials),
+		});
 
-	const data = await response.json();
-
-	if (response.ok) {
-		return data;
-	} else {
-		throw new Error(data.message);
+		if (response.ok) {
+			return { success: true, username: credentials.username };
+		} else {
+			const errorData = await response.json();
+			throw new Error(errorData.message || 'Logowanie nie powiodło się');
+		}
+	} catch (error) {
+		throw new Error(error.message || 'Błąd połączenia z serwerem');
 	}
 };
 
 export const register = async userData => {
-	const response = await fetch(`${API_URL}account/register`, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		credentials: 'include',
-		body: JSON.stringify(userData),
-	});
+	try {
+		const response = await fetch(`${API_URL}account/register`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			credentials: 'include',
+			body: JSON.stringify(userData),
+		});
 
-	const data = await response.json();
-
-	if (response.ok) {
-		return data;
-	} else {
-		throw new Error(data.message);
+		if (response.ok) {
+			return { success: true };
+		} else {
+			const errorData = await response.json();
+			throw new Error(errorData.message || 'Rejestracja nie powiodła się');
+		}
+	} catch (error) {
+		throw new Error(error.message || 'Błąd połączenia z serwerem');
 	}
 };
 

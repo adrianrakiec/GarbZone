@@ -46,8 +46,7 @@ export const AuthProvider = ({ children }) => {
 
 	const register = async userData => {
 		try {
-			const data = await registerService(userData);
-			return data;
+			await registerService(userData);
 		} catch (error) {
 			console.error('Błąd rejestracji:', error.message);
 			throw error;
