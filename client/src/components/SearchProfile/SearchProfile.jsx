@@ -1,15 +1,17 @@
 import { Link } from 'react-router-dom';
 import { Stars } from '../Stars/Stars';
+import defaultImg from '../../assets/user.png';
 import styles from './SearchProfile.module.css';
 
 export const SearchProfile = ({ user }) => {
 	const profileUrl = `/profil/${user?.username}`;
+	const profileImg = user?.profilePhotoUrl || defaultImg;
 
 	return (
 		<div className={styles.searchProfile}>
 			<Link to={profileUrl}>
 				<div className={styles.searchProfileInfo}>
-					<img src={user?.profilePhotoUrl} alt={user?.username} />
+					<img src={profileImg} alt={`Zdjęcie użytkownika ${user?.username}`} />
 					<div className={styles.userInfo}>
 						<h3>{user?.username}</h3>
 						<Stars count={user?.rating} />

@@ -16,6 +16,10 @@
 	overflow: hidden;
 }
 
+.searchProfileInfo img {
+	width: 40%;
+}
+
 .userInfo {
 	margin-left: 1em;
 }

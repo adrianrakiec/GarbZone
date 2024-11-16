@@ -3,6 +3,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { Wrapper } from '../Wrapper/Wrapper';
 import { Stars } from '../Stars/Stars';
 import { convertDate, getLastActivity } from '../../utils/dateUtils';
+import defaultImg from '../../assets/user.png';
 import styles from './Profile.module.css';
 
 const API_URL = import.meta.env.VITE_API_KEY;
@@ -10,6 +11,7 @@ const API_URL = import.meta.env.VITE_API_KEY;
 export const Profile = () => {
 	const { user: username, logout } = useContext(AuthContext);
 	const [user, setUser] = useState(null);
+	const profileImg = user?.profilePhotoUrl || defaultImg;
 
 	useEffect(() => {
 		fetch(`${API_URL}users/${username}`, { credentials: 'include' })
@@ -23,8 +25,8 @@ export const Profile = () => {
 			<Wrapper>
 				<div className={styles.profileInfo}>
 					<img
-						src={user?.profilePhotoUrl}
-						alt=''
+						src={profileImg}
+						alt={`Zdjęcie użytkownika ${user?.username}`}
 						className={styles.profileImg}
 					/>
 					<div className={styles.userInfo}>
@@ -40,7 +42,7 @@ export const Profile = () => {
 				</div>
 				<div className={styles.description}>
 					<h3>Opis</h3>
-					<p>{user?.about}</p>
+					<p>{user?.about || 'Brak opisu'}</p>
 				</div>
 			</Wrapper>
 		</section>

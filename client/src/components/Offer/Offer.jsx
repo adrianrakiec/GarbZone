@@ -14,7 +14,7 @@ export const Offer = ({ offer }) => {
 	return (
 		<div className={styles.offer}>
 			<Link to={linkToOfferDetails}>
-				<img src={mainPhoto} alt='' width={250} height={250} />
+				<img src={mainPhoto} alt={offer.title} width={250} height={250} />
 			</Link>
 			<button
 				className={styles.like}

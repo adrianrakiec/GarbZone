@@ -5,6 +5,7 @@ import { AuthProvider } from './context/AuthContext';
 import { RouterProvider } from 'react-router-dom';
 import { routes } from './routes';
 import './index.css';
+import { ToastContainer } from 'react-toastify';
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -18,6 +19,7 @@ createRoot(document.getElementById('root')).render(
 	<StrictMode>
 		<QueryClientProvider client={queryClient}>
 			<AuthProvider>
+				<ToastContainer />
 				<RouterProvider router={routes} />
 			</AuthProvider>
 		</QueryClientProvider>

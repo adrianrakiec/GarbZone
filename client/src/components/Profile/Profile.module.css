@@ -8,6 +8,10 @@
 	border-top: 1px solid #808080;
 }
 
+.profileInfo img {
+	width: 15%;
+}
+
 .userInfo {
 	margin-left: 2em;
 	padding: 1em;
@@ -15,5 +19,5 @@
 
 .description {
 	margin-top: 2em;
-    padding: 0 3em;
+	padding: 0 3em;
 }

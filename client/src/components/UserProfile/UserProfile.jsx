@@ -1,17 +1,24 @@
-import { Link, ScrollRestoration } from 'react-router-dom';
+import { Link, Navigate, ScrollRestoration } from 'react-router-dom';
+import { useContext } from 'react';
 import { Wrapper } from '../Wrapper/Wrapper';
 import { Stars } from '../Stars/Stars';
 import { Offer } from '../Offer/Offer';
 import { HorizontalRule } from '../HorizontalRule/HorizontalRule';
+import { AuthContext } from '../../context/AuthContext';
 import { getLastActivity } from '../../utils/dateUtils';
+import defaultImg from '../../assets/user.png';
 import styles from './UserProfile.module.css';
 
 export const UserProfile = ({ user }) => {
+	const { user: username } = useContext(AuthContext);
 	const messageUrl = `/wiadomosci/${user?.username}`;
+	const profileImg = user?.profilePhotoUrl || defaultImg;
 
 	if (!user) {
 		return <p>Ładowanie danych...</p>;
 	}
+
+	if (user?.username === username) return <Navigate to='/profil' />;
 
 	return (
 		<div className={styles.userProfile}>
@@ -20,8 +27,8 @@ export const UserProfile = ({ user }) => {
 				<div className={styles.userProfileInfo}>
 					<div className={styles.mainInfo}>
 						<img
-							src={user?.profilePhotoUrl}
-							alt={`${user?.username}'s photo`}
+							src={profileImg}
+							alt={`Zdjęcie użytkownika ${user?.username}`}
 						/>
 						<div>
 							<h3 className={styles.username}>{user?.username}</h3>
@@ -35,7 +42,9 @@ export const UserProfile = ({ user }) => {
 						</div>
 					</div>
 					<h4>O sprzedawcy</h4>
-					<p>{user?.about}</p>
+					<p className={user?.about ? '' : styles.offersEmpty}>
+						{user?.about || 'Brak opisu'}
+					</p>
 					<div className={styles.offersSection}>
 						<h3>Inne oferty sprzedającego</h3>
 						{user.offers && user.offers.length > 0 ? (
