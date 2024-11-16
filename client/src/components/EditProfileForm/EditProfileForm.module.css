@@ -1,0 +1,20 @@
+.editForm {
+	display: flex;
+	flex-direction: column;
+	padding: 2em;
+    gap: 2em;
+}
+
+.formGroup {
+	display: flex;
+	flex-direction: column;
+}
+
+.formGroup textarea,
+.formGroup input {
+	padding: 1em;
+}
+
+.formGroup textarea {
+	resize: vertical;
+}

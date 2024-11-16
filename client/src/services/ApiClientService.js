@@ -2,11 +2,12 @@ import { useQuery, useMutation } from '@tanstack/react-query';
 
 const API_URL = import.meta.env.VITE_API_KEY;
 
-export const apiClient = async (url, headers, body = null, method = 'GET') => {
+export const apiClient = async (url, body = null, method = 'GET') => {
 	try {
 		const response = await fetch(`${API_URL}${url}`, {
 			method: method,
-			headers: headers,
+			headers: { 'Content-Type': 'application/json' },
+			credentials: 'include',
 			body: body ? JSON.stringify(body) : null,
 		});
 
@@ -15,6 +16,8 @@ export const apiClient = async (url, headers, body = null, method = 'GET') => {
 			throw new Error(errorData.message);
 		}
 
+		if (response.status === 204) return;
+
 		return await response.json();
 	} catch (error) {
 		console.error('Błąd:', error.message);
@@ -22,26 +25,16 @@ export const apiClient = async (url, headers, body = null, method = 'GET') => {
 	}
 };
 
-export const useFetchData = (
-	url,
-	queryKey,
-	enabled = true,
-	headers = { 'Content-Type': 'application/json' }
-) => {
+export const useFetchData = (url, queryKey, enabled = true) => {
 	return useQuery({
 		queryKey,
-		queryFn: () => apiClient(url, headers),
+		queryFn: () => apiClient(url),
 		enabled: enabled,
 	});
 };
 
-export const useMutateData = (
-	url,
-	body,
-	headers = { 'Content-Type': 'application/json' },
-	method = 'POST'
-) => {
+export const useMutateData = (url, method = 'POST') => {
 	return useMutation({
-		mutationFn: () => apiClient(url, headers, body, method),
+		mutationFn: body => apiClient(url, body, method),
 	});
 };

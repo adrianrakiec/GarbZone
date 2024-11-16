@@ -1,23 +1,31 @@
 .profile {
-	padding: 1em;
-}
-
-.profileInfo {
-	display: flex;
-	padding: 4em 4em 0;
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	padding: 2em;
 	border-top: 1px solid #808080;
 }
 
+.title {
+	font-size: 2rem;
+	margin-bottom: 1em;
+}
+
+.profileInfo {
+	border: 1px solid black;
+	padding: 3em;
+}
+
 .profileInfo img {
-	width: 15%;
+	display: block;
+	width: 100%;
+	margin: 0 auto 1em;
 }
 
-.userInfo {
-	margin-left: 2em;
-	padding: 1em;
+.editInfo {
+	display: flex;
+	flex-direction: column;
 }
 
-.description {
-	margin-top: 2em;
-	padding: 0 3em;
+.editBtn {
+	align-self: flex-end;
 }

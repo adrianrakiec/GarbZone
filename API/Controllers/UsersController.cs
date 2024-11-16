@@ -1,5 +1,7 @@
+using System.Security.Claims;
 using API.DTOs;
 using API.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +9,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController(IUserRepository userRepository) : ControllerBase
+    public class UsersController(IUserRepository userRepository, IMapper mapper) : ControllerBase
     {
         [HttpGet]
         [Authorize]
@@ -36,6 +38,29 @@ namespace API.Controllers
             if(users == null) return NotFound(new { message = "Brak pasujących wyników"});
 
             return Ok(users);
+        }
+
+        [Authorize]
+        [HttpPut()]
+        public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
+        {           
+            if(memberUpdateDto.Email == "") return BadRequest(new { message = "Email nie może być pusty!" });
+            
+            var username = User.FindFirst(ClaimTypes.Name)?.Value;
+
+            if(username == null) return BadRequest();
+
+            var user = await userRepository.GetUserByUsername(username);
+
+            if(user == null) return BadRequest(new { message = "Użytkownik nie został odnaleziony!" });
+
+            mapper.Map(memberUpdateDto, user);
+
+            userRepository.Update(user);
+            
+            if(await userRepository.SaveAll()) return NoContent();
+
+            return BadRequest(new { message = "Nie udało się zaktualizować użytkownika!" });
         }
     }
 }
