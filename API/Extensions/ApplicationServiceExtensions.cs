@@ -1,4 +1,5 @@
 using API.Data;
+using API.Helpers;
 using API.Interfaces;
 using API.Repository;
 using API.Services;
@@ -16,11 +17,13 @@ public static class ApplicationServiceExtensions
         });
         services.AddCors();
         services.AddScoped<ITokenService, TokenService>();
-        services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IOfferRepository, OfferRepository>();
+        services.AddScoped<IPhotoService, PhotoService>();
+        services.AddEndpointsApiExplorer();
+        services.AddSwaggerGen();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+        services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
 
         return services;
     }
