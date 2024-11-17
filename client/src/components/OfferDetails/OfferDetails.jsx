@@ -1,17 +1,17 @@
 import { useParams, ScrollRestoration } from 'react-router-dom';
 import { Wrapper } from '../Wrapper/Wrapper';
 import { useFetchData } from '../../services/ApiClientService';
-import { NotFoundPage } from '../../pages/NotFoundPage';
 import { Gallery } from '../Gallery/Gallery';
 import { ProfileCard } from '../ProfileCard/ProfileCard';
 import { MainBtn } from '../MainBtn/MainBtn';
+import { HorizontalRule } from '../HorizontalRule/HorizontalRule';
 import styles from './OfferDetails.module.css';
 
 export const OfferDetails = () => {
 	const { id } = useParams();
 	const { data: offer } = useFetchData(`offers/${id}`, ['offer']);
 
-	if (!offer) return <NotFoundPage />;
+	if (!offer) return <div>Ładowanie oferty...</div>;
 
 	return (
 		<section className={styles.offerDetails}>
@@ -41,6 +41,7 @@ export const OfferDetails = () => {
 						<Gallery offerImages={offer.images} />
 					</div>
 				</div>
+				<HorizontalRule />
 			</Wrapper>
 		</section>
 	);

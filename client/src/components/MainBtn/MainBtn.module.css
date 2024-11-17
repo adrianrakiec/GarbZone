@@ -1,13 +1,18 @@
-.btn {
-    position: relative;
-    background: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    background-color: var(--main-color);
-    padding: 1.1em 2.2em;
-    text-align: center;
-    border-radius: 0.5em;
-    font-weight: 600;
-    font-size: 0.8em;
+.btn,
+.btnDisabled {
+	position: relative;
+	background: none;
+	border: none;
+	color: #fff;
+	cursor: pointer;
+	background-color: var(--main-color);
+	padding: 1.1em 2.2em;
+	text-align: center;
+	border-radius: 0.5em;
+	font-weight: 600;
+	font-size: 0.8em;
+}
+
+.btnDisabled {
+	background-color: gray;
 }

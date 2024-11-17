@@ -5,13 +5,18 @@ import { Wrapper } from '../Wrapper/Wrapper';
 import { MainBtn } from '../MainBtn/MainBtn';
 import { convertDate } from '../../utils/dateUtils';
 import { EditProfileForm } from '../EditProfileForm/EditProfileForm';
+import { EditProfilePhotoForm } from '../EditProfilePhotoForm/EditProfilePhotoForm';
+import { HorizontalRule } from '../HorizontalRule/HorizontalRule';
 import defaultImg from '../../assets/user.png';
 import styles from './Profile.module.css';
 
 export const Profile = () => {
 	const [isEdit, setIsEdit] = useState(false);
+	const [isPopupOpen, setIsPopupOpen] = useState(false);
 	const { user: username } = useContext(AuthContext);
-	const { data: user, refetch } = useFetchData(`users/${username}`, ['currentUser']);
+	const { data: user, refetch } = useFetchData(`users/${username}`, [
+		'currentUser',
+	]);
 
 	if (!user) return <div>Ładowanie...</div>;
 
@@ -20,15 +25,26 @@ export const Profile = () => {
 	return (
 		<section>
 			<Wrapper>
+				{isPopupOpen && (
+					<EditProfilePhotoForm onClose={setIsPopupOpen} refetch={refetch} />
+				)}
 				<div className={styles.profile}>
 					<div>
 						<h2 className={styles.title}>Twój profil</h2>
 						<div className={styles.profileInfo}>
-							<img
-								src={profileImg}
-								alt='Twoje zdjęcie profilowe'
-								className={styles.profileImg}
-							/>
+							<div className={styles.photoContainer}>
+								<img
+									src={profileImg}
+									alt='Twoje zdjęcie profilowe'
+									className={styles.profileImg}
+								/>
+								<button
+									className={styles.editPhotoBtn}
+									onClick={() => setIsPopupOpen(true)}
+								>
+									Edytuj zdjęcie
+								</button>
+							</div>
 							<p>Konto utwożone dnia: {convertDate(user.createdAt)}</p>
 						</div>
 					</div>
@@ -49,6 +65,7 @@ export const Profile = () => {
 						/>
 					</div>
 				</div>
+				<HorizontalRule />
 			</Wrapper>
 		</section>
 	);

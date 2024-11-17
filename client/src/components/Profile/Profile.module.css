@@ -15,10 +15,43 @@
 	padding: 3em;
 }
 
-.profileInfo img {
+.photoContainer {
+	position: relative;
+	margin-bottom: 1.3em;
+}
+
+.profileImg {
 	display: block;
 	width: 100%;
 	margin: 0 auto 1em;
+	object-fit: cover;
+	border-radius: 0.5em;
+	transition: transform 0.3s ease;
+}
+
+.photoContainer:hover .profileImg {
+	transform: scale(1.05);
+	filter: brightness(0.5);
+}
+
+.editPhotoBtn {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: var(--text-color);
+	color: white;
+	border: none;
+	padding: 0.7em 1.4em;
+	border-radius: 5px;
+	cursor: pointer;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	font-weight: bold;
+}
+
+.photoContainer:hover .editPhotoBtn {
+	opacity: 1;
 }
 
 .editInfo {
