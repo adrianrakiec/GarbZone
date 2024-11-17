@@ -484,3 +484,4 @@ $RECYCLE.BIN/
 *.swp
 API/garbzone.db-wal
 API/garbzone.db-shm
+API/appsettings.json
