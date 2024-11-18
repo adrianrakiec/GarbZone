@@ -9,6 +9,7 @@ import { OfferDetails } from './components/OfferDetails/OfferDetails';
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
 import { UserProfilePage } from './pages/UserProfilePage';
 import { SearchResultPage } from './pages/SearchResultPage';
+import { CreateOffer } from './components/CreateOffer/CreateOffer';
 
 export const routes = createBrowserRouter([
 	{
@@ -32,12 +33,20 @@ export const routes = createBrowserRouter([
 				),
 			},
 			{
+				path: '/nowa-oferta',
+				element: (
+					<ProtectedRoute>
+						<CreateOffer />
+					</ProtectedRoute>
+				),
+			},
+			{
 				path: '/profil/:username',
 				element: <UserProfilePage />,
 			},
 			{
 				path: '/wyszukiwanie',
-				element: <SearchResultPage />
+				element: <SearchResultPage />,
 			},
 			{
 				path: '*',

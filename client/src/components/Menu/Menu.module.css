@@ -1,0 +1,9 @@
+.menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 500px;
+    background-color: red;
+    z-index: 100;
+}

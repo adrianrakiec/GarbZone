@@ -1,16 +1,22 @@
-import logo from '../../assets/logo.png';
+import { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { AuthContext } from '../../context/AuthContext';
 import { MainBtn } from '../MainBtn/MainBtn';
 import { Wrapper } from '../Wrapper/Wrapper';
-import { Link, useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
 import { UserMenu } from '../UserMenu/UserMenu';
+import { Menu } from '../Menu/Menu';
+import logo from '../../assets/logo.png';
 import styles from './Nav.module.css';
 
 export const Nav = () => {
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const navigate = useNavigate();
 	const { user } = useContext(AuthContext);
+
+	const toggleMenu = () => {
+		setIsMenuOpen(prev => !prev);
+	};
 
 	return (
 		<nav className={styles.nav}>
@@ -31,9 +37,10 @@ export const Nav = () => {
 						)}
 					</li>
 					<li>
-						<button className={styles.menuBtn}>
+						<button className={styles.menuBtn} onClick={toggleMenu}>
 							<GiHamburgerMenu />
 						</button>
+						{isMenuOpen && <Menu />}
 					</li>
 				</ul>
 			</Wrapper>
