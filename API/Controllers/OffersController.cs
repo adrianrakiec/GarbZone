@@ -1,12 +1,15 @@
 using API.DTOs;
+using API.Entities;
+using API.Extensions;
 using API.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OffersController(IOfferRepository offerRepository) : ControllerBase
+    public class OffersController(IOfferRepository offerRepository, IUserRepository userRepository, IPhotoService photoService) : ControllerBase
     {
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OfferDto>>> GetOffers()
@@ -34,6 +37,51 @@ namespace API.Controllers
             if(offers == null) return NotFound(new { message = "Brak pasujących wyników"});
 
             return Ok(offers);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> CreateOffer(CreteOfferDto creteOfferDto)
+        {
+            var user = await userRepository.GetUserByUsername(User.GetUsername());
+
+            if(user == null) return Unauthorized();
+            
+            var offer = new Offer
+            {
+                Title = creteOfferDto.Title,
+                Description = creteOfferDto.Description,
+                Price = creteOfferDto.Price,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+                Status = "ACTIVE",
+                UserId = user.Id,
+                User = user
+            };
+
+            int index = 0;
+            foreach (var img in creteOfferDto.Images)
+            {
+                var result = await photoService.AddPhoto(img);
+
+                if(result.Error != null) return BadRequest(result.Error.Message);
+
+                var photo = new Photo
+                {
+                    Url = result.SecureUrl.AbsoluteUri,
+                    PublicId = result.PublicId,
+                    IsMain = index == 0,
+                    Offer = offer
+                };
+
+                 offer.Images.Add(photo);
+                 index++;
+            }
+            
+            user.Offers.Add(offer);
+            if(await userRepository.SaveAll()) return Ok();
+
+            return BadRequest(new { message = "Problem przy tworzeniu!"});
         }
     }
 }
