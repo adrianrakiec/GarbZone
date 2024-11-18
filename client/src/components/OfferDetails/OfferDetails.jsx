@@ -27,7 +27,7 @@ export const OfferDetails = () => {
 							/>
 						</div>
 						<div>
-							<h2>{offer.title}</h2>
+							<h2 className={styles.title}>{offer.title}</h2>
 							<p className={styles.price}>{offer.price} zł</p>
 							<p>{offer.description}</p>
 							<div className={styles.options}>

@@ -41,7 +41,12 @@ namespace API.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> CreateOffer(CreteOfferDto creteOfferDto)
+        public async Task<ActionResult> CreateOffer(
+            [FromForm] string title, 
+            [FromForm] string description, 
+            [FromForm] decimal price, 
+            [FromForm] List<IFormFile> images
+        )
         {
             var user = await userRepository.GetUserByUsername(User.GetUsername());
 
@@ -49,9 +54,9 @@ namespace API.Controllers
             
             var offer = new Offer
             {
-                Title = creteOfferDto.Title,
-                Description = creteOfferDto.Description,
-                Price = creteOfferDto.Price,
+                Title = title,
+                Description = description,
+                Price = price,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
                 Status = "ACTIVE",
@@ -60,7 +65,7 @@ namespace API.Controllers
             };
 
             int index = 0;
-            foreach (var img in creteOfferDto.Images)
+            foreach (var img in images)
             {
                 var result = await photoService.AddPhoto(img);
 

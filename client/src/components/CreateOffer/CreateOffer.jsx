@@ -1,13 +1,18 @@
 import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toastService } from '../../services/ToastService';
 import { IoMdAddCircleOutline } from 'react-icons/io';
 import { Wrapper } from '../Wrapper/Wrapper';
 import { HorizontalRule } from '../HorizontalRule/HorizontalRule';
 import { MainBtn } from '../MainBtn/MainBtn';
 import styles from './CreateOffer.module.css';
 
+const API_URL = import.meta.env.VITE_API_KEY;
+
 export const CreateOffer = () => {
 	const [selectedImages, setSelectedImages] = useState([]);
 	const fileInputRef = useRef();
+	const navigate = useNavigate();
 
 	const handleFileClick = () => {
 		fileInputRef.current.click();
@@ -26,11 +31,40 @@ export const CreateOffer = () => {
 		setSelectedImages(prev => prev.filter((_, i) => i !== index));
 	};
 
+	const handleSubmit = async event => {
+		event.preventDefault();
+
+		const formData = new FormData();
+		formData.append('title', event.target.title.value);
+		formData.append('description', event.target.description.value);
+		formData.append('price', event.target.price.value);
+		selectedImages.forEach(image => {
+			formData.append('images', image.file);
+		});
+
+		try {
+			const response = await fetch(`${API_URL}offers`, {
+				method: 'POST',
+				body: formData,
+				credentials: 'include',
+			});
+
+			if (!response.ok) {
+				toastService.error('Błąd podczas tworzenia oferty');
+			}
+
+			toastService.success('Oferta utworzona pomyślnie');
+			navigate('/');
+		} catch (error) {
+			toastService.error(error.message);
+		}
+	};
+
 	return (
 		<div className={styles.createOffer}>
 			<Wrapper>
 				<h2>Tworzenie oferty</h2>
-				<form className={styles.form}>
+				<form className={styles.form} onSubmit={handleSubmit}>
 					<div className={styles.formGroup}>
 						<label htmlFor='title'>Tytuł</label>
 						<input
@@ -39,6 +73,7 @@ export const CreateOffer = () => {
 							name='title'
 							placeholder='Wprowadź tytuł'
 							className={styles.input}
+							required
 						/>
 					</div>
 					<div className={styles.formGroup}>
@@ -48,6 +83,7 @@ export const CreateOffer = () => {
 							name='description'
 							placeholder='Dodaj opis oferty'
 							className={styles.textarea}
+							required
 						></textarea>
 					</div>
 					<div className={styles.formGroup}>
@@ -58,6 +94,7 @@ export const CreateOffer = () => {
 							name='price'
 							placeholder='Wprowadź cenę'
 							className={styles.input}
+							required
 						/>
 					</div>
 					<div className={styles.formGroup}>
@@ -71,6 +108,7 @@ export const CreateOffer = () => {
 							ref={fileInputRef}
 							onChange={handleFileChange}
 							className={styles.fileInput}
+							required
 						/>
 						<button
 							type='button'
