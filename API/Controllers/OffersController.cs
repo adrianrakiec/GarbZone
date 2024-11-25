@@ -88,5 +88,81 @@ namespace API.Controllers
 
             return BadRequest(new { message = "Problem przy tworzeniu!"});
         }
+
+        [Authorize]
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> EditOffer(
+            int id,
+            [FromForm] string title, 
+            [FromForm] string description, 
+            [FromForm] decimal price, 
+            [FromForm] List<IFormFile> images
+        )
+        {
+            var user = await userRepository.GetUserByUsername(User.GetUsername());
+
+            if(user == null) return Unauthorized();
+
+            if(images.Count == 0) return BadRequest(new { message = "Przynajmniej jedno zdjęcie jest wymagane!" });
+            
+            var offer = await offerRepository.GetFullOfferById(id);
+
+            if(offer == null) return BadRequest(new { message = "Brak oferty!" });
+
+            offer.Title = title;
+            offer.Description = description;
+            offer.Price = price;
+            offer.UpdatedAt = DateTime.UtcNow;
+            offer.Images = [];
+
+            int index = 0;
+            foreach (var img in images)
+            {
+                var result = await photoService.AddPhoto(img);
+
+                if(result.Error != null) return BadRequest(result.Error.Message);
+
+                var photo = new Photo
+                {
+                    Url = result.SecureUrl.AbsoluteUri,
+                    PublicId = result.PublicId,
+                    IsMain = index == 0,
+                    Offer = offer
+                };
+
+                 offer.Images.Add(photo);
+                 index++;
+            }
+            
+            if(await userRepository.SaveAll()) return NoContent();
+
+            return BadRequest(new { message = "Problem przy edytowaniu!"});
+        }
+
+        [Authorize]
+        [HttpDelete("delete-photo/{photoId:int}")]
+        public async Task<ActionResult> DeletePhoto(int photoId)
+        {
+            var user = await userRepository.GetUserByUsername(User.GetUsername());
+
+            if(user == null) return Unauthorized();
+
+            var photo = await offerRepository.GetPhotoById(photoId);
+
+            if(photo == null) return BadRequest(new { message = "Zdjęcie nie może zostać usunięte!" });
+
+            if(photo.PublicId != null)
+            {
+                var result = await photoService.DeletePhoto(photo.PublicId);
+                if(result.Error != null) return BadRequest(new { message = result.Error.Message });
+            }
+
+            offerRepository.DeletePhoto(photo);
+
+            if(await userRepository.SaveAll()) return Ok();
+
+            return BadRequest(new { message = "Problem przy usuwaniu!"});
+        }
+
     }
 }
