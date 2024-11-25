@@ -7,6 +7,7 @@ import { convertDate } from '../../utils/dateUtils';
 import { EditProfileForm } from '../EditProfileForm/EditProfileForm';
 import { EditProfilePhotoForm } from '../EditProfilePhotoForm/EditProfilePhotoForm';
 import { HorizontalRule } from '../HorizontalRule/HorizontalRule';
+import { UserOffers } from '../UserOffers/UserOffers';
 import defaultImg from '../../assets/user.png';
 import styles from './Profile.module.css';
 
@@ -65,6 +66,8 @@ export const Profile = () => {
 						/>
 					</div>
 				</div>
+				<HorizontalRule />
+				<UserOffers offers={user.offers} refetch={refetch} />
 				<HorizontalRule />
 			</Wrapper>
 		</section>

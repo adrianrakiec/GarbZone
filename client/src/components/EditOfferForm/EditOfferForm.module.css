@@ -1,0 +1,110 @@
+.editForm {
+	margin-top: 1em;
+}
+
+.createOffer {
+	margin-top: 2em;
+}
+
+h2 {
+	text-align: center;
+	margin-bottom: 1em;
+	color: var(--text-color);
+}
+
+.form {
+	display: flex;
+	max-width: 60%;
+	margin: 0 auto;
+	flex-direction: column;
+	gap: 1em;
+}
+
+.formGroup {
+	display: flex;
+	flex-direction: column;
+}
+
+label {
+	margin-bottom: 0.2em;
+}
+
+.input,
+.textarea {
+	padding: 1em;
+	font-size: 1rem;
+	border: 1px solid #ccc;
+	border-radius: 0.2em;
+}
+
+.input:focus,
+.textarea:focus {
+	outline: none;
+	border-color: var(--main-color);
+	box-shadow: 0 0 2px var(--main-color);
+}
+
+.textarea {
+	resize: vertical;
+	min-height: 100px;
+}
+
+.fileInput {
+	display: none;
+}
+
+.uploadButton {
+	display: block;
+	width: 10%;
+	font-size: 3rem;
+	color: var(--main-color);
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+.previewContainer {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1em;
+}
+
+.preview {
+	position: relative;
+	width: 6em;
+	height: 6em;
+	border: 1px solid #ddd;
+	border-radius: 0.2em;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.preview img {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: cover;
+}
+
+.removeButton {
+	position: absolute;
+	top: 5%;
+	right: 5%;
+	background-color: var(--main-color);
+	color: white;
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+	padding: 0.3em;
+	font-size: 0.8rem;
+}
+
+.submitBtn {
+	width: 20%;
+	margin: 1em auto 0;
+}
+
+.deleted {
+	display: none;
+}
