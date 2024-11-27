@@ -4,7 +4,6 @@ using API.Entities;
 using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Repository;
@@ -13,7 +12,10 @@ public class OfferRepository(DataContext context, IMapper mapper) : IOfferReposi
 {
     public async Task<Offer?> GetFullOfferById(int id)
     {
-        return await context.Offers.FindAsync(id);
+        return await context.Offers
+            .Include(p => p.Images)
+            .Include(u => u.User)
+            .FirstOrDefaultAsync(x => x.Id == id);
     }
     
     public async Task<OfferDto?> GetOfferById(int id)

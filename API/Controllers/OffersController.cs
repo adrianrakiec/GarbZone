@@ -2,6 +2,7 @@ using API.DTOs;
 using API.Entities;
 using API.Extensions;
 using API.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +10,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OffersController(IOfferRepository offerRepository, IUserRepository userRepository, IPhotoService photoService) : ControllerBase
+    public class OffersController(IOfferRepository offerRepository, IUserRepository userRepository, IPhotoService photoService, IMapper mapper) : ControllerBase
     {
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OfferDto>>> GetOffers()
@@ -30,11 +31,17 @@ namespace API.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<OfferDto>> GetOffer(int id)
         {
-            var offer = await offerRepository.GetOfferById(id);
+            var offer = await offerRepository.GetFullOfferById(id);
 
             if(offer == null) return NotFound(new { message = "Nie znaleziono elementu." });
 
-            return offer;
+            offer.ViewCount++;
+            
+            if(await userRepository.SaveAll() == false) return BadRequest(new { message = "Nie udało się zapisać!" });
+
+            var offerDto = mapper.Map<OfferDto>(offer);
+
+            return offerDto;
         }
 
         [HttpGet("search/{term}")]
@@ -69,7 +76,8 @@ namespace API.Controllers
                 UpdatedAt = DateTime.UtcNow,
                 Status = "ACTIVE",
                 UserId = user.Id,
-                User = user
+                User = user,
+                ViewCount = 0
             };
 
             int index = 0;
@@ -171,6 +179,5 @@ namespace API.Controllers
 
             return BadRequest(new { message = "Problem przy usuwaniu!"});
         }
-
     }
 }
