@@ -13,5 +13,5 @@ public class Offer
     public List<Photo> Images { get; set; } = [];
     public int UserId { get; set; }
     public User User { get; set; } = null!;
-    public List<Tag> Tags { get; } = [];
+    public List<Tag> Tags { get; set; } = [];
 }

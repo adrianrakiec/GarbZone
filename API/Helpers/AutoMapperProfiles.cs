@@ -15,5 +15,6 @@ public class AutoMapperProfiles : Profile
             .ForMember(d => d.SellerRaiting, o => o.MapFrom(s => s.User.Rating))
             .ForMember(d => d.SellerImg, o => o.MapFrom(s => s.User.ProfilePhotoUrl));
         CreateMap<MemberUpdateDto, User>();
+        CreateMap<Tag, TagDto>();
     }
 }

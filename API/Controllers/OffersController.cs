@@ -10,7 +10,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OffersController(IOfferRepository offerRepository, IUserRepository userRepository, IPhotoService photoService, IMapper mapper) : ControllerBase
+    public class OffersController(IOfferRepository offerRepository, IUserRepository userRepository, IPhotoService photoService, ITagRepository tagRepository, IMapper mapper) : ControllerBase
     {
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OfferDto>>> GetOffers()
@@ -60,6 +60,7 @@ namespace API.Controllers
             [FromForm] string title, 
             [FromForm] string description, 
             [FromForm] decimal price, 
+            [FromForm] List<int> tagIds,
             [FromForm] List<IFormFile> images
         )
         {
@@ -79,6 +80,10 @@ namespace API.Controllers
                 User = user,
                 ViewCount = 0
             };
+
+            var tags = await tagRepository.GetTagsById(tagIds);
+
+            if(tags != null) offer.Tags = tags;
 
             int index = 0;
             foreach (var img in images)
@@ -100,6 +105,7 @@ namespace API.Controllers
             }
             
             user.Offers.Add(offer);
+
             if(await userRepository.SaveAll()) return Ok();
 
             return BadRequest(new { message = "Problem przy tworzeniu!"});
@@ -112,6 +118,7 @@ namespace API.Controllers
             [FromForm] string title, 
             [FromForm] string description, 
             [FromForm] decimal price, 
+            [FromForm] List<int> tagIds,
             [FromForm] List<IFormFile> images
         )
         {
@@ -130,6 +137,11 @@ namespace API.Controllers
             offer.Price = price;
             offer.UpdatedAt = DateTime.UtcNow;
             offer.Images = [];
+            offer.Tags = [];
+
+            var tags = await tagRepository.GetTagsById(tagIds);
+
+            if(tags != null) offer.Tags = tags;
 
             int index = 0;
             foreach (var img in images)

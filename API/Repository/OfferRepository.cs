@@ -15,6 +15,7 @@ public class OfferRepository(DataContext context, IMapper mapper) : IOfferReposi
         return await context.Offers
             .Include(p => p.Images)
             .Include(u => u.User)
+            .Include(t => t.Tags)
             .FirstOrDefaultAsync(x => x.Id == id);
     }
     
