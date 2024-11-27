@@ -19,6 +19,14 @@ namespace API.Controllers
             return Ok(offers);
         }
 
+        [HttpGet("last-added")]
+        public async Task<ActionResult<IEnumerable<OfferDto>>> GetLastAddedOffers()
+        {
+            var offers = await offerRepository.GetLastAddedOffers(8);
+
+            return Ok(offers);
+        }
+
         [HttpGet("{id:int}")]
         public async Task<ActionResult<OfferDto>> GetOffer(int id)
         {

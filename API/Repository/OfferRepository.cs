@@ -31,6 +31,15 @@ public class OfferRepository(DataContext context, IMapper mapper) : IOfferReposi
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<OfferDto>> GetLastAddedOffers(int count)
+    {
+        return await context.Offers
+            .ProjectTo<OfferDto>(mapper.ConfigurationProvider)
+            .OrderByDescending(o => o.CreatedAt)
+            .Take(count)
+            .ToListAsync();
+    }
+
     public async Task<IEnumerable<OfferDto>> GetOffersByTerm(string term)
     {
         return await context.Offers

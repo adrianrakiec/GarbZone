@@ -7,8 +7,16 @@ import { Wrapper } from '../components/Wrapper/Wrapper';
 import { useFetchData } from '../services/ApiClientService';
 
 export const MainPage = () => {
-	const { data: bestOffers } = useFetchData('offers', ['offers']);
-	const { data: lastAdded } = useFetchData('offers', ['offers']);
+	const { data: bestOffers, isPending: isPendingBest } = useFetchData(
+		'offers',
+		['offers']
+	);
+	const { data: lastAdded, isPending: isPendingLast } = useFetchData(
+		'offers/last-added',
+		['lastAdded']
+	);
+
+	if (isPendingBest && isPendingLast) return <p>Ładowanie...</p>;
 
 	return (
 		<>

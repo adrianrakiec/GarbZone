@@ -7,7 +7,7 @@ import styles from './Offer.module.css';
 export const Offer = ({ offer }) => {
 	if (!offer) return <p>Ładowanie...</p>;
 
-	const mainPhoto = offer.images.find(img => img.isMain);
+	const mainPhoto = offer?.images.find(img => img.isMain);
 	const sellerRaiting = Math.floor(offer.sellerRaiting);
 	const linkToOfferDetails = `/oferta/${offer.id}`;
 	const linkToProfile = `/profil/${offer.seller}`;
