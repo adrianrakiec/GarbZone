@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MainBtn } from '../MainBtn/MainBtn';
-import styles from './OfferToEdit.module.css';
 import { EditOfferForm } from '../EditOfferForm/EditOfferForm';
+import ImgPlaceholder from '../../assets/placeholder-image.jpg';
+import styles from './OfferToEdit.module.css';
 
 export const OfferToEdit = ({ offer, refetch }) => {
 	const [isEdit, setIsEdit] = useState(false);
@@ -14,7 +15,7 @@ export const OfferToEdit = ({ offer, refetch }) => {
 		<section className={styles.card}>
 			<div className={styles.offerInfo}>
 				<img
-					src={mainPhoto?.url}
+					src={mainPhoto?.url ?? ImgPlaceholder}
 					alt={offer.title}
 					className={styles.mainPhoto}
 				/>
@@ -26,7 +27,9 @@ export const OfferToEdit = ({ offer, refetch }) => {
 					<button className={styles.deleteOfferBtn}>Zakończ</button>
 				</div>
 			</div>
-			{isEdit && <EditOfferForm offer={offer} setIsEdit={setIsEdit} refetch={refetch} />}
+			{isEdit && (
+				<EditOfferForm offer={offer} setIsEdit={setIsEdit} refetch={refetch} />
+			)}
 		</section>
 	);
 };

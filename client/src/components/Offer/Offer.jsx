@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom';
 import { FaHeart } from 'react-icons/fa';
 import { Stars } from '../Stars/Stars';
+import ImgPlaceholder from '../../assets/placeholder-image.jpg';
 import styles from './Offer.module.css';
-import { Link } from 'react-router-dom';
 
 export const Offer = ({ offer }) => {
 	if (!offer) return <p>Ładowanie...</p>;
@@ -14,7 +15,12 @@ export const Offer = ({ offer }) => {
 	return (
 		<div className={styles.offer}>
 			<Link to={linkToOfferDetails}>
-				<img src={mainPhoto?.url} alt={offer.title} width={250} height={250} />
+				<img
+					src={mainPhoto?.url ?? ImgPlaceholder}
+					alt={offer.title}
+					width={250}
+					height={250}
+				/>
 			</Link>
 			<button
 				className={styles.like}

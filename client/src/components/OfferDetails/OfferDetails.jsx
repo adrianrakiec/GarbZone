@@ -38,7 +38,7 @@ export const OfferDetails = () => {
 						</div>
 					</div>
 					<div className={styles.offerGallery}>
-						<Gallery offerImages={offer.images} />
+						{offer.images.length > 0 && <Gallery offerImages={offer.images} />}
 					</div>
 				</div>
 				<HorizontalRule />

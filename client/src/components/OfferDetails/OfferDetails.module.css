@@ -37,6 +37,7 @@
 
 .options button {
 	width: 30%;
+	cursor: pointer;
 }
 
 .btn {
