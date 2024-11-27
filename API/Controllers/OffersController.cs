@@ -191,5 +191,13 @@ namespace API.Controllers
 
             return BadRequest(new { message = "Problem przy usuwaniu!"});
         }
+
+        [HttpGet("tags")]
+        public async Task<ActionResult> GetTags()
+        {
+            var tags = await tagRepository.GetTags();
+
+            return Ok(tags);
+        }
     }
 }
