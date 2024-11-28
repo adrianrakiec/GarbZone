@@ -30,6 +30,7 @@ public class OfferRepository(DataContext context, IMapper mapper) : IOfferReposi
     public async Task<IEnumerable<OfferDto>> GetOffers()
     {
         return await context.Offers
+            .Where(x => x.Status == "Active")
             .Include(t => t.Tags)
             .ProjectTo<OfferDto>(mapper.ConfigurationProvider)
             .ToListAsync();
@@ -38,8 +39,20 @@ public class OfferRepository(DataContext context, IMapper mapper) : IOfferReposi
     public async Task<IEnumerable<OfferDto>> GetLastAddedOffers(int count)
     {
         return await context.Offers
+            .Where(x => x.Status == "Active")
             .ProjectTo<OfferDto>(mapper.ConfigurationProvider)
             .OrderByDescending(o => o.CreatedAt)
+            .Take(count)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<OfferDto>> GetBestOffers(int count)
+    {
+        return await context.Offers
+            .Where(x => x.Status == "Active")
+            .ProjectTo<OfferDto>(mapper.ConfigurationProvider)
+            .OrderByDescending(u => u.SellerRaiting)
+            .ThenByDescending(u => u.ViewCount) 
             .Take(count)
             .ToListAsync();
     }
@@ -48,6 +61,7 @@ public class OfferRepository(DataContext context, IMapper mapper) : IOfferReposi
     {
         return await context.Offers
             .Where(o => o.Title.ToLower().Contains(term.ToLower()))
+            .Where(x => x.Status == "Active")
             .ProjectTo<OfferDto>(mapper.ConfigurationProvider)
             .ToListAsync();
     }

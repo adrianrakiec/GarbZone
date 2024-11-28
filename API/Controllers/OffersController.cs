@@ -28,6 +28,14 @@ namespace API.Controllers
             return Ok(offers);
         }
 
+        [HttpGet("best")]
+        public async Task<ActionResult<IEnumerable<OfferDto>>> GetBestOffers()
+        {
+            var offers = await offerRepository.GetBestOffers(8);
+
+            return Ok(offers);
+        }
+
         [HttpGet("{id:int}")]
         public async Task<ActionResult<OfferDto>> GetOffer(int id)
         {
@@ -73,9 +81,9 @@ namespace API.Controllers
                 Title = title,
                 Description = description,
                 Price = price,
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow,
-                Status = "ACTIVE",
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                Status = "Active",
                 UserId = user.Id,
                 User = user,
                 ViewCount = 0
@@ -133,7 +141,7 @@ namespace API.Controllers
             offer.Title = title;
             offer.Description = description;
             offer.Price = price;
-            offer.UpdatedAt = DateTime.UtcNow;
+            offer.UpdatedAt = DateTime.Now;
             offer.Tags = [];
 
             var tags = await tagRepository.GetTagsById(tagIds);

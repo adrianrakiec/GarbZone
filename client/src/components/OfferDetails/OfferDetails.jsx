@@ -53,6 +53,9 @@ export const OfferDetails = () => {
 						{offer.images.length > 0 && <Gallery offerImages={offer.images} />}
 					</div>
 				</div>
+				<p className={styles.views}>
+					Liczba wyświetleń: <i>{offer.viewCount}</i>
+				</p>
 				<HorizontalRule />
 			</Wrapper>
 		</section>

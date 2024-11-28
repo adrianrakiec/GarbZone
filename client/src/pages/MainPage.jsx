@@ -8,8 +8,8 @@ import { useFetchData } from '../services/ApiClientService';
 
 export const MainPage = () => {
 	const { data: bestOffers, isPending: isPendingBest } = useFetchData(
-		'offers',
-		['offers']
+		'offers/best',
+		['best']
 	);
 	const { data: lastAdded, isPending: isPendingLast } = useFetchData(
 		'offers/last-added',

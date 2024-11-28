@@ -4,7 +4,6 @@ import { Wrapper } from '../components/Wrapper/Wrapper';
 import { NotFoundPage } from './NotFoundPage';
 import { UserProfile } from '../components/UserProfile/UserProfile';
 import { HorizontalRule } from '../components/HorizontalRule/HorizontalRule';
-import { Search } from '../components/Search/Search';
 
 export const UserProfilePage = () => {
 	const { username } = useParams();
@@ -19,14 +18,6 @@ export const UserProfilePage = () => {
 
 	return (
 		<Wrapper>
-			<div
-				style={{
-					margin: '0 auto',
-					maxWidth: '55%',
-				}}
-			>
-				<Search />
-			</div>
 			<HorizontalRule />
 			<UserProfile user={user} />
 		</Wrapper>
