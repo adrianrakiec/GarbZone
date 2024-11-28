@@ -125,8 +125,6 @@ namespace API.Controllers
             var user = await userRepository.GetUserByUsername(User.GetUsername());
 
             if(user == null) return Unauthorized();
-
-            if(images.Count == 0) return BadRequest(new { message = "Przynajmniej jedno zdjęcie jest wymagane!" });
             
             var offer = await offerRepository.GetFullOfferById(id);
 
@@ -136,7 +134,6 @@ namespace API.Controllers
             offer.Description = description;
             offer.Price = price;
             offer.UpdatedAt = DateTime.UtcNow;
-            offer.Images = [];
             offer.Tags = [];
 
             var tags = await tagRepository.GetTagsById(tagIds);

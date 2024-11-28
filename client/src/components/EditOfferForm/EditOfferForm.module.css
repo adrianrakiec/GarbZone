@@ -108,3 +108,15 @@ label {
 .deleted {
 	display: none;
 }
+
+.addTagsBtn {
+	width: 40%;
+	padding: 1em 2em;
+	border-radius: 10em;
+	cursor: pointer;
+	margin: 1em 0;
+}
+
+.addTagsBtn:hover {
+	background-color: var(--second-color);
+}

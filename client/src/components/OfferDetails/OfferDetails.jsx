@@ -19,6 +19,18 @@ export const OfferDetails = () => {
 			<Wrapper>
 				<div className={styles.container}>
 					<div className={styles.offerInfo}>
+						<div className={styles.tags}>
+							<p>Tagi: </p>
+							{offer.tags.length > 0 ? (
+								offer.tags.map(tag => (
+									<div key={tag.id} className={styles.tag}>
+										{tag.tagName}
+									</div>
+								))
+							) : (
+								<i>Brak dodanych tagów</i>
+							)}
+						</div>
 						<div className={styles.offer}>
 							<ProfileCard
 								sellerUsername={offer.seller}

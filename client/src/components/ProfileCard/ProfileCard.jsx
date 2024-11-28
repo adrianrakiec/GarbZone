@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa6';
 import { Stars } from '../Stars/Stars';
+import DefaultImg from '../../assets/user.png';
 import styles from './ProfileCard.module.css';
-import { Link } from 'react-router-dom';
 
 export const ProfileCard = ({ sellerImg, sellerRaiting, sellerUsername }) => {
 	const linkToProfile = `/profil/${sellerUsername}`;
@@ -10,7 +11,10 @@ export const ProfileCard = ({ sellerImg, sellerRaiting, sellerUsername }) => {
 		<div className={styles.profileCard}>
 			<Link to={linkToProfile}>
 				<div className={styles.profileInfo}>
-					<img src={sellerImg} alt={`${sellerUsername} photo`} />
+					<img
+						src={sellerImg ? sellerImg : DefaultImg}
+						alt={`${sellerUsername} photo`}
+					/>
 					<div className={styles.sellerInfo}>
 						<p>{sellerUsername}</p>
 						<Stars count={sellerRaiting} />

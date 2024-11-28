@@ -100,3 +100,15 @@ label {
 	width: 20%;
 	margin: 1em auto 0;
 }
+
+.addTagsBtn {
+	width: 30%;
+	padding: 1em 2em;
+	border-radius: 10em;
+	cursor: pointer;
+	margin: 1em 0;
+}
+
+.addTagsBtn:hover {
+	background-color: var(--second-color);
+}

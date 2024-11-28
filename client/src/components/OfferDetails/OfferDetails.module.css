@@ -50,3 +50,19 @@
 .title {
 	text-align: left;
 }
+
+.tags {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 1em;
+	padding: 0 1em 2em 1em;
+}
+
+.tag {
+	background-color: #f0f0f0;
+	border: 1px solid #ccc;
+	padding: 1em;
+	border-radius: 2em;
+	font-size: 0.8em;
+}

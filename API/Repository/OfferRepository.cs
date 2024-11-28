@@ -30,6 +30,7 @@ public class OfferRepository(DataContext context, IMapper mapper) : IOfferReposi
     public async Task<IEnumerable<OfferDto>> GetOffers()
     {
         return await context.Offers
+            .Include(t => t.Tags)
             .ProjectTo<OfferDto>(mapper.ConfigurationProvider)
             .ToListAsync();
     }

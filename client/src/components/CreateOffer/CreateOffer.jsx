@@ -5,12 +5,15 @@ import { IoMdAddCircleOutline } from 'react-icons/io';
 import { Wrapper } from '../Wrapper/Wrapper';
 import { HorizontalRule } from '../HorizontalRule/HorizontalRule';
 import { MainBtn } from '../MainBtn/MainBtn';
+import { TagPopup } from '../TagPopup/TagPopup';
 import styles from './CreateOffer.module.css';
 
 const API_URL = import.meta.env.VITE_API_KEY;
 
 export const CreateOffer = () => {
 	const [selectedImages, setSelectedImages] = useState([]);
+	const [selectedTags, setSelectedTags] = useState([]);
+	const [showPopup, setShowPopup] = useState(false);
 	const fileInputRef = useRef();
 	const navigate = useNavigate();
 
@@ -38,9 +41,12 @@ export const CreateOffer = () => {
 		formData.append('title', event.target.title.value);
 		formData.append('description', event.target.description.value);
 		formData.append('price', event.target.price.value);
+
 		selectedImages.forEach(image => {
 			formData.append('images', image.file);
 		});
+
+		selectedTags.forEach(tagId => formData.append('tagIds', tagId));
 
 		try {
 			const response = await fetch(`${API_URL}offers`, {
@@ -131,6 +137,26 @@ export const CreateOffer = () => {
 								</button>
 							</div>
 						))}
+					</div>
+					<div className={styles.formGroup}>
+						<p>Wybierz tagi, które najlepiej opisują twoją ofertę:</p>
+						<button
+							type='button'
+							className={styles.addTagsBtn}
+							onClick={() => setShowPopup(true)}
+						>
+							Dodaj tagi
+						</button>
+						<p>
+							Wybrane: <strong>{selectedTags?.length}</strong>
+						</p>
+						{showPopup && (
+							<TagPopup
+								onClose={() => setShowPopup(false)}
+								setSelectedTags={setSelectedTags}
+								selectedTags={selectedTags}
+							/>
+						)}
 					</div>
 					<div className={styles.submitBtn}>
 						<MainBtn>Utwórz ofertę</MainBtn>

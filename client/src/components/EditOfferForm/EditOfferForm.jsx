@@ -6,12 +6,17 @@ import { IoMdAddCircleOutline } from 'react-icons/io';
 import { Wrapper } from '../Wrapper/Wrapper';
 import { MainBtn } from '../MainBtn/MainBtn';
 import styles from './EditOfferForm.module.css';
+import { TagPopup } from '../TagPopup/TagPopup';
 
 const API_URL = import.meta.env.VITE_API_KEY;
 
 export const EditOfferForm = ({ offer, setIsEdit, refetch }) => {
 	const [selectedImages, setSelectedImages] = useState([]);
+	const [selectedTags, setSelectedTags] = useState(
+		offer.tags.map(tag => tag.id)
+	);
 	const [activeParents, setActiveParents] = useState([]);
+	const [showPopup, setShowPopup] = useState(false);
 	const fileInputRef = useRef();
 	const navigate = useNavigate();
 
@@ -68,6 +73,8 @@ export const EditOfferForm = ({ offer, setIsEdit, refetch }) => {
 		selectedImages.forEach(image => {
 			formData.append('images', image.file);
 		});
+
+		selectedTags.forEach(tagId => formData.append('tagIds', tagId));
 
 		try {
 			const response = await fetch(`${API_URL}offers/${offer.id}`, {
@@ -186,6 +193,27 @@ export const EditOfferForm = ({ offer, setIsEdit, refetch }) => {
 								</button>
 							</div>
 						))}
+					</div>
+
+					<div className={styles.formGroup}>
+						<p>Edytuj tagi:</p>
+						<button
+							type='button'
+							className={styles.addTagsBtn}
+							onClick={() => setShowPopup(true)}
+						>
+							Dodaj tagi
+						</button>
+						<p>
+							Wybrane: <strong>{selectedTags?.length}</strong>
+						</p>
+						{showPopup && (
+							<TagPopup
+								onClose={() => setShowPopup(false)}
+								setSelectedTags={setSelectedTags}
+								selectedTags={selectedTags}
+							/>
+						)}
 					</div>
 					<div className={styles.submitBtn}>
 						<MainBtn>Zaktualizuj ofertę</MainBtn>
