@@ -1,6 +1,7 @@
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -53,11 +54,13 @@ namespace API.Controllers
         }
 
         [HttpGet("search/{term}")]
-        public async Task<ActionResult<IEnumerable<OfferDto>>> GetOffersByTerm(string term)
+        public async Task<ActionResult<IEnumerable<OfferDto>>> GetOffersByTerm(string term, [FromQuery]UserParams userParams)
         {
-            var offers = await offerRepository.GetOffersByTerm(term);
+            var offers = await offerRepository.GetOffersByTerm(term, userParams);
 
             if(offers == null) return NotFound(new { message = "Brak pasujących wyników"});
+
+            Response.AddPaginationHeader(offers);
 
             return Ok(offers);
         }

@@ -1,5 +1,6 @@
 using API.DTOs;
 using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -31,11 +32,13 @@ namespace API.Controllers
         }
 
         [HttpGet("search/{term}")]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsersByTerm(string term)
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsersByTerm(string term, [FromQuery]UserParams userParams)
         {
-            var users = await userRepository.GetUsersByTerm(term);
+            var users = await userRepository.GetUsersByTerm(term, userParams);
 
             if(users == null) return NotFound(new { message = "Brak pasujących wyników"});
+
+            Response.AddPaginationHeader(users);
 
             return Ok(users);
         }

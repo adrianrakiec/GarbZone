@@ -1,5 +1,6 @@
 using API.DTOs;
 using API.Entities;
+using API.Helpers;
 
 namespace API.Interfaces;
 
@@ -12,5 +13,5 @@ public interface IUserRepository
     Task<User?> GetUserByUsername(string username);
     Task<IEnumerable<MemberDto>> GetMembers();
     Task<MemberDto?> GetMember(string username);
-    Task<IEnumerable<MemberDto>> GetUsersByTerm(string term);
+    Task<PagedList<MemberDto>> GetUsersByTerm(string term, UserParams userParams);
 }

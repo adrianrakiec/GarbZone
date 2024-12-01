@@ -1,6 +1,7 @@
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -57,13 +58,14 @@ public class OfferRepository(DataContext context, IMapper mapper) : IOfferReposi
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<OfferDto>> GetOffersByTerm(string term)
+    public async Task<PagedList<OfferDto>> GetOffersByTerm(string term, UserParams userParams)
     {
-        return await context.Offers
+        var query = context.Offers
             .Where(o => o.Title.ToLower().Contains(term.ToLower()))
             .Where(x => x.Status == "Active")
-            .ProjectTo<OfferDto>(mapper.ConfigurationProvider)
-            .ToListAsync();
+            .ProjectTo<OfferDto>(mapper.ConfigurationProvider);
+
+        return await PagedList<OfferDto>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
     }
 
     public async Task<Photo?> GetPhotoById(int id)

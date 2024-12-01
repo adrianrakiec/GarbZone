@@ -1,5 +1,6 @@
 using API.DTOs;
 using API.Entities;
+using API.Helpers;
 
 namespace API.Interfaces;
 
@@ -10,7 +11,7 @@ public interface IOfferRepository
     Task<IEnumerable<OfferDto>> GetLastAddedOffers(int count);
     Task<IEnumerable<OfferDto>> GetBestOffers(int count);
     Task<OfferDto?> GetOfferById(int id);
-    Task<IEnumerable<OfferDto>> GetOffersByTerm(string term);
+    Task<PagedList<OfferDto>> GetOffersByTerm(string term, UserParams userParams);
     Task<Photo?> GetPhotoById(int id);
     void DeletePhoto(Photo photo);
 }
