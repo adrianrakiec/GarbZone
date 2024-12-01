@@ -2,7 +2,12 @@ import { useQuery, useMutation } from '@tanstack/react-query';
 
 const API_URL = import.meta.env.VITE_API_KEY;
 
-export const apiClient = async (url, body = null, method = 'GET') => {
+export const apiClient = async (
+	url,
+	body = null,
+	method = 'GET',
+	returnHeaders = false
+) => {
 	try {
 		const response = await fetch(`${API_URL}${url}`, {
 			method: method,
@@ -17,18 +22,29 @@ export const apiClient = async (url, body = null, method = 'GET') => {
 		}
 
 		if (response.status === 204) return;
+		const data = await response.json();
 
-		return await response.json();
+		if (returnHeaders) {
+			const pagination = response.headers.get('Pagination');
+			return { data, pagination };
+		}
+
+		return data;
 	} catch (error) {
 		console.error('Błąd:', error.message);
 		throw error;
 	}
 };
 
-export const useFetchData = (url, queryKey, enabled = true) => {
+export const useFetchData = (
+	url,
+	queryKey,
+	enabled = true,
+	returnHeaders = false
+) => {
 	return useQuery({
 		queryKey,
-		queryFn: () => apiClient(url),
+		queryFn: () => apiClient(url, null, 'GET', returnHeaders),
 		enabled: enabled,
 	});
 };
