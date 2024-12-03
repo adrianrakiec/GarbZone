@@ -21,6 +21,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped<IOfferRepository, OfferRepository>();
         services.AddScoped<IPhotoService, PhotoService>();
         services.AddScoped<ITagRepository, TagRepository>();
+        services.AddScoped<ILikeRepository, LikeRepository>();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
