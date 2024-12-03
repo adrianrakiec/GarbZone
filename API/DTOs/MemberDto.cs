@@ -11,4 +11,5 @@ public class MemberDto
     public string? About { get; set; }
     public string? ProfilePhotoUrl { get; set; }
     public List<OfferDto>? Offers { get; set; }
+    public List<int>? LikedOffers { get; set; }
 }

@@ -15,4 +15,5 @@ public class OfferDto
     public string? SellerImg { get; set; }
     public List<PhotoDto>? Images { get; set; }
     public List<TagDto>? Tags { get; set; }
+    public List<int>? LikedByUsers { get; set; }
 }
