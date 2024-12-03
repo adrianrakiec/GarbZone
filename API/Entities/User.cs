@@ -13,4 +13,5 @@ public class User
     public string? About { get; set; }
     public string? ProfilePhotoUrl { get; set; }
     public List<Offer> Offers { get; set; } = [];
+    public List<UserOfferLike> LikedOffers { get; set; } = [];
 }
