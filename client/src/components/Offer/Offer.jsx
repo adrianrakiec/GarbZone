@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { FaHeart } from 'react-icons/fa';
 import { Stars } from '../Stars/Stars';
+import { LikeBtn } from '../LikeBtn/LikeBtn';
 import ImgPlaceholder from '../../assets/placeholder-image.jpg';
 import styles from './Offer.module.css';
 
@@ -22,12 +22,7 @@ export const Offer = ({ offer }) => {
 					height={250}
 				/>
 			</Link>
-			<button
-				className={styles.like}
-				onClick={() => console.log('dodano do polubionych')}
-			>
-				<FaHeart className={styles.heart} />
-			</button>
+			<LikeBtn offerId={offer.id} likedBy={offer.likedByUsers} />
 			<h3>{offer.title}</h3>
 			<p className={styles.price}>{offer.price} zł</p>
 			<p>

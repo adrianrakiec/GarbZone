@@ -74,9 +74,10 @@ namespace API.Controllers
         public IActionResult GetCurrentUser()
         {
             var username = User.FindFirst(ClaimTypes.Name)?.Value;
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            return Ok(new { Username = username });
-}
+            return Ok(new { Username = username, UserId = userId });
+        }
 
         [HttpPost("logout")]
         public IActionResult Logout()

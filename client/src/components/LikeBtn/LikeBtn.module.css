@@ -1,0 +1,29 @@
+.like,
+.liked {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	right: 5%;
+	top: 5%;
+	background: none;
+	border: none;
+	width: 2em;
+	height: 2em;
+	background-color: var(--second-color);
+	border-radius: 50%;
+	font-size: 1.2rem;
+	cursor: pointer;
+}
+
+.like:hover .heart,
+.liked .heart {
+	fill: #f00;
+	stroke: #fff;
+}
+
+.heart {
+	fill: #fff;
+	stroke: #000;
+	stroke-width: 1.5em;
+}

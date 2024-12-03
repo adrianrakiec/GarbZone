@@ -10,6 +10,7 @@ const API_URL = import.meta.env.VITE_API_KEY;
 
 export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
+	const [id, setId] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
@@ -24,10 +25,12 @@ export const AuthProvider = ({ children }) => {
 			if (response.ok) {
 				const data = await response.json();
 				setUser(data.username);
+				setId(data.userId);
 			}
 		} catch (e) {
 			console.log(e);
 			setUser(null);
+			setId(null);
 		} finally {
 			setIsLoading(false);
 		}
@@ -37,6 +40,7 @@ export const AuthProvider = ({ children }) => {
 		try {
 			const data = await loginService(credentials);
 			setUser(data.username);
+			setId(data.userId);
 			return data;
 		} catch (error) {
 			console.error('Błąd logowania:', error.message);
@@ -56,10 +60,13 @@ export const AuthProvider = ({ children }) => {
 	const logout = () => {
 		logoutService();
 		setUser(null);
+		setId(null);
 	};
 
 	return (
-		<AuthContext.Provider value={{ user, login, register, logout, isLoading }}>
+		<AuthContext.Provider
+			value={{ user, id, login, register, logout, isLoading }}
+		>
 			{children}
 		</AuthContext.Provider>
 	);
