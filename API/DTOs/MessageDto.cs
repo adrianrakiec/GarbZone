@@ -11,5 +11,5 @@ public class MessageDto
     public required string RecipientPhotoUrl { get; set; }
     public required string Content { get; set; }
     public DateTime MessageSent { get; set; }
-    public DateTime? MessageRead { get; set; }
+    public DateTime MessageRead { get; set; }
 }
