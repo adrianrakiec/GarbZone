@@ -20,5 +20,8 @@ public class AutoMapperProfiles : Profile
                        opt => opt.MapFrom(src => src.LikedByUsers.Select(like => like.UserId)));
         CreateMap<MemberUpdateDto, User>();
         CreateMap<Tag, TagDto>();
+        CreateMap<Message, MessageDto>()
+            .ForMember(d => d.SenderPhotoUrl, o => o.MapFrom(s => s.Sender.ProfilePhotoUrl))
+            .ForMember(d => d.RecipientPhotoUrl, o => o.MapFrom(s => s.Recipient.ProfilePhotoUrl));
     }
 }
