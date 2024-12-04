@@ -8,6 +8,7 @@ public interface IOfferRepository
 {
     Task<Offer?> GetFullOfferById(int id);
     Task<IEnumerable<OfferDto>> GetOffers();
+    Task<PagedList<OfferDto>> GetLikedOffers(UserParams userParams);
     Task<IEnumerable<OfferDto>> GetLastAddedOffers(int count);
     Task<IEnumerable<OfferDto>> GetBestOffers(int count);
     Task<OfferDto?> GetOfferById(int id);

@@ -10,6 +10,7 @@ import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
 import { UserProfilePage } from './pages/UserProfilePage';
 import { SearchResultPage } from './pages/SearchResultPage';
 import { CreateOffer } from './components/CreateOffer/CreateOffer';
+import { LikedOffers } from './components/LikedOffers/LikedOffers';
 
 export const routes = createBrowserRouter([
 	{
@@ -47,6 +48,10 @@ export const routes = createBrowserRouter([
 			{
 				path: '/wyszukiwanie',
 				element: <SearchResultPage />,
+			},
+			{
+				path: '/obserwowane',
+				element: <LikedOffers />,
 			},
 			{
 				path: '*',

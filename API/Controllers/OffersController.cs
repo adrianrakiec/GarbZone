@@ -37,6 +37,17 @@ namespace API.Controllers
             return Ok(offers);
         }
 
+        [Authorize]
+        [HttpGet("liked")]
+        public async Task<ActionResult<IEnumerable<OfferDto>>> GetLikedOffers([FromQuery]UserParams userParams)
+        {
+            var offers = await offerRepository.GetLikedOffers(userParams);
+
+            Response.AddPaginationHeader(offers);
+
+            return Ok(offers);
+        }
+
         [HttpGet("{id:int}")]
         public async Task<ActionResult<OfferDto>> GetOffer(int id)
         {
