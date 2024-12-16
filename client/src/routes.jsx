@@ -11,6 +11,7 @@ import { UserProfilePage } from './pages/UserProfilePage';
 import { SearchResultPage } from './pages/SearchResultPage';
 import { CreateOffer } from './components/CreateOffer/CreateOffer';
 import { LikedOffers } from './components/LikedOffers/LikedOffers';
+import { MessagePage } from './pages/MessagePage';
 
 export const routes = createBrowserRouter([
 	{
@@ -38,6 +39,14 @@ export const routes = createBrowserRouter([
 				element: (
 					<ProtectedRoute>
 						<CreateOffer />
+					</ProtectedRoute>
+				),
+			},
+			{
+				path: '/wiadomosci',
+				element: (
+					<ProtectedRoute>
+						<MessagePage />
 					</ProtectedRoute>
 				),
 			},

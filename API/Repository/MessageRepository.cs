@@ -35,7 +35,7 @@ public class MessageRepository(DataContext context, IMapper mapper) : IMessageRe
         query = messageParams.Container switch
         {
             "Inbox" => query.Where(x => x.Recipient.UserName == messageParams.Username),
-            "OutBox" => query.Where(x => x.Sender.UserName == messageParams.Username),
+            "Outbox" => query.Where(x => x.Sender.UserName == messageParams.Username),
             _ => query.Where(x => x.Recipient.UserName == messageParams.Username && x.MessageRead == DateTime.MinValue),
         };
 

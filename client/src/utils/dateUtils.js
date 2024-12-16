@@ -18,3 +18,7 @@ export const getLastActivity = dateString => {
 
 	return Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 };
+
+export const isDateNull = date => {
+	return date === '0001-01-01T00:00:00';
+};
