@@ -1,4 +1,4 @@
-import { useParams, ScrollRestoration } from 'react-router-dom';
+import { useParams, ScrollRestoration, useNavigate } from 'react-router-dom';
 import { Wrapper } from '../Wrapper/Wrapper';
 import { useFetchData } from '../../services/ApiClientService';
 import { Gallery } from '../Gallery/Gallery';
@@ -9,6 +9,7 @@ import styles from './OfferDetails.module.css';
 
 export const OfferDetails = () => {
 	const { id } = useParams();
+	const navigate = useNavigate();
 	const { data: offer } = useFetchData(`offers/${id}`, ['offer']);
 
 	if (!offer) return <div>Ładowanie oferty...</div>;
@@ -45,7 +46,12 @@ export const OfferDetails = () => {
 							<div className={styles.options}>
 								<MainBtn>Kup</MainBtn>
 								<button className={styles.btn}>Zaoferuj wymianę</button>
-								<button className={styles.btn}>Napisz do sprzedawcy</button>
+								<button
+									className={styles.btn}
+									onClick={() => navigate(`/wiadomosci/${offer.seller}`)}
+								>
+									Napisz do sprzedawcy
+								</button>
 							</div>
 						</div>
 					</div>

@@ -213,6 +213,25 @@ namespace API.Controllers
             return BadRequest(new { message = "Problem przy usuwaniu!"});
         }
 
+        [Authorize]
+        [HttpDelete("delete-offer/{offerId:int}")]
+        public async Task<ActionResult> DeleteOffer(int offerId)
+        {
+            var user = await userRepository.GetUserByUsername(User.GetUsername());
+
+            if(user == null) return Unauthorized();
+
+            var offer = await offerRepository.GetFullOfferById(offerId);
+
+            if(offer == null) return BadRequest(new { message = "Brak oferty!" });
+
+            offerRepository.DeleteOffer(offer);
+
+            if(await userRepository.SaveAll()) return Ok();
+
+            return BadRequest(new { message = "Problem przy usuwaniu!"});
+        }
+
         [HttpGet("tags")]
         public async Task<ActionResult> GetTags()
         {

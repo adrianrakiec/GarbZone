@@ -14,5 +14,6 @@ public interface IOfferRepository
     Task<OfferDto?> GetOfferById(int id);
     Task<PagedList<OfferDto>> GetOffersByTerm(string term, UserParams userParams);
     Task<Photo?> GetPhotoById(int id);
+    void DeleteOffer(Offer offer);
     void DeletePhoto(Photo photo);
 }

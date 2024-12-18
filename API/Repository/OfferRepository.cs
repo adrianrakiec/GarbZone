@@ -88,4 +88,9 @@ public class OfferRepository(DataContext context, IMapper mapper) : IOfferReposi
 
         return await PagedList<OfferDto>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
     }
+
+    public void DeleteOffer(Offer offer)
+    {
+       context.Offers.Remove(offer);
+    }
 }
