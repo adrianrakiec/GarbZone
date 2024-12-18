@@ -7,6 +7,7 @@ import { ChatMessage } from '../ChatMessage/ChatMessage';
 import { HorizontalRule } from '../HorizontalRule/HorizontalRule';
 import { ChatMessageForm } from '../ChatMessageForm/ChatMessageForm';
 import { NotFoundPage } from '../../pages/NotFoundPage';
+import { Profile } from '../Profile/Profile';
 import styles from './Chat.module.css';
 
 export const Chat = () => {
@@ -21,7 +22,8 @@ export const Chat = () => {
 		true
 	);
 
-	if (!user || loggedUser === username) return <NotFoundPage />;
+	if (!user) return <NotFoundPage />;
+	if (loggedUser === username) return <Profile />;
 
 	const messages = data?.data;
 	const linkToProfile = `/profil/${username}`;

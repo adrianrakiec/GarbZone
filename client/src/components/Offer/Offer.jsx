@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Stars } from '../Stars/Stars';
 import { LikeBtn } from '../LikeBtn/LikeBtn';
+import { calculateAverage } from '../../utils/ratingUtils';
 import ImgPlaceholder from '../../assets/placeholder-image.jpg';
 import styles from './Offer.module.css';
 
@@ -8,7 +9,7 @@ export const Offer = ({ offer }) => {
 	if (!offer) return <p>Ładowanie...</p>;
 
 	const mainPhoto = offer?.images?.find(img => img.isMain);
-	const sellerRating = Math.floor(offer.sellerRating);
+	const sellerRating = Math.floor(calculateAverage(offer.sellerRating));
 	const linkToOfferDetails = `/oferta/${offer.id}`;
 	const linkToProfile = `/profil/${offer.seller}`;
 

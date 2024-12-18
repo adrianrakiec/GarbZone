@@ -7,7 +7,7 @@ public class MemberDto
     public string? Email { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime LastActive { get; set; } 
-    public double? Rating { get; set; }
+    public List<int>? Rating { get; set; }
     public string? About { get; set; }
     public string? ProfilePhotoUrl { get; set; }
     public List<OfferDto>? Offers { get; set; }

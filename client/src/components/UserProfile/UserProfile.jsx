@@ -8,12 +8,13 @@ import { AuthContext } from '../../context/AuthContext';
 import { getLastActivity } from '../../utils/dateUtils';
 import defaultImg from '../../assets/user.png';
 import styles from './UserProfile.module.css';
+import { calculateAverage } from '../../utils/ratingUtils';
 
 export const UserProfile = ({ user }) => {
 	const { user: username } = useContext(AuthContext);
 	const messageUrl = `/wiadomosci/${user.username}`;
 	const profileImg = user.profilePhotoUrl || defaultImg;
-	
+
 	if (user.username === username) return <Navigate to='/profil' />;
 
 	return (
@@ -28,7 +29,8 @@ export const UserProfile = ({ user }) => {
 						/>
 						<div>
 							<h3 className={styles.username}>{user.username}</h3>
-							<Stars count={user?.rating} />
+							<Stars count={Math.floor(calculateAverage(user?.rating))} />
+							<small className={styles.rating}> - na podstawie {user?.rating?.length} opinii</small>
 							<p>
 								Ostatnia aktywność: {getLastActivity(user.lastActive)} dni temu
 							</p>

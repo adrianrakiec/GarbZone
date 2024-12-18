@@ -37,7 +37,7 @@
 
 .offersEmpty {
 	margin-top: 2em;
-    font-size: 0.8rem;
+	font-size: 0.8rem;
 }
 
 .offers {
@@ -45,5 +45,9 @@
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: auto;
 	justify-items: center;
-    margin-top: 1em;
+	margin-top: 1em;
+}
+
+.rating {
+	font-size: 0.8rem;
 }

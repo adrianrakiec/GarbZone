@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa6';
 import { Stars } from '../Stars/Stars';
+import { calculateAverage } from '../../utils/ratingUtils';
 import DefaultImg from '../../assets/user.png';
 import styles from './ProfileCard.module.css';
 
@@ -17,7 +18,7 @@ export const ProfileCard = ({ sellerImg, sellerRating, sellerUsername }) => {
 					/>
 					<div className={styles.sellerInfo}>
 						<p>{sellerUsername}</p>
-						<Stars count={sellerRating} />
+						<Stars count={Math.floor(calculateAverage(sellerRating))} />
 					</div>
 					<FaArrowRight />
 				</div>

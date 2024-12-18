@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Stars } from '../Stars/Stars';
 import defaultImg from '../../assets/user.png';
 import styles from './SearchProfile.module.css';
+import { calculateAverage } from '../../utils/ratingUtils';
 
 export const SearchProfile = ({ user }) => {
 	const profileUrl = `/profil/${user?.username}`;
@@ -14,7 +15,7 @@ export const SearchProfile = ({ user }) => {
 					<img src={profileImg} alt={`Zdjęcie użytkownika ${user?.username}`} />
 					<div className={styles.userInfo}>
 						<h3>{user?.username}</h3>
-						<Stars count={user?.rating} />
+						<Stars count={Math.floor(calculateAverage(user?.rating))} />
 					</div>
 				</div>
 			</Link>
