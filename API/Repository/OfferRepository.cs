@@ -78,14 +78,12 @@ public class OfferRepository(DataContext context, IMapper mapper) : IOfferReposi
         context.Photos.Remove(photo);
     }
 
-    public async Task<PagedList<OfferDto>> GetLikedOffers(UserParams userParams)
+    public async Task<PagedList<OfferDto>> GetLikedOffers(UserParams userParams, int userId)
     {
         var query = context.Offers
             .Where(x => x.Status == "Active" &&
-                context.Likes
-                       .Select(uol => uol.OfferId)
-                       .Contains(x.Id)) 
-            .Include(t => t.Tags)
+                 context.Likes.Any(uol => uol.UserId == userId && uol.OfferId == x.Id))                
+            .Include(t => t.Tags)                                  
             .ProjectTo<OfferDto>(mapper.ConfigurationProvider); 
 
         return await PagedList<OfferDto>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);

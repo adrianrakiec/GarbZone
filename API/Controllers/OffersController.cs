@@ -41,7 +41,9 @@ namespace API.Controllers
         [HttpGet("liked")]
         public async Task<ActionResult<IEnumerable<OfferDto>>> GetLikedOffers([FromQuery]UserParams userParams)
         {
-            var offers = await offerRepository.GetLikedOffers(userParams);
+            var user = await userRepository.GetUserByUsername(User.GetUsername());
+            if(user == null) return BadRequest();
+            var offers = await offerRepository.GetLikedOffers(userParams, user.Id);
 
             Response.AddPaginationHeader(offers);
 
