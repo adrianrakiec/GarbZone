@@ -17,3 +17,11 @@
 	padding: 1em;
 	border: 1px solid black;
 }
+
+.profileLink {
+	color: var(--text-color);
+}
+
+.profileLink:hover {
+	color: var(--main-color);
+}
