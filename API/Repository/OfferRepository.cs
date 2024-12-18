@@ -52,7 +52,7 @@ public class OfferRepository(DataContext context, IMapper mapper) : IOfferReposi
         return await context.Offers
             .Where(x => x.Status == "Active")
             .ProjectTo<OfferDto>(mapper.ConfigurationProvider)
-            .OrderByDescending(u => u.SellerRaiting)
+            .OrderByDescending(u => u.SellerRating)
             .ThenByDescending(u => u.ViewCount) 
             .Take(count)
             .ToListAsync();

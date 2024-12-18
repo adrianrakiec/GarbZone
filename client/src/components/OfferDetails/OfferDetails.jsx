@@ -35,7 +35,7 @@ export const OfferDetails = () => {
 						<div className={styles.offer}>
 							<ProfileCard
 								sellerUsername={offer.seller}
-								sellerRaiting={offer.sellerRaiting}
+								sellerRating={offer.sellerRating}
 								sellerImg={offer.sellerImg}
 							/>
 						</div>

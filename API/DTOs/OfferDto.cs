@@ -11,7 +11,7 @@ public class OfferDto
     public DateTime UpdatedAt { get; set; }
     public string? Status { get; set; }
     public string? Seller { get; set; }
-    public double? SellerRaiting { get; set; }
+    public double? SellerRating { get; set; }
     public string? SellerImg { get; set; }
     public List<PhotoDto>? Images { get; set; }
     public List<TagDto>? Tags { get; set; }

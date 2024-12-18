@@ -4,7 +4,7 @@ import { Stars } from '../Stars/Stars';
 import DefaultImg from '../../assets/user.png';
 import styles from './ProfileCard.module.css';
 
-export const ProfileCard = ({ sellerImg, sellerRaiting, sellerUsername }) => {
+export const ProfileCard = ({ sellerImg, sellerRating, sellerUsername }) => {
 	const linkToProfile = `/profil/${sellerUsername}`;
 
 	return (
@@ -17,7 +17,7 @@ export const ProfileCard = ({ sellerImg, sellerRaiting, sellerUsername }) => {
 					/>
 					<div className={styles.sellerInfo}>
 						<p>{sellerUsername}</p>
-						<Stars count={sellerRaiting} />
+						<Stars count={sellerRating} />
 					</div>
 					<FaArrowRight />
 				</div>

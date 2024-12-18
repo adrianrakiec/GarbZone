@@ -8,7 +8,7 @@ export const Offer = ({ offer }) => {
 	if (!offer) return <p>Ładowanie...</p>;
 
 	const mainPhoto = offer?.images?.find(img => img.isMain);
-	const sellerRaiting = Math.floor(offer.sellerRaiting);
+	const sellerRating = Math.floor(offer.sellerRating);
 	const linkToOfferDetails = `/oferta/${offer.id}`;
 	const linkToProfile = `/profil/${offer.seller}`;
 
@@ -27,7 +27,7 @@ export const Offer = ({ offer }) => {
 			<p className={styles.price}>{offer.price} zł</p>
 			<p>
 				<Link to={linkToProfile}>{offer.seller}</Link> (
-				<Stars count={sellerRaiting} />)
+				<Stars count={sellerRating} />)
 			</p>
 		</div>
 	);
