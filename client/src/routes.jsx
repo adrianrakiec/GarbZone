@@ -12,6 +12,7 @@ import { SearchResultPage } from './pages/SearchResultPage';
 import { CreateOffer } from './components/CreateOffer/CreateOffer';
 import { LikedOffers } from './components/LikedOffers/LikedOffers';
 import { MessagePage } from './pages/MessagePage';
+import { Chat } from './components/Chat/Chat';
 
 export const routes = createBrowserRouter([
 	{
@@ -47,6 +48,14 @@ export const routes = createBrowserRouter([
 				element: (
 					<ProtectedRoute>
 						<MessagePage />
+					</ProtectedRoute>
+				),
+			},
+			{
+				path: '/wiadomosci/:username',
+				element: (
+					<ProtectedRoute>
+						<Chat />
 					</ProtectedRoute>
 				),
 			},

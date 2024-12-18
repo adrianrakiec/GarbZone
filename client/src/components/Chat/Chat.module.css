@@ -1,0 +1,26 @@
+.chat {
+	border-top: 1px solid #808080;
+}
+
+.chat h2 {
+	margin: 2em 0;
+}
+
+.messages {
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 1em;
+	border: 1px solid black;
+}
+
+.sendForm {
+	display: flex;
+}
+
+.sendMsgInput {
+	flex: 1;
+    padding: 0 1em;
+}

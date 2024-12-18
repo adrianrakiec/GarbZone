@@ -64,7 +64,9 @@ export const MessagePage = () => {
 							/>
 						))
 					) : (
-						<p>Brak wiadomości</p>
+						<p style={{ padding: '2em', textAlign: 'center' }}>
+							Brak wiadomości
+						</p>
 					)}
 					<Pagination {...pagination} onPageChange={handlePageChange} />
 				</div>

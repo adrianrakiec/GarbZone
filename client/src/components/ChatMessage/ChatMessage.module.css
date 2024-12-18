@@ -1,0 +1,32 @@
+.chatMessage {
+	display: flex;
+	padding: 1em;
+	border-bottom: 1px solid #808080;
+}
+
+.msgContainer {
+	flex: 1;
+}
+
+.profileImg {
+	order: 1;
+    border-radius: 50%;
+	width: 4em;
+	margin-right: 1em;
+}
+
+.imgRight {
+	order: 0;
+}
+
+.unreadMsg {
+	color: var(--main-color);
+}
+
+.readMsg {
+	color: #006400;
+}
+
+.msgContent {
+	margin: 0.2em 0;
+}

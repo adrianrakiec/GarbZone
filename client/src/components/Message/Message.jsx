@@ -20,7 +20,9 @@ export const Message = ({ message, container }) => {
 		<Link
 			to={linkToChat}
 			className={`${styles.message} ${
-				isDateNull(message?.messageRead) && styles.unread
+				isDateNull(message?.messageRead) &&
+				container === 'Inbox' &&
+				styles.unread
 			}`}
 		>
 			<img
