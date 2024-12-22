@@ -1,5 +1,5 @@
-import { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useContext, useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { AuthContext } from '../../context/AuthContext';
 import { MainBtn } from '../MainBtn/MainBtn';
@@ -12,22 +12,27 @@ import styles from './Nav.module.css';
 export const Nav = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const navigate = useNavigate();
+	const location = useLocation();
 	const { user } = useContext(AuthContext);
 
 	const toggleMenu = () => {
 		setIsMenuOpen(prev => !prev);
 	};
 
+	useEffect(() => {
+		setIsMenuOpen(false);
+	}, [location]);
+
 	return (
 		<nav className={styles.nav}>
 			<Wrapper>
 				<ul className={styles.navItems}>
-					<li>
+					<li className={styles.logo}>
 						<Link to='/'>
 							<img src={logo} alt='GarbZone logo' />
 						</Link>
 					</li>
-					<li>
+					<li className={styles.userMenu}>
 						{user ? (
 							<UserMenu />
 						) : (
@@ -40,10 +45,10 @@ export const Nav = () => {
 						<button className={styles.menuBtn} onClick={toggleMenu}>
 							<GiHamburgerMenu />
 						</button>
-						{isMenuOpen && <Menu />}
 					</li>
 				</ul>
 			</Wrapper>
+			{isMenuOpen && <Menu setIsMenuOpen={setIsMenuOpen} />}
 		</nav>
 	);
 };

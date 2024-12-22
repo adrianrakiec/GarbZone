@@ -1,6 +1,7 @@
 .nav {
 	width: 100%;
 	background-color: var(--second-color);
+	position: relative;
 }
 
 .navItems {
@@ -10,16 +11,16 @@
 	padding: 1em 2em;
 }
 
-.navItems li:first-of-type {
+.logo {
 	padding-top: 0.5em;
 }
 
-.navItems li:nth-child(2) {
+.userMenu {
 	flex: 1;
 	text-align: right;
 }
 
-.navItems li:nth-child(2) button {
+.userMenu button {
 	top: 0.8em;
 }
 
