@@ -93,4 +93,14 @@ public class OfferRepository(DataContext context, IMapper mapper) : IOfferReposi
     {
        context.Offers.Remove(offer);
     }
+
+    public async Task<PagedList<OfferDto>> GetOffersByTag(string tagName, UserParams userParams)
+    {
+        var query = context.Offers
+            .Where(x => x.Tags.Any(o => o.TagName == tagName))
+            .Where(x => x.Status == "Active")
+            .ProjectTo<OfferDto>(mapper.ConfigurationProvider);
+
+        return await PagedList<OfferDto>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
+    }
 }

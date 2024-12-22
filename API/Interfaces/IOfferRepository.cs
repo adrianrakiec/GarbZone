@@ -13,6 +13,7 @@ public interface IOfferRepository
     Task<IEnumerable<OfferDto>> GetBestOffers(int count);
     Task<OfferDto?> GetOfferById(int id);
     Task<PagedList<OfferDto>> GetOffersByTerm(string term, UserParams userParams);
+    Task<PagedList<OfferDto>> GetOffersByTag(string tagName, UserParams userParams);
     Task<Photo?> GetPhotoById(int id);
     void DeleteOffer(Offer offer);
     void DeletePhoto(Photo photo);

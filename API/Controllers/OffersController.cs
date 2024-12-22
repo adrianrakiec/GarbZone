@@ -239,5 +239,15 @@ namespace API.Controllers
 
             return Ok(tags);
         }
+
+        [HttpGet("offers-by-tag/{tagName}")]
+        public async Task<ActionResult<IEnumerable<OfferDto>>> GetOffersByTag(string tagName, [FromQuery]UserParams userParams)
+        {
+            var offers = await offerRepository.GetOffersByTag(tagName, userParams);
+
+            Response.AddPaginationHeader(offers);
+
+            return Ok(offers);
+        }
     }
 }
