@@ -13,6 +13,7 @@ import { CreateOffer } from './components/CreateOffer/CreateOffer';
 import { LikedOffers } from './components/LikedOffers/LikedOffers';
 import { MessagePage } from './pages/MessagePage';
 import { Chat } from './components/Chat/Chat';
+import { OffersPage } from './pages/OffersPage';
 
 export const routes = createBrowserRouter([
 	{
@@ -70,6 +71,10 @@ export const routes = createBrowserRouter([
 			{
 				path: '/obserwowane',
 				element: <LikedOffers />,
+			},
+			{
+				path: '/oferty/:tag',
+				element: <OffersPage />,
 			},
 			{
 				path: '*',
