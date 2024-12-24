@@ -8,7 +8,7 @@ import { useFetchData } from '../../services/ApiClientService';
 import { toastService } from '../../services/ToastService';
 import styles from './Menu.module.css';
 
-export const Menu = ({ setIsMenuOpen }) => {
+export const Menu = ({ setIsMenuOpen, wallet }) => {
 	const { user, logout } = useContext(AuthContext);
 	const { data: tags } = useFetchData('offers/tags', ['tags']);
 
@@ -21,9 +21,11 @@ export const Menu = ({ setIsMenuOpen }) => {
 	return (
 		<div className={styles.menu}>
 			<Wrapper>
-				<h3 className={styles.balance}>
-					Twoje saldo: <span>10</span> zł
-				</h3>
+				<Link>
+					<h3 className={styles.balance}>
+						Twoje saldo: <span>{wallet}</span> zł
+					</h3>
+				</Link>
 				<h3 className={styles.title}>Tagi:</h3>
 				<ul className={styles.tagsContainer}>
 					{tags?.length > 0 &&

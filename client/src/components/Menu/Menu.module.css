@@ -16,10 +16,15 @@
 .balance {
 	font-size: 1rem;
 	margin-bottom: 1em;
+	color: var(--text-color);
+}
+
+.balance:hover {
+	color: var(--second-color);
 }
 
 .title {
-    font-size: 2rem;
+	font-size: 2rem;
 }
 
 .tagsContainer {
@@ -55,5 +60,5 @@
 }
 
 .logoutBtn {
-	margin-top: 3em;
+	margin-top: 2em;
 }
