@@ -1,4 +1,5 @@
 using API.DTOs;
+using API.Entities;
 using API.Extensions;
 using API.Helpers;
 using API.Interfaces;
@@ -10,7 +11,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController(IUserRepository userRepository, IMapper mapper, IPhotoService photoService) : ControllerBase
+    public class UsersController(IUserRepository userRepository, IMapper mapper, IPhotoService photoService, IWalletRepository walletRepository) : ControllerBase
     {
         [HttpGet]
         [Authorize]
@@ -79,6 +80,21 @@ namespace API.Controllers
             if(await userRepository.SaveAll()) return Ok(new { photoUrl = user.ProfilePhotoUrl });
 
             return BadRequest(new { message = "Błąd podczas dodawania zdjęcia" });
+        }
+
+        [Authorize]
+        [HttpGet("wallet")]
+        public async Task<ActionResult<decimal>> GetUserWallet()
+        {           
+            var user = await userRepository.GetUserByUsername(User.GetUsername());
+
+            if(user == null) return BadRequest(new { message = "Użytkownik nie został odnaleziony!" });
+
+            var wallet = await walletRepository.GetWalletByUserId(user.Id);
+
+            if(wallet == null) return BadRequest(new { message = "Nie znaleziono portfela!"});
+
+            return wallet.Amount;
         }
     }
 }
