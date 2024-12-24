@@ -1,0 +1,22 @@
+[
+	{
+		"Id": 1,
+		"Amount": 12.34,
+		"UserId": 1
+	},
+	{
+		"Id": 2,
+		"Amount": 100,
+		"UserId": 2
+	},
+	{
+		"Id": 3,
+		"Amount": 67.19,
+		"UserId": 3
+	},
+	{
+		"Id": 4,
+		"Amount": 238.7,
+		"UserId": 4
+	}
+]

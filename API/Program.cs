@@ -37,6 +37,7 @@ try
     await context.Database.MigrateAsync();
     await Seed.SeedUser(context);
     await Seed.SeedOffers(context);
+    await Seed.SeedWallets(context);
 }
 catch(Exception e)
 {

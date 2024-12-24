@@ -34,8 +34,16 @@ namespace API.Controllers
                 Email = registerDto.Email,
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
                 PasswordSalt = hmac.Key,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow,
             };
+
+            var wallet = new Wallet
+            { 
+                Amount = 0,
+                User = user
+            };
+
+            user.Wallet = wallet;
 
             context.Users.Add(user);
             await context.SaveChangesAsync();

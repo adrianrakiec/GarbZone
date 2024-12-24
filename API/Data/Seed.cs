@@ -43,4 +43,20 @@ public class Seed
 
         await context.SaveChangesAsync();
     }
+
+    public static async Task SeedWallets(DataContext context)
+    {
+        if(await context.Wallets.AnyAsync()) return;
+
+        var walletsData = await File.ReadAllTextAsync("Data/WalletSeedData.json");
+        var wallets = JsonSerializer.Deserialize<List<Wallet>>(walletsData);
+        if(wallets == null) return;
+
+        foreach (var wallet in wallets)
+        {
+            context.Wallets.Add(wallet);
+        }
+
+        await context.SaveChangesAsync();
+    }
 }

@@ -11,6 +11,7 @@ public class DataContext(DbContextOptions options) : DbContext(options)
     public DbSet<Tag> Tags { get; set; }
     public DbSet<UserOfferLike> Likes { get; set; }
     public DbSet<Message> Messages { get; set; }
+    public DbSet<Wallet> Wallets { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
