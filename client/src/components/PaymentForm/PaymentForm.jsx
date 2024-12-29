@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form';
 import { useMutateData } from '../../services/ApiClientService';
 import { toastService } from '../../services/ToastService';
 import { Wrapper } from '../Wrapper/Wrapper';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 import styles from './PaymentForm.module.css';
 
 const cardElementOptions = {
@@ -26,6 +28,7 @@ const cardElementOptions = {
 };
 
 export const PaymentForm = () => {
+	const { setWallet } = useContext(AuthContext);
 	const { mutateAsync, isPending } = useMutateData(
 		'users/create-payment-intent',
 		'POST'
@@ -49,6 +52,7 @@ export const PaymentForm = () => {
 			});
 
 			toastService.success('Środki dodane prawidłowo');
+			setWallet(prev => parseFloat(prev) + parseFloat(data.amount));
 			navigate('/');
 		} catch (e) {
 			toastService.error(e.message || 'Wystąpił błąd');

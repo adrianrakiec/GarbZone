@@ -10,11 +10,13 @@ const API_URL = import.meta.env.VITE_API_KEY;
 
 export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
+	const [wallet, setWallet] = useState(null);
 	const [id, setId] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		getCurrentUser();
+		getWallet();
 	}, []);
 
 	const getCurrentUser = async () => {
@@ -36,11 +38,28 @@ export const AuthProvider = ({ children }) => {
 		}
 	};
 
+	const getWallet = async () => {
+		try {
+			const response = await fetch(`${API_URL}users/wallet`, {
+				credentials: 'include',
+			});
+			if (response.ok) {
+				const data = await response.json();
+				setWallet(data);
+			}
+		} catch (e) {
+			console.log(e);
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
 	const login = async credentials => {
 		try {
 			const data = await loginService(credentials);
 			setUser(data.username);
 			setId(data.userId);
+			getWallet();
 			return data;
 		} catch (error) {
 			console.error('Błąd logowania:', error.message);
@@ -51,6 +70,7 @@ export const AuthProvider = ({ children }) => {
 	const register = async userData => {
 		try {
 			await registerService(userData);
+			getWallet();
 		} catch (error) {
 			console.error('Błąd rejestracji:', error.message);
 			throw error;
@@ -61,11 +81,21 @@ export const AuthProvider = ({ children }) => {
 		logoutService();
 		setUser(null);
 		setId(null);
+		setWallet(null);
 	};
 
 	return (
 		<AuthContext.Provider
-			value={{ user, id, login, register, logout, isLoading }}
+			value={{
+				user,
+				id,
+				login,
+				register,
+				logout,
+				isLoading,
+				wallet,
+				setWallet,
+			}}
 		>
 			{children}
 		</AuthContext.Provider>

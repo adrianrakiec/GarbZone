@@ -2,7 +2,6 @@ import { useContext, useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { AuthContext } from '../../context/AuthContext';
-import { useFetchData } from '../../services/ApiClientService';
 import { MainBtn } from '../MainBtn/MainBtn';
 import { Wrapper } from '../Wrapper/Wrapper';
 import { UserMenu } from '../UserMenu/UserMenu';
@@ -12,10 +11,9 @@ import styles from './Nav.module.css';
 
 export const Nav = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	const { data: wallet } = useFetchData('users/wallet', ['wallet']);
 	const navigate = useNavigate();
 	const location = useLocation();
-	const { user } = useContext(AuthContext);
+	const { user, wallet } = useContext(AuthContext);
 
 	const toggleMenu = () => {
 		setIsMenuOpen(prev => !prev);
