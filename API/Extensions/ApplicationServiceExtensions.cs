@@ -20,6 +20,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IOfferRepository, OfferRepository>();
         services.AddScoped<IPhotoService, PhotoService>();
+        services.AddScoped<IStripeService, StripeService>();
         services.AddScoped<ITagRepository, TagRepository>();
         services.AddScoped<ILikeRepository, LikeRepository>();
         services.AddScoped<IMessageRepository, MessageRepository>();
@@ -28,6 +29,7 @@ public static class ApplicationServiceExtensions
         services.AddSwaggerGen();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+        services.Configure<StripeSettings>(config.GetSection("Stripe"));
 
         return services;
     }

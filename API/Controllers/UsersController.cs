@@ -6,12 +6,13 @@ using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Stripe;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController(IUserRepository userRepository, IMapper mapper, IPhotoService photoService, IWalletRepository walletRepository) : ControllerBase
+    public class UsersController(IUserRepository userRepository, IMapper mapper, IPhotoService photoService, IWalletRepository walletRepository, IStripeService stripeService) : ControllerBase
     {
         [HttpGet]
         [Authorize]
@@ -95,6 +96,27 @@ namespace API.Controllers
             if(wallet == null) return BadRequest(new { message = "Nie znaleziono portfela!"});
 
             return wallet.Amount;
+        }
+
+        [Authorize]
+        [HttpPost("create-payment-intent")]
+        public async Task<IActionResult> CreatePaymentIntent([FromBody] decimal amount)
+        {           
+            var user = await userRepository.GetUserByUsername(User.GetUsername());
+
+            if(user == null) return BadRequest(new { message = "Użytkownik nie został odnaleziony!" });
+
+            try
+            {
+                var paymentIntent = await stripeService.CreatePaymentIntentAsync(amount);
+                
+                walletRepository.AddAmount(user.Id, amount);
+                return Ok(new { clientSecret = paymentIntent.ClientSecret });
+            }
+            catch (StripeException e)
+            {
+                return BadRequest(new { error = e.StripeError.Message });
+            }
         }
     }
 }

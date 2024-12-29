@@ -11,7 +11,7 @@ builder.Services.AddIdentityServices(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.UseCors(x => x.WithOrigins("http://localhost:5173", "https://localhost:5173")
+app.UseCors(x => x.WithOrigins("http://localhost:5173", "https://localhost:5173", "https://js.stripe.com")
     .AllowCredentials()
     .AllowAnyHeader()
     .AllowAnyMethod());
