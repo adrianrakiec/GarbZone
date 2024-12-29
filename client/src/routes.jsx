@@ -14,6 +14,7 @@ import { LikedOffers } from './components/LikedOffers/LikedOffers';
 import { MessagePage } from './pages/MessagePage';
 import { Chat } from './components/Chat/Chat';
 import { OffersPage } from './pages/OffersPage';
+import { PaymentForm } from './components/PaymentForm/PaymentForm';
 
 export const routes = createBrowserRouter([
 	{
@@ -75,6 +76,14 @@ export const routes = createBrowserRouter([
 			{
 				path: '/oferty/:tag',
 				element: <OffersPage />,
+			},
+			{
+				path: '/portfel',
+				element: (
+					<ProtectedRoute>
+						<PaymentForm />
+					</ProtectedRoute>
+				),
 			},
 			{
 				path: '*',

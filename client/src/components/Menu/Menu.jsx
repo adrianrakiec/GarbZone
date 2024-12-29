@@ -21,7 +21,7 @@ export const Menu = ({ setIsMenuOpen, wallet }) => {
 	return (
 		<div className={styles.menu}>
 			<Wrapper>
-				<Link>
+				<Link to='portfel'>
 					<h3 className={styles.balance}>
 						Twoje saldo: <span>{wallet}</span> zł
 					</h3>
