@@ -1,6 +1,6 @@
 import { useParams, ScrollRestoration, useNavigate } from 'react-router-dom';
 import { Wrapper } from '../Wrapper/Wrapper';
-import { useFetchData } from '../../services/ApiClientService';
+import { useFetchData, useMutateData } from '../../services/ApiClientService';
 import { Gallery } from '../Gallery/Gallery';
 import { ProfileCard } from '../ProfileCard/ProfileCard';
 import { MainBtn } from '../MainBtn/MainBtn';
@@ -11,8 +11,17 @@ export const OfferDetails = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
 	const { data: offer } = useFetchData(`offers/${id}`, ['offer']);
+	const { mutateAsync } = useMutateData(
+		`transaction/create-transaction/${id}`,
+		'POST'
+	);
 
 	if (!offer) return <div>Ładowanie oferty...</div>;
+
+	const handleBuyClick = async () => {
+		await mutateAsync();
+		navigate(`/wiadomosci/${offer.seller}`);
+	};
 
 	return (
 		<section className={styles.offerDetails}>
@@ -44,8 +53,7 @@ export const OfferDetails = () => {
 							<p className={styles.price}>{offer.price} zł</p>
 							<p>{offer.description}</p>
 							<div className={styles.options}>
-								<MainBtn>Kup</MainBtn>
-								<button className={styles.btn}>Zaoferuj wymianę</button>
+								<MainBtn onClick={handleBuyClick}>Kup</MainBtn>
 								<button
 									className={styles.btn}
 									onClick={() => navigate(`/wiadomosci/${offer.seller}`)}

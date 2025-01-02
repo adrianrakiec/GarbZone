@@ -1,14 +1,23 @@
 import { GiConfirmed } from 'react-icons/gi';
 import { ImCancelCircle } from 'react-icons/im';
-import { useFetchData } from '../../services/ApiClientService';
+import { useFetchData, useMutateData } from '../../services/ApiClientService';
 import styles from './MessageToBuy.module.css';
 
-export const MessageToBuy = ({ offerId, username }) => {
+export const MessageToBuy = ({ offerId, username, refetch }) => {
 	const { data: offer } = useFetchData(`offers/${offerId}`, ['offer']);
+	const { mutateAsync } = useMutateData(
+		`transaction/cancel-transaction/${offerId}`,
+		'PUT'
+	);
 
 	if (!offer) return;
 
 	const offerImg = offer.images.find(img => img.isMain).url;
+
+	const handleClick = async () => {
+		await mutateAsync();
+		refetch();
+	};
 
 	return (
 		<div className={styles.msg}>
@@ -21,7 +30,11 @@ export const MessageToBuy = ({ offerId, username }) => {
 						<button className={styles.confirmBtn} title='Potwierdź zakup'>
 							<GiConfirmed />
 						</button>
-						<button className={styles.cancelBtn} title='Odrzuć'>
+						<button
+							className={styles.cancelBtn}
+							title='Odrzuć'
+							onClick={handleClick}
+						>
 							<ImCancelCircle />
 						</button>
 					</div>

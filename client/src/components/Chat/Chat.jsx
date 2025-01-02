@@ -43,7 +43,12 @@ export const Chat = () => {
 						<div className={styles.msgContainer}>
 							{messages?.length > 0 ? (
 								messages.map(msg => (
-									<ChatMessage key={msg.id} message={msg} username={username} />
+									<ChatMessage
+										key={msg.id}
+										message={msg}
+										username={username}
+										refetch={refetch}
+									/>
 								))
 							) : (
 								<h3>Brak wiadomości</h3>

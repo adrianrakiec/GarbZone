@@ -3,7 +3,7 @@ import { MessageToBuy } from '../MessageToBuy/MessageToBuy';
 import defaultImg from '../../assets/user.png';
 import styles from './ChatMessage.module.css';
 
-export const ChatMessage = ({ message, username }) => {
+export const ChatMessage = ({ message, username, refetch }) => {
 	if (!message) return;
 
 	const senderImg = message.senderPhotoUrl || defaultImg;
@@ -30,7 +30,11 @@ export const ChatMessage = ({ message, username }) => {
 				</div>
 			</div>
 			{message.offerId !== 0 ? (
-				<MessageToBuy offerId={message.offerId} username={username}/>
+				<MessageToBuy
+					offerId={message.offerId}
+					username={username}
+					refetch={refetch}
+				/>
 			) : (
 				<></>
 			)}

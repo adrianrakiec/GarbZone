@@ -54,7 +54,7 @@ namespace API.Controllers
 
             transactionRepository.AddTransaction(transaction);
 
-            if(await userRepository.SaveAll()) return Ok();
+            if(await userRepository.SaveAll()) return NoContent();
 
             return BadRequest(new { message = "Problem przy tworzeniu transakcji!"});
         }
