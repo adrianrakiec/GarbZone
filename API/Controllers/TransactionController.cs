@@ -9,7 +9,7 @@ namespace API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class TransactionController(IUserRepository userRepository, IOfferRepository offerRepository, ITransactionRepository transactionRepository) : ControllerBase
+    public class TransactionController(IUserRepository userRepository, IOfferRepository offerRepository, ITransactionRepository transactionRepository, IMessageRepository messageRepository) : ControllerBase
     {
         [HttpPost("create-transaction/{offerId:int}")]
         public async Task<ActionResult> CreateTransaction(int offerId)
@@ -35,6 +35,18 @@ namespace API.Controllers
                 Offer = offer,
                 OfferId = offer.Id
             };
+
+            var message = new Message
+            {
+                Sender = user,
+                Recipient = offer.User,
+                SenderUsername = user.UserName,
+                RecipientUsername = offer.User.UserName,
+                Content = $"Użytkownik {user.UserName} chce kupić od Ciebie przedmiot: {offer.Title}.",
+                OfferId = offer.Id
+            };
+
+            messageRepository.AddMessage(message);
 
             transactionRepository.AddTransaction(transaction);
 

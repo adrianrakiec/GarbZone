@@ -14,4 +14,5 @@ public class Message
     public User Sender { get; set; } = null!;
     public int RecipientId { get; set; }
     public User Recipient { get; set; } = null!;
+    public int? OfferId { get; set; }
 }
