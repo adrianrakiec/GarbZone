@@ -21,11 +21,13 @@ export const Menu = ({ setIsMenuOpen, wallet }) => {
 	return (
 		<div className={styles.menu}>
 			<Wrapper>
-				<Link to='portfel'>
-					<h3 className={styles.balance}>
-						Twoje saldo: <span>{wallet}</span> zł
-					</h3>
-				</Link>
+				{user && (
+					<Link to='portfel'>
+						<h3 className={styles.balance}>
+							Twoje saldo: <span>{wallet}</span> zł
+						</h3>
+					</Link>
+				)}
 				<h3 className={styles.title}>Tagi:</h3>
 				<ul className={styles.tagsContainer}>
 					{tags?.length > 0 &&
