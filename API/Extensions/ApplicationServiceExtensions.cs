@@ -25,6 +25,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped<ILikeRepository, LikeRepository>();
         services.AddScoped<IMessageRepository, MessageRepository>();
         services.AddScoped<IWalletRepository, WalletRepository>();
+        services.AddScoped<ITransactionRepository, TransactionRepository>();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
