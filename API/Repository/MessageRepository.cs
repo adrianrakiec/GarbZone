@@ -26,6 +26,14 @@ public class MessageRepository(DataContext context, IMapper mapper) : IMessageRe
         return await context.Messages.FindAsync(id);
     }
 
+    public async Task<Message?> GetMessageByTransaction(int sellerId, int buyerId, int offerId)
+    {
+        return await context.Messages.FirstOrDefaultAsync(t => 
+                t.RecipientId == sellerId &&
+                t.SenderId == buyerId &&
+                t.OfferId== offerId);
+    }
+
     public async Task<PagedList<MessageDto>> GetMessagesForUser(MessageParams messageParams)
     {
         var query = context.Messages
