@@ -118,5 +118,22 @@ namespace API.Controllers
                 return BadRequest(new { error = e.StripeError.Message });
             }
         }
+
+        [Authorize]
+        [HttpPut("add-rating/{username}")]
+        public async Task<ActionResult> AddUserRating(AddRatingDto addRatingDto, string username)
+        {           
+            var user = await userRepository.GetUserByUsername(username);
+
+            if(user == null) return BadRequest(new { message = "Użytkownik nie został odnaleziony!" });
+
+            user.Rating.Add(addRatingDto.Rating);
+
+            userRepository.Update(user);
+            
+            if(await userRepository.SaveAll()) return NoContent();
+
+            return BadRequest(new { message = "Nie udało się zaktualizować użytkownika!" });
+        }
     }
 }
