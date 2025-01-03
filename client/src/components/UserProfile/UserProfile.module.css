@@ -51,3 +51,9 @@
 .rating {
 	font-size: 0.8rem;
 }
+
+.ratings {
+	max-width: 1000px;
+	margin: 2em auto;
+	padding: 0 1em;
+}

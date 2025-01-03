@@ -61,7 +61,7 @@ export const MessageToBuy = ({ offerId, username, refetch }) => {
 						<Link
 							to='/ocena'
 							className={styles.ratingLink}
-							state={{ user: offer.seller }}
+							state={{ user: offer.seller, offerId: offerId }}
 						>
 							Oceń sprzedawcę
 						</Link>

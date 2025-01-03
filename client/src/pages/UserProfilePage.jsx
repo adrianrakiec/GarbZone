@@ -3,7 +3,6 @@ import { useFetchData } from '../services/ApiClientService';
 import { Wrapper } from '../components/Wrapper/Wrapper';
 import { NotFoundPage } from './NotFoundPage';
 import { UserProfile } from '../components/UserProfile/UserProfile';
-import { HorizontalRule } from '../components/HorizontalRule/HorizontalRule';
 
 export const UserProfilePage = () => {
 	const { username } = useParams();
@@ -18,7 +17,9 @@ export const UserProfilePage = () => {
 
 	return (
 		<Wrapper>
-			<HorizontalRule />
+			<div
+				style={{ borderTop: '1px solid #808080', marginBottom: '4em' }}
+			></div>
 			<UserProfile user={user} />
 		</Wrapper>
 	);

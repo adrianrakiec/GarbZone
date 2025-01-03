@@ -1,18 +1,26 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { toastService } from '../../services/ToastService';
 import { useMutateData } from '../../services/ApiClientService';
 import { Wrapper } from '../Wrapper/Wrapper';
 import { MainBtn } from '../MainBtn/MainBtn';
+import { NotFoundPage } from '../../pages/NotFoundPage';
 import styles from './RatingForm.module.css';
 
 export const RatingForm = () => {
 	const { register, handleSubmit, reset } = useForm();
 	const [rating, setRating] = useState(0);
 	const location = useLocation();
+	const navigate = useNavigate();
 	const user = location.state?.user;
-	const { mutateAsync } = useMutateData(`users/add-rating/${user}`, 'PUT');
+	const offerId = location.state?.offerId;
+	const { mutateAsync } = useMutateData(
+		`users/add-rating/${user}/${offerId}`,
+		'PUT'
+	);
+
+	if (!user || !offerId) return <NotFoundPage />;
 
 	const handleRatingClick = value => {
 		setRating(value);
@@ -24,6 +32,7 @@ export const RatingForm = () => {
 			setRating(0);
 			const payload = { comment: data.comment, rating: rating };
 			await mutateAsync(payload);
+			navigate('/');
 			toastService.success('Ocena dodana prawidłowo');
 		} catch (e) {
 			toastService.error(e.message || 'Wystąpił błąd');

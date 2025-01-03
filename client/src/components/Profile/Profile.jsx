@@ -8,6 +8,7 @@ import { EditProfileForm } from '../EditProfileForm/EditProfileForm';
 import { EditProfilePhotoForm } from '../EditProfilePhotoForm/EditProfilePhotoForm';
 import { HorizontalRule } from '../HorizontalRule/HorizontalRule';
 import { UserOffers } from '../UserOffers/UserOffers';
+import { Comment } from '../Comment/Comment';
 import defaultImg from '../../assets/user.png';
 import styles from './Profile.module.css';
 
@@ -68,6 +69,18 @@ export const Profile = () => {
 				</div>
 				<HorizontalRule />
 				<UserOffers offers={user.offers} refetch={refetch} />
+				<div className={styles.ratings}>
+					<h2>Opinie o Tobie</h2>
+					{user.comments && user.comments.length > 0 ? (
+						<div>
+							{user.comments.map(comment => (
+								<Comment comment={comment} key={comment.id} />
+							))}
+						</div>
+					) : (
+						<p className={styles.offersEmpty}>Nie masz jeszcze opinii</p>
+					)}
+				</div>
 				<HorizontalRule />
 			</Wrapper>
 		</section>
