@@ -14,4 +14,5 @@ public interface IUserRepository
     Task<IEnumerable<MemberDto>> GetMembers();
     Task<MemberDto?> GetMember(string username);
     Task<PagedList<MemberDto>> GetUsersByTerm(string term, UserParams userParams);
+    void AddComment(Comment comment);
 }

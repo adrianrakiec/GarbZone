@@ -120,12 +120,31 @@ namespace API.Controllers
         }
 
         [Authorize]
-        [HttpPut("add-rating/{username}")]
-        public async Task<ActionResult> AddUserRating(AddRatingDto addRatingDto, string username)
+        [HttpPut("add-rating/{username}/{offerId:int}")]
+        public async Task<ActionResult> AddUserRating(AddRatingDto addRatingDto, string username, int offerId)
         {           
+            var author = await userRepository.GetUserByUsername(User.GetUsername());
+
+            if(author == null) return BadRequest(new { message = "Użytkownik nie został odnaleziony!" });
+            
             var user = await userRepository.GetUserByUsername(username);
 
             if(user == null) return BadRequest(new { message = "Użytkownik nie został odnaleziony!" });
+            
+            if(addRatingDto.Comment != "" && addRatingDto.Comment != null)
+            {
+                var comment = new Comment
+                {
+                    Content = addRatingDto.Comment,
+                    Author = author,
+                    AuthorId = author.Id,
+                    User = user,
+                    UserId = user.Id,
+                    OfferId = offerId
+                };
+
+                userRepository.AddComment(comment);
+            }
 
             user.Rating.Add(addRatingDto.Rating);
 

@@ -59,4 +59,9 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
 
         return await PagedList<MemberDto>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
     }
+
+    public void AddComment(Comment comment)
+    {
+        context.Comments.Add(comment);
+    }
 }
