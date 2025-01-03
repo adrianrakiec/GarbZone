@@ -16,5 +16,6 @@ public class User
     public List<UserOfferLike> LikedOffers { get; set; } = [];
     public List<Message> MessagesSent { get; set; } = [];
     public List<Message> MessagesReceived { get; set; } = [];
+    public List<Comment> Comments { get; set; } = [];
     public Wallet? Wallet { get; set; }
 }

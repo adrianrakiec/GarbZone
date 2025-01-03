@@ -9,7 +9,7 @@ public class AutoMapperProfiles : Profile
     public AutoMapperProfiles()
     {
         CreateMap<User, MemberDto>()
-        .ForMember(dest => dest.LikedOffers, 
+            .ForMember(dest => dest.LikedOffers, 
                        opt => opt.MapFrom(src => src.LikedOffers.Select(like => like.OfferId)));
         CreateMap<Photo, PhotoDto>();
         CreateMap<Offer, OfferDto>()
@@ -23,5 +23,8 @@ public class AutoMapperProfiles : Profile
         CreateMap<Message, MessageDto>()
             .ForMember(d => d.SenderPhotoUrl, o => o.MapFrom(s => s.Sender.ProfilePhotoUrl))
             .ForMember(d => d.RecipientPhotoUrl, o => o.MapFrom(s => s.Recipient.ProfilePhotoUrl));
+        CreateMap<Comment, CommentDto>()
+            .ForMember(dest => dest.AuthorName, opt => opt.MapFrom(src => src.Author.UserName))
+            .ForMember(dest => dest.AuthorPhoto, opt => opt.MapFrom(src => src.Author.ProfilePhotoUrl));
     }
 }

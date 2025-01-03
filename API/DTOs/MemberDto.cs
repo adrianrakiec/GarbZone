@@ -8,6 +8,7 @@ public class MemberDto
     public DateTime CreatedAt { get; set; }
     public DateTime LastActive { get; set; } 
     public List<int>? Rating { get; set; }
+    public List<CommentDto>? Comments { get; set; }
     public string? About { get; set; }
     public string? ProfilePhotoUrl { get; set; }
     public List<OfferDto>? Offers { get; set; }

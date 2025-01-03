@@ -13,6 +13,7 @@ public class DataContext(DbContextOptions options) : DbContext(options)
     public DbSet<Message> Messages { get; set; }
     public DbSet<Wallet> Wallets { get; set; }
     public DbSet<Transaction> Transactions { get; set; }
+    public DbSet<Comment> Comments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -42,5 +43,17 @@ public class DataContext(DbContextOptions options) : DbContext(options)
             .HasOne(x => x.Sender)
             .WithMany(x => x.MessagesSent)
             .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Comment>()
+            .HasOne(x => x.Author) 
+            .WithMany() 
+            .HasForeignKey(x => x.AuthorId) 
+            .OnDelete(DeleteBehavior.Restrict); 
+
+        modelBuilder.Entity<Comment>()
+            .HasOne(x => x.User)
+            .WithMany(x => x.Comments) 
+            .HasForeignKey(x => x.UserId)
+            .OnDelete(DeleteBehavior.Restrict); 
     }
 }
