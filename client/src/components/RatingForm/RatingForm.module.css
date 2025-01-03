@@ -1,0 +1,36 @@
+.ratingForm {
+	border-top: 1px solid #808080;
+    margin-bottom: 1em;
+}
+
+.ratingForm form {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.container {
+	display: flex;
+	gap: 0.5em;
+	margin-bottom: 0.7em;
+}
+
+.star {
+	font-size: 2rem;
+	cursor: pointer;
+}
+
+.comment {
+	display: block;
+    width: 100%;
+    padding: 1em;
+	border: 1px solid #ccc;
+	border-radius: 0.2em;
+	resize: vertical;
+    margin: 1em 0;
+}
+
+.comment:focus {
+	outline: none;
+	border-color: var(--main-color);
+	box-shadow: 0 0 2px var(--main-color);
+}

@@ -15,6 +15,7 @@ import { MessagePage } from './pages/MessagePage';
 import { Chat } from './components/Chat/Chat';
 import { OffersPage } from './pages/OffersPage';
 import { PaymentForm } from './components/PaymentForm/PaymentForm';
+import { RatingForm } from './components/RatingForm/RatingForm';
 
 export const routes = createBrowserRouter([
 	{
@@ -82,6 +83,14 @@ export const routes = createBrowserRouter([
 				element: (
 					<ProtectedRoute>
 						<PaymentForm />
+					</ProtectedRoute>
+				),
+			},
+			{
+				path: '/ocena',
+				element: (
+					<ProtectedRoute>
+						<RatingForm />
 					</ProtectedRoute>
 				),
 			},

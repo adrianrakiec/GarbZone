@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { GiConfirmed } from 'react-icons/gi';
 import { ImCancelCircle } from 'react-icons/im';
@@ -38,7 +39,7 @@ export const MessageToBuy = ({ offerId, username, refetch }) => {
 			<div className={styles.offerContainer}>
 				<h3>{offer.title}</h3>
 				<p>Kwota: {offer.price} zł</p>
-				{username !== offer.seller && (
+				{username !== offer.seller ? (
 					<div className={styles.actionBtns}>
 						<button
 							className={styles.confirmBtn}
@@ -54,6 +55,16 @@ export const MessageToBuy = ({ offerId, username, refetch }) => {
 						>
 							<ImCancelCircle />
 						</button>
+					</div>
+				) : (
+					<div>
+						<Link
+							to='/ocena'
+							className={styles.ratingLink}
+							state={{ user: offer.seller }}
+						>
+							Oceń sprzedawcę
+						</Link>
 					</div>
 				)}
 			</div>

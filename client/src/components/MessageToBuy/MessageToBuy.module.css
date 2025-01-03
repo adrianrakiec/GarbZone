@@ -13,9 +13,9 @@
 }
 
 .actionBtns {
-    display: flex;
-    padding: 1em;
-    gap: 1em;
+	display: flex;
+	padding: 1em;
+	gap: 1em;
 }
 
 .actionBtns button {
@@ -32,4 +32,18 @@
 
 .cancelBtn {
 	color: red;
+}
+
+.ratingLink {
+	display: inline-block;
+	padding: 0.5em;
+	margin-top: 1em;
+	text-decoration: none;
+	color: var(--text-color);
+	border: 1px solid black;
+}
+
+.ratingLink:hover {
+	color: var(--main-color);
+	border-color: var(--main-color);
 }
