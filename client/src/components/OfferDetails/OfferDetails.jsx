@@ -1,13 +1,17 @@
+import { useContext } from 'react';
 import { useParams, ScrollRestoration, useNavigate } from 'react-router-dom';
-import { Wrapper } from '../Wrapper/Wrapper';
 import { useFetchData, useMutateData } from '../../services/ApiClientService';
+import { AuthContext } from '../../context/AuthContext';
+import { Wrapper } from '../Wrapper/Wrapper';
 import { Gallery } from '../Gallery/Gallery';
 import { ProfileCard } from '../ProfileCard/ProfileCard';
 import { MainBtn } from '../MainBtn/MainBtn';
 import { HorizontalRule } from '../HorizontalRule/HorizontalRule';
+import { NotFoundPage } from '../../pages/NotFoundPage';
 import styles from './OfferDetails.module.css';
 
 export const OfferDetails = () => {
+	const { setWallet } = useContext(AuthContext);
 	const { id } = useParams();
 	const navigate = useNavigate();
 	const { data: offer } = useFetchData(`offers/${id}`, ['offer']);
@@ -17,9 +21,11 @@ export const OfferDetails = () => {
 	);
 
 	if (!offer) return <div>Ładowanie oferty...</div>;
+	if (offer.status !== 'Active') return <NotFoundPage />;
 
 	const handleBuyClick = async () => {
 		await mutateAsync();
+		setWallet(prev => prev - offer.price);
 		navigate(`/wiadomosci/${offer.seller}`);
 	};
 

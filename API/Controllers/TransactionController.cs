@@ -96,5 +96,39 @@ namespace API.Controllers
 
             return BadRequest(new { message = "Problem przy anulowaniu!"});
         }
+
+        [HttpPut("complete-transaction/{offerId:int}")]
+        public async Task<ActionResult> CompleteTransation(int offerId)
+        {
+            var user = await userRepository.GetUserByUsername(User.GetUsername());
+
+            if(user == null) return Unauthorized();
+            
+            var transaction = await transactionRepository.GetTransaction(user.Id, offerId);
+
+            if(transaction == null) return BadRequest(new { message = "Nie znaleziono transakcji!"});
+
+            transaction.CompletedAt = DateTime.Now;
+            transaction.Status = "Completed";
+
+            user.Wallet!.Amount += transaction.Amount;
+
+            var offer = await offerRepository.GetFullOfferById(transaction.OfferId);
+
+            if(offer == null) return BadRequest(new { message = "Nie znaleziono oferty!"});
+
+            offerRepository.DeleteOffer(offer);
+
+            var message = await messageRepository.GetMessageByTransaction(transaction.SellerId, transaction.BuyerId, offerId);
+
+            if(message == null) return BadRequest(new { message = "Nie znaleziono wiadomości!"});
+
+            message.OfferId = null;
+            message.Content += "\nTwój przedmiot jest w drodze :) Dziękuję za skorzystanie z mojej oferty i zapraszam do przeglądu innych.";
+            
+            if(await userRepository.SaveAll()) return NoContent();
+
+            return BadRequest(new { message = "Problem przy potwierdzeniu!"});
+        }
     }
 }
