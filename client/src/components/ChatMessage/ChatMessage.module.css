@@ -1,5 +1,6 @@
 .chatMessage {
 	display: flex;
+	align-items: start;
 	padding: 1em;
 	border-bottom: 1px solid #808080;
 }
@@ -10,7 +11,7 @@
 
 .profileImg {
 	order: 1;
-    border-radius: 50%;
+	border-radius: 50%;
 	width: 4em;
 	margin-right: 1em;
 }
@@ -29,4 +30,20 @@
 
 .msgContent {
 	margin: 0.2em 0;
+}
+
+@media (max-width: 580px) {
+	.msgContent {
+		font-size: 0.8rem;
+		word-break: break-all;
+	}
+
+	.profileImg {
+		width: 3em;
+		margin-right: 0.7em;
+	}
+
+	.chatMessage {
+		padding: 0.6em;
+	}
 }

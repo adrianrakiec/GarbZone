@@ -25,3 +25,9 @@
 .profileLink:hover {
 	color: var(--main-color);
 }
+
+@media (max-width: 580px) {
+	.chat {
+		padding: 0.5em;
+	}
+}

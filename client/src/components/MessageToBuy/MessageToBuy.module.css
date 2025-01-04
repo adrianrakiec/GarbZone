@@ -47,3 +47,9 @@
 	color: var(--main-color);
 	border-color: var(--main-color);
 }
+
+@media (max-width: 580px) {
+	.msg {
+		flex-direction: column;
+	}
+}
