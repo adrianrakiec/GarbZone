@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { useFetchData } from '../../services/ApiClientService';
 import styles from './TagPopup.module.css';
 
 export const TagPopup = ({ onClose, setSelectedTags, selectedTags }) => {
 	const { data: tags } = useFetchData('offers/tags', ['tags']);
+	const [filter, setFilter] = useState('');
 
 	if (!tags) return <p>Ładowanie...</p>;
 
@@ -20,6 +22,10 @@ export const TagPopup = ({ onClose, setSelectedTags, selectedTags }) => {
 		});
 	};
 
+	const filteredTags = tags.filter(tag =>
+		tag.tagName.toLowerCase().includes(filter.toLowerCase())
+	);
+
 	return (
 		<div className={styles.popup}>
 			<div className={styles.popupContent}>
@@ -27,9 +33,16 @@ export const TagPopup = ({ onClose, setSelectedTags, selectedTags }) => {
 					X
 				</button>
 				<h3>Wybierz tagi</h3>
+				<input
+					type='text'
+					className={styles.filterTagInput}
+					value={filter}
+					placeholder='Wyszukaj tag'
+					onChange={e => setFilter(e.target.value)}
+				/>
 				<div className={styles.tagContainer}>
 					{tags &&
-						tags.map(tag => (
+						filteredTags.map(tag => (
 							<button
 								key={tag.id}
 								type='button'
