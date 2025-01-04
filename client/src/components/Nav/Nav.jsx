@@ -29,7 +29,7 @@ export const Nav = () => {
 				<ul className={styles.navItems}>
 					<li className={styles.logo}>
 						<Link to='/'>
-							<img src={logo} alt='GarbZone logo' />
+							<img src={logo} alt='GarbZone logo' className={styles.logoImg}/>
 						</Link>
 					</li>
 					<li className={styles.userMenu}>

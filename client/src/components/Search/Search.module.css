@@ -35,3 +35,36 @@
 	padding: 0.2em 0.5em;
 	cursor: pointer;
 }
+
+@media (max-width: 1130px) {
+	.input {
+		padding: 0.5em 0.7em;
+		padding-left: 3em;
+	}
+
+	.select {
+		padding: 0.4em 0.5em;
+		font-size: 0.7rem;
+	}
+}
+
+@media (max-width: 650px) {
+	.form {
+		flex-direction: column;
+	}
+
+	.select {
+		width: 40%;
+		margin-bottom: 0.3em;
+	}
+}
+
+@media (max-width: 500px) {
+	.select {
+		width: 50%;
+	}
+
+	.input {
+		font-size: 0.7rem;
+	}
+}
