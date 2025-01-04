@@ -51,21 +51,23 @@ export const SearchResult = () => {
 	return (
 		<div className={styles.searchResult}>
 			<Wrapper>
-				<h2>Wyniki wyszukiwania dla: {searchTerm}</h2>
-				{!result || result?.length === 0 ? (
-					<p>Brak wyników wyszukiwania</p>
-				) : (
-					<>
-						<div className={styles.results}>
-							{selectedOption === 'uzytkownicy'
-								? result?.map((user, i) => (
-										<SearchProfile key={i} user={user} />
-								  ))
-								: result?.map((offer, i) => <Offer key={i} offer={offer} />)}
-						</div>
-						<Pagination {...pagination} onPageChange={handlePageChange} />
-					</>
-				)}
+				<div className={styles.container}>
+					<h2>Wyniki wyszukiwania dla: {searchTerm}</h2>
+					{!result ? (
+						<p>Brak wyników wyszukiwania</p>
+					) : (
+						<>
+							<div className={styles.results}>
+								{selectedOption === 'uzytkownicy'
+									? result?.map((user, i) => (
+											<SearchProfile key={i} user={user} />
+									  ))
+									: result?.map((offer, i) => <Offer key={i} offer={offer} />)}
+							</div>
+							<Pagination {...pagination} onPageChange={handlePageChange} />
+						</>
+					)}
+				</div>
 			</Wrapper>
 		</div>
 	);

@@ -1,5 +1,5 @@
 export const calculateAverage = numbers => {
-	if (numbers.length === 0) {
+	if (!numbers) {
 		return 0;
 	}
 

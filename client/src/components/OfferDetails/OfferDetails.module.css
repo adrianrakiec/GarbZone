@@ -9,7 +9,7 @@
 }
 
 .offer {
-	width: 45%;
+	width: 60%;
 	margin-bottom: 2em;
 }
 
@@ -71,4 +71,27 @@
 	text-align: center;
 	margin-top: 5em;
 	font-size: 0.8rem;
+}
+
+@media (max-width: 600px) {
+	.options button {
+		width: 100%;
+		font-size: 0.7rem;
+	}
+
+	.offer {
+		width: 100%;
+		font-size: 0.8rem;
+	}
+}
+
+@media (max-width: 900px) {
+	.container {
+		flex-direction: column;
+		padding: 1em 1em 0;
+	}
+
+	.options {
+		margin-bottom: 1em;
+	}
 }

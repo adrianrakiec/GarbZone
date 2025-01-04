@@ -7,9 +7,21 @@
 	margin-bottom: 1.5em;
 }
 
+.container {
+	padding: 1em;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+}
+
 .results {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr;
 	justify-items: center;
-    gap: 3em 0;
+	gap: 2em 0;
+}
+
+@media (max-width: 800px) {
+	.results {
+		grid-template-columns: 1fr;
+	}
 }
