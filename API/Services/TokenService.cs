@@ -9,7 +9,7 @@ namespace API.Services;
 
 public class TokenService(IConfiguration config) : ITokenService
 {
-    public string CreateToken(User user)
+    public string CreateToken(User user, Role role)
     {
         var tokenKey = config["TokenKey"] ?? throw new Exception("Nie można uzyskać dostępu do klucza tokenu");
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
@@ -18,6 +18,7 @@ public class TokenService(IConfiguration config) : ITokenService
         {
             new (ClaimTypes.Name, user.UserName),
             new (ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new (ClaimTypes.Role, user.Role.Name)
         };
 
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);

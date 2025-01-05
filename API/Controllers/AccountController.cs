@@ -37,6 +37,13 @@ namespace API.Controllers
                 CreatedAt = DateTime.UtcNow,
             };
 
+            var role = context.Roles.FirstOrDefault(r => r.Name == "Użytkownik");
+            if(role != null)
+            {
+                user.Role = role;
+                user.RoleId = role.Id;
+            }
+
             var wallet = new Wallet
             { 
                 Amount = 0,
@@ -71,7 +78,9 @@ namespace API.Controllers
                     return Unauthorized(new { message = "Hasło jest nieprawidłowe!" });
             }
 
-            var token = tokenService.CreateToken(user);
+            var role = await context.Roles.FindAsync(user.RoleId);
+
+            var token = tokenService.CreateToken(user, role!);
             AddTokenToCookie(token);
 
             return Ok();

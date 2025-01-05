@@ -38,6 +38,8 @@ public static class IdentityServiceExtensions
                     };
                 });
 
+        services.AddAuthorization();
+
         return services;
     }
 }
