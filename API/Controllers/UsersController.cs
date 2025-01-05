@@ -156,6 +156,13 @@ namespace API.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
+        [HttpGet("admin-panel")]
+        public ActionResult GetAdminPanel()
+        { 
+            return Ok(new { message = "Uzyskano dostęp" });
+        }
+
+        [Authorize(Roles = "Administrator")]
         [HttpPost("create-tag")]
         public async Task<ActionResult> CreateTag(string tagName)
         {
@@ -171,6 +178,21 @@ namespace API.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
+        [HttpPut("edit-tag/{tagId:int}")]
+        public async Task<ActionResult> EditTag(int tagId, [FromBody]string newTagName)
+        {
+            var tag = await tagRepository.GetTagById(tagId);
+
+            if(tag == null) return BadRequest(new { message = "Nie znaleziono tagu!" });
+            
+            tag.TagName = newTagName;
+
+            if(await userRepository.SaveAll()) return NoContent();
+
+            return BadRequest(new { message = "Nie udało się edytować tagu!" });
+        }
+
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("remove-tag/{tagId:int}")]
         public async Task<ActionResult> RemoveTag(int tagId)
         {
@@ -180,7 +202,7 @@ namespace API.Controllers
 
             tagRepository.RemoveTag(tag);
 
-            if(await userRepository.SaveAll()) return Ok();
+            if(await userRepository.SaveAll()) return NoContent();
 
             return BadRequest(new { message = "Nie udało się usunąć tagu!" });
         }

@@ -1,0 +1,32 @@
+.adminPanel {
+	border-top: 1px solid #808080;
+	padding: 2em;
+}
+
+.options {
+	display: flex;
+	list-style: none;
+	gap: 1em;
+}
+
+.optionItem {
+	font-size: 1.3rem;
+	color: var(--text-color);
+	text-decoration: none;
+	border-bottom: 3px solid transparent;
+}
+
+.optionItem:hover {
+	border-color: var(--main-color);
+}
+
+.active {
+	border-color: var(--main-color);
+	font-weight: bold;
+}
+
+@media (max-width: 580px) {
+	.optionItem {
+		font-size: 1rem;
+	}
+}

@@ -1,0 +1,12 @@
+.tagsContainer {
+	margin: 2em 0;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+}
+
+@media (max-width: 450px) {
+	.tagsContainer {
+		margin: 2em 0.1em;
+	}
+}

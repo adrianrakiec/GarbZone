@@ -16,6 +16,9 @@ import { Chat } from './components/Chat/Chat';
 import { OffersPage } from './pages/OffersPage';
 import { PaymentForm } from './components/PaymentForm/PaymentForm';
 import { RatingForm } from './components/RatingForm/RatingForm';
+import { ProtectedAdminRoute } from './components/ProtectedAdminRoute/ProtectedAdminRoute';
+import { AdminPanel } from './components/AdminPanel/AdminPanel';
+import { AdminPanelTags } from './components/AdminPanelTags/AdminPanelTags';
 
 export const routes = createBrowserRouter([
 	{
@@ -93,6 +96,28 @@ export const routes = createBrowserRouter([
 						<RatingForm />
 					</ProtectedRoute>
 				),
+			},
+			{
+				path: '/admin-panel',
+				element: (
+					<ProtectedAdminRoute>
+						<AdminPanel />
+					</ProtectedAdminRoute>
+				),
+				children: [
+					{
+						path: 'tagi',
+						element: <AdminPanelTags />,
+					},
+					{
+						path: 'role',
+						element: <NotFoundPage />,
+					},
+					{
+						path: 'zgloszone',
+						element: <NotFoundPage />,
+					},
+				],
 			},
 			{
 				path: '*',
