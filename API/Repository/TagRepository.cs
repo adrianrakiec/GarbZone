@@ -23,4 +23,19 @@ public class TagRepository(DataContext context, IMapper mapper) : ITagRepository
             .ProjectTo<TagDto>(mapper.ConfigurationProvider)
             .ToListAsync();
     }
+
+    public void AddTag(Tag tag)
+    {
+        context.Tags.Add(tag);
+    }
+
+    public void RemoveTag(Tag tag)
+    {
+        context.Tags.Remove(tag);
+    }
+
+    public async Task<Tag?> GetTagById(int id)
+    {
+        return await context.Tags.FindAsync(id);
+    }
 }

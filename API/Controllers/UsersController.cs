@@ -12,7 +12,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController(IUserRepository userRepository, IMapper mapper, IPhotoService photoService, IWalletRepository walletRepository, IStripeService stripeService) : ControllerBase
+    public class UsersController(IUserRepository userRepository, IMapper mapper, IPhotoService photoService, IWalletRepository walletRepository, ITagRepository tagRepository, IStripeService stripeService) : ControllerBase
     {
         [HttpGet]
         [Authorize]
@@ -153,6 +153,36 @@ namespace API.Controllers
             if(await userRepository.SaveAll()) return NoContent();
 
             return BadRequest(new { message = "Nie udało się zaktualizować użytkownika!" });
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpPost("create-tag")]
+        public async Task<ActionResult> CreateTag(string tagName)
+        {
+            if(string.IsNullOrEmpty(tagName)) return BadRequest(new { message = "Tag nie może być pusty!" });
+            
+            var tag = new Tag { TagName = tagName };
+            
+            tagRepository.AddTag(tag);
+
+            if(await userRepository.SaveAll()) return Ok();
+
+            return BadRequest(new { message = "Nie udało się utworzyć tagu!" });
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpDelete("remove-tag/{tagId:int}")]
+        public async Task<ActionResult> RemoveTag(int tagId)
+        {
+            var tag = await tagRepository.GetTagById(tagId);
+            
+            if(tag == null) return BadRequest(new { message = "Tag nie został odnaleziony!" });
+
+            tagRepository.RemoveTag(tag);
+
+            if(await userRepository.SaveAll()) return Ok();
+
+            return BadRequest(new { message = "Nie udało się usunąć tagu!" });
         }
     }
 }
