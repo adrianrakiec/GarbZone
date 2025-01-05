@@ -164,7 +164,7 @@ namespace API.Controllers
 
         [Authorize(Roles = "Administrator")]
         [HttpPost("create-tag")]
-        public async Task<ActionResult> CreateTag(string tagName)
+        public async Task<ActionResult> CreateTag([FromBody]string tagName)
         {
             if(string.IsNullOrEmpty(tagName)) return BadRequest(new { message = "Tag nie może być pusty!" });
             
@@ -172,7 +172,7 @@ namespace API.Controllers
             
             tagRepository.AddTag(tag);
 
-            if(await userRepository.SaveAll()) return Ok();
+            if(await userRepository.SaveAll()) return NoContent();
 
             return BadRequest(new { message = "Nie udało się utworzyć tagu!" });
         }

@@ -8,6 +8,7 @@ import { Offer } from '../Offer/Offer';
 import { HorizontalRule } from '../HorizontalRule/HorizontalRule';
 import { Wrapper } from '../Wrapper/Wrapper';
 import { Comment } from '../Comment/Comment';
+import { NotFoundPage } from '../../pages/NotFoundPage';
 import defaultImg from '../../assets/user.png';
 import styles from './UserProfile.module.css';
 
@@ -16,6 +17,7 @@ export const UserProfile = ({ user }) => {
 	const messageUrl = `/wiadomosci/${user.username}`;
 	const profileImg = user.profilePhotoUrl || defaultImg;
 
+	if (!user) return <NotFoundPage />;
 	if (user.username === username) return <Navigate to='/profil' />;
 
 	return (

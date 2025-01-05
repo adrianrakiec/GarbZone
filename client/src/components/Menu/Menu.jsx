@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CiLogout } from 'react-icons/ci';
 import { AuthContext } from '../../context/AuthContext';
 import { Wrapper } from '../Wrapper/Wrapper';
@@ -10,9 +10,11 @@ import styles from './Menu.module.css';
 
 export const Menu = ({ setIsMenuOpen, wallet }) => {
 	const { user, logout } = useContext(AuthContext);
+	const navigate = useNavigate();
 	const { data: tags } = useFetchData('offers/tags', ['tags']);
 
 	const handleClick = () => {
+		navigate('/');
 		logout();
 		setIsMenuOpen(false);
 		toastService.success('Wylogowano');
