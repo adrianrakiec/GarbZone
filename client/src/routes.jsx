@@ -19,6 +19,7 @@ import { RatingForm } from './components/RatingForm/RatingForm';
 import { ProtectedAdminRoute } from './components/ProtectedAdminRoute/ProtectedAdminRoute';
 import { AdminPanel } from './components/AdminPanel/AdminPanel';
 import { AdminPanelTags } from './components/AdminPanelTags/AdminPanelTags';
+import { AdminPanelRoles } from './components/AdminPanelRoles/AdminPanelRoles';
 
 export const routes = createBrowserRouter([
 	{
@@ -111,7 +112,7 @@ export const routes = createBrowserRouter([
 					},
 					{
 						path: 'role',
-						element: <NotFoundPage />,
+						element: <AdminPanelRoles />,
 					},
 					{
 						path: 'zgloszone',

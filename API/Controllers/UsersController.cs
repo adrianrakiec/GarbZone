@@ -163,6 +163,30 @@ namespace API.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
+        [HttpGet("users-with-role")]
+        public async Task<ActionResult> GetUsersWithRole()
+        { 
+            var users = await userRepository.GetUsers();
+
+            var usersWithRoles = users
+                .OrderBy(x => x.UserName)
+                .Select(x => new
+                {
+                    x.Id,
+                    x.UserName,
+                    x.RoleId,
+                    Role = x.RoleId switch
+                    {
+                        1 => "Administrator",
+                        2 => "Użytkownik",
+                        _ => "Nieznana rola"
+                    }
+                }).ToList();
+
+            return Ok(usersWithRoles);
+        }
+
+        [Authorize(Roles = "Administrator")]
         [HttpPost("create-tag")]
         public async Task<ActionResult> CreateTag([FromBody]string tagName)
         {
@@ -205,6 +229,22 @@ namespace API.Controllers
             if(await userRepository.SaveAll()) return NoContent();
 
             return BadRequest(new { message = "Nie udało się usunąć tagu!" });
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpPut("change-user-role/{username}")]
+        public async Task<ActionResult> ChangeUserRole(string username)
+        {
+            var user = await userRepository.GetUserByUsername(username);
+
+            if(user == null) return BadRequest(new { message = "Użytkownik nie został odnaleziony!" });
+
+            if(user.RoleId == 1) user.RoleId = 2;
+            else user.RoleId = 1;
+
+            if(await userRepository.SaveAll()) return NoContent();
+
+            return BadRequest(new { message = "Nie udało się edytować tagu!" });
         }
     }
 }
