@@ -6,6 +6,7 @@ namespace API.Data;
 public class DataContext(DbContextOptions options) : DbContext(options)
 {
     public DbSet<User> Users { get; set; }
+    public DbSet<Role> Roles { get; set; }
     public DbSet<Offer> Offers { get; set; }
     public DbSet<Photo> Photos { get; set; }
     public DbSet<Tag> Tags { get; set; }
@@ -18,6 +19,11 @@ public class DataContext(DbContextOptions options) : DbContext(options)
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Role>().HasData(
+            new Role { Id = 1, Name = "Administrator" },
+            new Role { Id = 2, Name = "Użytkownik" }
+        );
 
         modelBuilder.Entity<UserOfferLike>()
             .HasKey(uo => new { uo.UserId, uo.OfferId }); 

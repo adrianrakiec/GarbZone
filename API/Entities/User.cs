@@ -7,6 +7,8 @@ public class User
     public required string Email { get; set; }
     public byte[] PasswordHash { get; set; } = [];
     public byte[] PasswordSalt { get; set; } = [];
+    public Role Role { get; set; } = null!;
+    public int RoleId { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime LastActive { get; set; }
     public List<int> Rating { get; set; } = [];

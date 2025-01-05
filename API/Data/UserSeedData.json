@@ -6,7 +6,8 @@
 		"LastActive": "2024-10-06",
 		"Rating": [4, 4, 5],
 		"About": "Nostrud commodo Lorem enim esse incididunt magna officia amet occaecat proident ut. Sit ullamco commodo Lorem ut ex. Velit qui nisi esse commodo labore ullamco mollit. Nostrud est irure cupidatat labore adipisicing occaecat. Reprehenderit sunt exercitation ea ullamco mollit. In mollit eiusmod ut occaecat enim nulla labore. Est consequat est veniam ut enim veniam velit voluptate culpa.\r\n",
-		"ProfilePhotoUrl": "https://randomuser.me/api/portraits/men/7.jpg"
+		"ProfilePhotoUrl": "https://randomuser.me/api/portraits/men/7.jpg",
+		"RoleId": 2
 	},
 	{
 		"UserName": "witek13",
@@ -15,7 +16,8 @@
 		"LastActive": "2024-09-18",
 		"Rating": [5, 2, 3],
 		"About": "In ut nulla excepteur non. Cillum esse tempor quis nulla culpa fugiat sunt. Consequat tempor do duis commodo cillum esse ea non aliquip dolor magna sint ex nostrud.\r\n",
-		"ProfilePhotoUrl": "https://randomuser.me/api/portraits/men/50.jpg"
+		"ProfilePhotoUrl": "https://randomuser.me/api/portraits/men/50.jpg",
+		"RoleId": 2
 	},
 	{
 		"UserName": "krysiakrysia",
@@ -24,7 +26,8 @@
 		"LastActive": "2024-11-18",
 		"Rating": [5],
 		"About": "Commodo veniam eiusmod incididunt ullamco aute aute enim anim esse non sunt. Magna nisi aute culpa et elit. Nostrud mollit exercitation Lorem in labore cupidatat consequat Lorem sunt. Pariatur adipisicing anim id aliquip consequat duis in.\r\n",
-		"ProfilePhotoUrl": "https://randomuser.me/api/portraits/women/26.jpg"
+		"ProfilePhotoUrl": "https://randomuser.me/api/portraits/women/26.jpg",
+		"RoleId": 2
 	},
 	{
 		"UserName": "misiaPL",
@@ -33,6 +36,7 @@
 		"LastActive": "2024-11-19",
 		"Rating": [5, 5, 4],
 		"About": "Voluptate esse velit ad pariatur incididunt ut excepteur. Cillum non aute aliqua ea culpa duis sit deserunt tempor anim aliquip. Occaecat ex proident ea ut nulla aliquip. Exercitation commodo ullamco ipsum sit voluptate cupidatat et dolore reprehenderit deserunt eu enim cupidatat. Nulla ea nulla anim deserunt est dolor ad.\r\n",
-		"ProfilePhotoUrl": "https://randomuser.me/api/portraits/women/85.jpg"
+		"ProfilePhotoUrl": "https://randomuser.me/api/portraits/women/85.jpg",
+		"RoleId": 2
 	}
 ]
