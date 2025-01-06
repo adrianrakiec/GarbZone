@@ -1,6 +1,7 @@
 .reportForm {
 	border-top: 1px solid #808080;
     margin-bottom: 1em;
+	padding: 1em;
 }
 
 .reportForm form {
