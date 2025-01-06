@@ -1,0 +1,25 @@
+.reportForm {
+	border-top: 1px solid #808080;
+    margin-bottom: 1em;
+}
+
+.reportForm form {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.reason {
+	display: block;
+    width: 100%;
+    padding: 1em;
+	border: 1px solid #ccc;
+	border-radius: 0.2em;
+	resize: vertical;
+    margin: 1em 0;
+}
+
+.reason:focus {
+	outline: none;
+	border-color: var(--main-color);
+	box-shadow: 0 0 2px var(--main-color);
+}

@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { Wrapper } from '../Wrapper/Wrapper';
-import styles from './AdminPanel.module.css';
 import { HorizontalRule } from '../HorizontalRule/HorizontalRule';
+import styles from './AdminPanel.module.css';
 
 export const AdminPanel = () => {
 	return (
@@ -50,8 +50,8 @@ export const AdminPanel = () => {
 				<div>
 					<Outlet />
 				</div>
-				<HorizontalRule />
 			</section>
+			<HorizontalRule />
 		</Wrapper>
 	);
 };

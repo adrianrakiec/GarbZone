@@ -20,6 +20,8 @@ import { ProtectedAdminRoute } from './components/ProtectedAdminRoute/ProtectedA
 import { AdminPanel } from './components/AdminPanel/AdminPanel';
 import { AdminPanelTags } from './components/AdminPanelTags/AdminPanelTags';
 import { AdminPanelRoles } from './components/AdminPanelRoles/AdminPanelRoles';
+import { AdminPanelReports } from './components/AdminPanelReports/AdminPanelReports';
+import { ReportForm } from './components/ReportForm/ReportForm';
 
 export const routes = createBrowserRouter([
 	{
@@ -99,6 +101,14 @@ export const routes = createBrowserRouter([
 				),
 			},
 			{
+				path: '/zgloszenie',
+				element: (
+					<ProtectedRoute>
+						<ReportForm />
+					</ProtectedRoute>
+				),
+			},
+			{
 				path: '/admin-panel',
 				element: (
 					<ProtectedAdminRoute>
@@ -116,7 +126,7 @@ export const routes = createBrowserRouter([
 					},
 					{
 						path: 'zgloszone',
-						element: <NotFoundPage />,
+						element: <AdminPanelReports />,
 					},
 				],
 			},

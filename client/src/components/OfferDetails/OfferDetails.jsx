@@ -1,6 +1,12 @@
 import { useContext } from 'react';
-import { useParams, ScrollRestoration, useNavigate } from 'react-router-dom';
+import {
+	useParams,
+	ScrollRestoration,
+	useNavigate,
+	Link,
+} from 'react-router-dom';
 import { useFetchData, useMutateData } from '../../services/ApiClientService';
+import { MdReportProblem } from 'react-icons/md';
 import { AuthContext } from '../../context/AuthContext';
 import { Wrapper } from '../Wrapper/Wrapper';
 import { Gallery } from '../Gallery/Gallery';
@@ -76,6 +82,15 @@ export const OfferDetails = () => {
 				<p className={styles.views}>
 					Liczba wyświetleń: <i>{offer.viewCount}</i>
 				</p>
+				<div className={styles.reportOffer}>
+					<Link
+						className={styles.reportLink}
+						to='/zgloszenie'
+						state={{ offerId: offer.id }}
+					>
+						Zgłoś ofertę <MdReportProblem />
+					</Link>
+				</div>
 				<HorizontalRule />
 			</Wrapper>
 		</section>
