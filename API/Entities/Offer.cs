@@ -15,4 +15,5 @@ public class Offer
     public User User { get; set; } = null!;
     public List<Tag> Tags { get; set; } = [];
     public List<UserOfferLike> LikedByUsers { get; set; } = [];
+    public List<Report> Reports { get; set; } = [];
 }
