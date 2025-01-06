@@ -250,21 +250,21 @@ namespace API.Controllers
             return Ok(offers);
         }
 
-        [HttpPost("report-offer")]
         [Authorize] 
-        public async Task<ActionResult> ReportOffer([FromBody] ReportRequestDto request)
+        [HttpPost("report-offer/{offerId:int}")]
+        public async Task<ActionResult> ReportOffer([FromBody]string reason, int offerId)
         {
             var report = new Report
             {
-                OfferId = request.OfferId,
-                Reason = request.Reason,
+                OfferId = offerId,
+                Reason = reason,
                 CreatedAt = DateTime.Now,
                 IsResolved = false
             };
 
             offerRepository.AddOfferReport(report);
 
-            if(await userRepository.SaveAll()) return Ok();
+            if(await userRepository.SaveAll()) return NoContent();
 
             return BadRequest(new { message = "Problem przy tworzeniu zgłoszenia!"});
         }
