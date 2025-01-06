@@ -103,4 +103,22 @@ public class OfferRepository(DataContext context, IMapper mapper) : IOfferReposi
 
         return await PagedList<OfferDto>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
     }
+
+    public void AddOfferReport(Report report)
+    {
+        context.Reports.Add(report);
+    }
+
+    public async Task<IEnumerable<Report>> GetReports()
+    {
+        return await context.Reports
+            .Where(r => !r.IsResolved)
+            .OrderBy(r => r.CreatedAt)
+            .ToListAsync();
+    }
+
+    public async Task<Report?> GetReportById(int reportId)
+    {
+        return await context.Reports.FindAsync(reportId);
+    }
 }

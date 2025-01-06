@@ -249,5 +249,77 @@ namespace API.Controllers
 
             return Ok(offers);
         }
+
+        [HttpPost("report-offer")]
+        [Authorize] 
+        public async Task<ActionResult> ReportOffer([FromBody] ReportRequestDto request)
+        {
+            var report = new Report
+            {
+                OfferId = request.OfferId,
+                Reason = request.Reason,
+                CreatedAt = DateTime.Now,
+                IsResolved = false
+            };
+
+            offerRepository.AddOfferReport(report);
+
+            if(await userRepository.SaveAll()) return Ok();
+
+            return BadRequest(new { message = "Problem przy tworzeniu zgłoszenia!"});
+        }
+
+        [Authorize(Roles = "Administrator")] 
+        [HttpGet("report-offers")]
+        public async Task<ActionResult> GetReports()
+        {
+            var reports = await offerRepository.GetReports();
+
+            var selectedReports = reports.Select(r => new
+            {
+                r.Id,
+                r.OfferId,
+                r.Reason,
+                r.CreatedAt
+            }).ToList();
+
+            return Ok(selectedReports);
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpDelete("remove-reported-offer/{reportId:int}/{offerId:int}")]
+        public async Task<ActionResult> RemoveReportedOffer(int offerId, int reportId)
+        {
+            var offer = await offerRepository.GetFullOfferById(offerId);
+            
+            if(offer == null) return BadRequest(new { message = "Oferta nie została odnaleziona!" });
+
+            offerRepository.DeleteOffer(offer);
+
+            var report = await offerRepository.GetReportById(reportId);
+
+            if(report == null) return BadRequest(new { message = "Zgłoszenie nie zostało odnalezione!" });
+
+            report.IsResolved = true;
+
+            if(await userRepository.SaveAll()) return NoContent();
+
+            return BadRequest(new { message = "Nie udało się usunąć oferty!" });
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpPut("end-report/{reportId:int}")]
+        public async Task<ActionResult> EndReport(int reportId)
+        {
+            var report = await offerRepository.GetReportById(reportId);
+
+            if(report == null) return BadRequest(new { message = "Zgłoszenie nie zostało odnalezione!" });
+
+            report.IsResolved = true;
+
+            if(await userRepository.SaveAll()) return NoContent();
+
+            return BadRequest(new { message = "Nie udało się zakończyć zgłoszenia!" });
+        }
     }
 }

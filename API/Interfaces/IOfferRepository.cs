@@ -15,6 +15,9 @@ public interface IOfferRepository
     Task<PagedList<OfferDto>> GetOffersByTerm(string term, UserParams userParams);
     Task<PagedList<OfferDto>> GetOffersByTag(string tagName, UserParams userParams);
     Task<Photo?> GetPhotoById(int id);
+    Task<IEnumerable<Report>> GetReports();
+    Task<Report?> GetReportById(int reportId);
+    void AddOfferReport(Report report);
     void DeleteOffer(Offer offer);
     void DeletePhoto(Photo photo);
 }
