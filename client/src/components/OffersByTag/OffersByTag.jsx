@@ -40,7 +40,7 @@ export const OffersByTag = () => {
 		<div className={styles.offers}>
 			<h2>Wybrana kategoria: {tag}</h2>
 			{!result || result?.length === 0 ? (
-				<p>Brak wyników dla podanej kategorii</p>
+				<p className={styles.emptyResult}>Brak wyników dla podanej kategorii</p>
 			) : (
 				<>
 					<div className={styles.results}>

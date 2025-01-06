@@ -9,3 +9,7 @@
 	justify-items: center;
 	gap: 3em 0;
 }
+
+.emptyResult {
+	padding: 1em;
+}

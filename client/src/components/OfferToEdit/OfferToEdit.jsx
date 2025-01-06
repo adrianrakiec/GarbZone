@@ -51,3 +51,4 @@ export const OfferToEdit = ({ offer, refetch }) => {
 		</section>
 	);
 };
+ 

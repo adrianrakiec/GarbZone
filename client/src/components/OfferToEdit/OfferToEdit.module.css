@@ -38,3 +38,13 @@
 	color: var(--main-color);
 	font-weight: bolder;
 }
+
+@media(max-width: 700px) {
+	.offerInfo {
+		flex-direction: column;
+	}
+
+	.mainPhoto {
+		width: 100%;
+	}
+}
