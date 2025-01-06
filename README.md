@@ -20,26 +20,25 @@ GarbZone is an online platform where you can sell and buy second-hand items, sim
 - **Search for Offers and Users**  
   Quickly find items or users by searching their names.
 
-- **Pagination for Search Results**  
-  View search results spread across multiple pages, making it easier to browse through large lists of items or users.  
+- **Chat**  
+  Send and receive messages with other users. 
 
-## 🚀 Coming Soon  
+- **Reporting Offers**  
+  Allow users to report inappropriate or rule-breaking offers directly to the platform.
 
-We’re working on adding more features and improving the platform. Here’s what’s coming next:  
+- **Admin Panel**  
+  A comprehensive tool for managing user roles, reported offers, and categories, giving full control over the platform.
 
-- **Real-time Chat**  
-  Send and receive messages instantly with other users.  
+- **User Ratings and Reviews**  
+  Build trust within the community with a system that lets users rate and leave reviews for each other.
 
-- **Sorting Options**  
-  Sort offers by price, date, or other criteria to find what you need faster.  
+- **Wallet Top-ups**  
+  Seamless integration with **Stripe API** for fast and secure wallet top-ups.
 
-- **User Rankings**  
-  A leaderboard to highlight the most active users on the platform.  
+- **User-to-User Transactions**  
+  Simplified exchange of funds between users with a built-in transaction system for security and transparency.
 
-- **Recommendation System**  
-  Simple suggestions based on the offers you’ve visited to help you discover more items.  
-
-## 🛠️ Technology Stack  
+## 🛠️ Technology Stack
 
 GarbZone is built using modern tools and technologies:  
 
