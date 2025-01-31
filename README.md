@@ -38,6 +38,16 @@ GarbZone is an online platform where you can sell and buy second-hand items, sim
 - **User-to-User Transactions**  
   Simplified exchange of funds between users with a built-in transaction system for security and transparency.
 
+## Views
+
+![image](https://github.com/user-attachments/assets/2625122b-7610-4e9b-8eb2-69969e5a976d)
+![image](https://github.com/user-attachments/assets/d6dfa549-3dc6-462a-9503-304847e65331)
+![image](https://github.com/user-attachments/assets/7ed25d95-3415-4563-8c48-471fce0413aa)
+![image](https://github.com/user-attachments/assets/c63d92e5-6451-497a-9174-31aa95653e38)
+
+
+
+
 ## 🛠️ Technology Stack
 
 GarbZone is built using modern tools and technologies:  
